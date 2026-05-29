@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debt-to-Income Calculator - Calculate Your DTI Ratio | CalcHive</title>
+<meta name="description" content="Free debt-to-income calculator. Calculate your DTI ratio instantly and see if you qualify for a mortgage or loan. No signup required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--text)}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none}.nav-links a:hover{color:var(--text)}
+.dropdown{position:relative}
+.more-btn{background:none;border:none;color:var(--muted);font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif}
+.more-btn:hover{color:var(--text)}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 0;min-width:210px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.dropdown-menu a{display:block;padding:9px 16px;color:var(--muted);text-decoration:none;font-size:.82rem}
+.dropdown-menu a:hover{color:var(--text);background:var(--surface2)}
+.dropdown.open .dropdown-menu{display:block}
+@media(max-width:800px){.nav-links{display:none}}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin-bottom:.75rem}
+.hero h1 span{color:var(--yellow)}.hero-sub{font-size:.95rem;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.6}
+.main{max-width:1000px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:360px 1fr;gap:2rem;align-items:start}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.25rem}
+.panel:last-child{margin-bottom:0}
+.panel-head{background:var(--surface2);border-bottom:1px solid var(--border);padding:1rem 1.5rem;font-weight:700;font-size:.95rem}
+.panel-body{padding:1.5rem}
+.field{margin-bottom:1rem}
+.field label{display:block;font-size:.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.35rem}
+.input-wrap{position:relative}
+.input-prefix{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+.input-suffix{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+input[type=number]{width:100%;padding:.6rem .75rem .6rem 1.75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.9rem;outline:none}
+input[type=number].no-prefix{padding-left:.75rem}
+input[type=number]:focus{border-color:var(--accent)}
+input[type=number]::-webkit-inner-spin-button{opacity:0}
+.dti-hero{text-align:center;padding:2rem;border-radius:14px;margin-bottom:1.5rem;border:1px solid}
+.dti-hero.good{background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.3)}
+.dti-hero.ok{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.3)}
+.dti-hero.bad{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.3)}
+.dti-val{font-family:'Playfair Display',serif;font-weight:900;font-size:5rem;line-height:1;margin-bottom:.25rem}
+.dti-label{font-size:.82rem;color:var(--muted)}
+.dti-status{font-size:.88rem;font-weight:600;margin-top:.5rem}
+.gauge-wrap{margin-bottom:1.5rem}
+.gauge-track{height:20px;border-radius:10px;overflow:hidden;background:linear-gradient(90deg,var(--green) 0%,var(--green) 35%,var(--yellow) 35%,var(--yellow) 43%,var(--red) 43%);position:relative;margin-bottom:.4rem}
+.gauge-needle{position:absolute;top:0;width:3px;height:100%;background:#fff;border-radius:2px;transition:left .5s;box-shadow:0 0 4px rgba(0,0,0,.5)}
+.gauge-marks{display:flex;justify-content:space-between;font-size:.65rem;color:var(--muted)}
+.thresholds{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1.5rem}
+.threshold-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.875rem;text-align:center}
+.threshold-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600;margin-bottom:3px}
+.threshold-range{font-family:'Playfair Display',serif;font-weight:700;font-size:.95rem;margin-bottom:3px}
+.threshold-desc{font-size:.68rem;color:var(--muted)}
+.breakdown{margin-bottom:1.5rem}
+.breakdown-title{font-weight:700;font-size:.88rem;margin-bottom:.75rem}
+.breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--border);font-size:.82rem}
+.breakdown-row:last-child{border-bottom:none;font-weight:700;font-size:.9rem}
+.breakdown-label{color:var(--muted)}
+.breakdown-val{font-family:'Playfair Display',serif;font-weight:700}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted)}
+.faq-section{max-width:1000px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:700px){.main{grid-template-columns:1fr}.thresholds{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Calc<span>Hive</span></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/mortgage-calculator.html">Mortgage</a></li>
+  <li><a href="/loan-calculator.html">Loan</a></li>
+  <li><a href="/budget-planner.html">Budget</a></li>
+  <li><a href="/debt-snowball-calculator.html">Debt Snowball</a></li>
+  <li class="dropdown">
+    <button class="more-btn">More &#9660;</button>
+    <div class="dropdown-menu">
+      <a href="/savings-goal-calculator.html">Savings Goal</a>
+      <a href="/credit-card-payoff-calculator.html">Credit Card Payoff</a>
+      <a href="/retirement-calculator.html">Retirement</a>
+      <a href="/net-worth-calculator.html">Net Worth</a>
+      <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+      <a href="/investment-return-calculator.html">Investment Return</a>
+      <a href="/rent-vs-buy-calculator.html">Rent vs Buy</a>
+      <a href="/car-loan-calculator.html">Car Loan</a>
+      <a href="/student-loan-calculator.html">Student Loan</a>
+      <a href="/tax-bracket-calculator.html">Tax Bracket</a>
+      <a href="/tip-calculator.html">Tip Calculator</a>
+      <a href="/hourly-to-salary-calculator.html">Hourly to Salary</a>
+      <a href="/break-even-calculator.html">Break Even</a>
+      <a href="/currency-converter.html">Currency Converter</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/401k-calculator.html">401k Calculator</a>
+      <a href="/salary-comparison-calculator.html">Salary Comparison</a>
+      <a href="/inflation-calculator.html">Inflation Calculator</a>
+      <a href="/mortgage-refinance-calculator.html">Refinance</a>
+      <a href="/dividend-calculator.html">Dividend Calculator</a>
+      <a href="/savings-rate-calculator.html">Savings Rate</a>
+      <a href="/paycheck-calculator.html">Paycheck Calculator</a>
+    </div>
+  </li>
+</ul>
+</header>
+<div class="hero">
+<div class="hero-eyebrow">Free · Instant · No Signup</div>
+<h1>Debt-to-Income <span>Calculator</span></h1>
+<p class="hero-sub">Calculate your DTI ratio instantly. Lenders use DTI to decide if you qualify for a mortgage or loan — know your number before you apply.</p>
+</div>
+<div class="main">
+<div class="input-col">
+<div class="panel">
+<div class="panel-head">Monthly Income</div>
+<div class="panel-body">
+<div class="field"><label>Gross Monthly Salary</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="salary" value="6000" oninput="calc()"></div></div>
+<div class="field"><label>Other Monthly Income</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="otherIncome" value="0" oninput="calc()"></div></div>
+</div></div>
+<div class="panel">
+<div class="panel-head">Monthly Debt Payments</div>
+<div class="panel-body">
+<div class="field"><label>Mortgage / Rent</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="housing" value="1500" oninput="calc()"></div></div>
+<div class="field"><label>Car Loan Payment</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="car" value="350" oninput="calc()"></div></div>
+<div class="field"><label>Student Loan Payment</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="student" value="200" oninput="calc()"></div></div>
+<div class="field"><label>Credit Card Minimum Payments</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="cc" value="100" oninput="calc()"></div></div>
+<div class="field"><label>Personal Loan Payments</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="personal" value="0" oninput="calc()"></div></div>
+<div class="field"><label>Other Monthly Debt</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="other" value="0" oninput="calc()"></div></div>
+</div></div>
+<div class="panel">
+<div class="panel-head">New Loan (Optional)</div>
+<div class="panel-body">
+<div class="field"><label>Proposed New Monthly Payment</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="newPayment" value="0" oninput="calc()"></div></div>
+</div></div>
+</div>
+<div class="output-col">
+<div class="dti-hero good" id="dtiHero">
+<div class="dti-val" id="dtiVal">0%</div>
+<div class="dti-label">Debt-to-Income Ratio</div>
+<div class="dti-status" id="dtiStatus"></div>
+</div>
+<div class="gauge-wrap">
+<div class="gauge-track"><div class="gauge-needle" id="gaugeNeedle" style="left:0%"></div></div>
+<div class="gauge-marks"><span>0%</span><span>20%</span><span>36%</span><span>43%</span><span>50%+</span></div>
+</div>
+<div class="thresholds">
+<div class="threshold-card"><div class="threshold-label" style="color:var(--green)">Excellent</div><div class="threshold-range" style="color:var(--green)">Under 36%</div><div class="threshold-desc">Most lenders prefer this</div></div>
+<div class="threshold-card"><div class="threshold-label" style="color:var(--yellow)">Acceptable</div><div class="threshold-range" style="color:var(--yellow)">36–43%</div><div class="threshold-desc">FHA loans may approve</div></div>
+<div class="threshold-card"><div class="threshold-label" style="color:var(--red)">High Risk</div><div class="threshold-range" style="color:var(--red)">Above 43%</div><div class="threshold-desc">Hard to get approved</div></div>
+</div>
+<div class="breakdown">
+<div class="breakdown-title">Your Numbers</div>
+<div class="breakdown-row"><span class="breakdown-label">Gross monthly income</span><span class="breakdown-val" id="bd-income">$0</span></div>
+<div class="breakdown-row"><span class="breakdown-label">Current monthly debt</span><span class="breakdown-val" id="bd-debt" style="color:var(--red)">$0</span></div>
+<div class="breakdown-row" id="bd-new-row" style="display:none"><span class="breakdown-label">New loan payment</span><span class="breakdown-val" id="bd-new" style="color:var(--yellow)">$0</span></div>
+<div class="breakdown-row"><span class="breakdown-label">Current DTI</span><span class="breakdown-val" id="bd-dti">0%</span></div>
+<div class="breakdown-row" id="bd-new-dti-row" style="display:none"><span class="breakdown-label">DTI with new loan</span><span class="breakdown-val" id="bd-new-dti" style="color:var(--yellow)">0%</span></div>
+<div class="breakdown-row"><span class="breakdown-label">Max debt for 36% DTI</span><span class="breakdown-val" id="bd-max36" style="color:var(--green)">$0</span></div>
+<div class="breakdown-row"><span class="breakdown-label">Room for more debt</span><span class="breakdown-val" id="bd-room">$0</span></div>
+</div>
+<div class="ad-slot">Advertisement · Google AdSense</div>
+</div>
+</div>
+<div class="faq-section">
+<h2>Frequently asked questions</h2>
+<div class="faq-item"><div class="faq-q">What is a good DTI ratio?</div><div class="faq-a">Most conventional lenders prefer a DTI below 36%. FHA loans may accept up to 43-50% with compensating factors like a high credit score or large down payment. The lower your DTI, the better your loan terms will be.</div></div>
+<div class="faq-item"><div class="faq-q">Does DTI use gross or net income?</div><div class="faq-a">Lenders calculate DTI using gross (pre-tax) monthly income, not take-home pay. This means your DTI looks better than it feels day-to-day since you can not actually spend your gross income.</div></div>
+<div class="faq-item"><div class="faq-q">How can I lower my DTI?</div><div class="faq-a">You can lower your DTI by paying off debts (especially small balances with minimum payments), increasing your income, or avoiding taking on new debt before applying for a loan. Even paying off a small credit card can meaningfully reduce your DTI.</div></div>
+<div class="faq-item"><div class="faq-q">Is this calculator free?</div><div class="faq-a">Yes — completely free with no account or signup required.</div></div>
+</div>
+<footer><p>&copy; 2025 CalcHive &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a><br>
+Also try: <a href="/mortgage-calculator.html">Mortgage Calculator</a> &middot; <a href="/debt-snowball-calculator.html">Debt Snowball</a></p></footer>
+<script>
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+function calc(){
+  var salary=parseFloat(document.getElementById('salary').value)||0;
+  var other=parseFloat(document.getElementById('otherIncome').value)||0;
+  var income=salary+other;
+  var housing=parseFloat(document.getElementById('housing').value)||0;
+  var car=parseFloat(document.getElementById('car').value)||0;
+  var student=parseFloat(document.getElementById('student').value)||0;
+  var cc=parseFloat(document.getElementById('cc').value)||0;
+  var personal=parseFloat(document.getElementById('personal').value)||0;
+  var otherDebt=parseFloat(document.getElementById('other').value)||0;
+  var newPmt=parseFloat(document.getElementById('newPayment').value)||0;
+  var totalDebt=housing+car+student+cc+personal+otherDebt;
+  var dti=income>0?(totalDebt/income*100):0;
+  var dtiWithNew=income>0?((totalDebt+newPmt)/income*100):0;
+  var max36=income*0.36;
+  var room=Math.max(0,max36-totalDebt-newPmt);
+  var hero=document.getElementById('dtiHero');
+  var dtiEl=document.getElementById('dtiVal');
+  dtiEl.textContent=dti.toFixed(1)+'%';
+  var cls,color,status;
+  if(dti<36){cls='good';color='var(--green)';status='✅ Excellent — you qualify for most loans';}
+  else if(dti<43){cls='ok';color='var(--yellow)';status='⚠️ Acceptable — some lenders may approve';}
+  else{cls='bad';color='var(--red)';status='❌ High — focus on paying down debt before applying';}
+  hero.className='dti-hero '+cls;
+  dtiEl.style.color=color;
+  document.getElementById('dtiStatus').textContent=status;
+  document.getElementById('gaugeNeedle').style.left=Math.min(95,dti/50*100)+'%';
+  document.getElementById('bd-income').textContent=fmt(income);
+  document.getElementById('bd-debt').textContent=fmt(totalDebt);
+  document.getElementById('bd-dti').textContent=dti.toFixed(1)+'%';
+  document.getElementById('bd-max36').textContent=fmt(max36);
+  document.getElementById('bd-room').textContent=room>0?fmt(room)+'/mo':'No room at current income';
+  document.getElementById('bd-room').style.color=room>0?'var(--green)':'var(--red)';
+  if(newPmt>0){
+    document.getElementById('bd-new-row').style.display='flex';
+    document.getElementById('bd-new-dti-row').style.display='flex';
+    document.getElementById('bd-new').textContent=fmt(newPmt);
+    document.getElementById('bd-new-dti').textContent=dtiWithNew.toFixed(1)+'%';
+    document.getElementById('bd-new-dti').style.color=dtiWithNew<36?'var(--green)':dtiWithNew<43?'var(--yellow)':'var(--red)';
+  } else {
+    document.getElementById('bd-new-row').style.display='none';
+    document.getElementById('bd-new-dti-row').style.display='none';
+  }
+}
+var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');
+if(_mb&&_dd){
+  _mb.addEventListener('click',function(e){e.stopPropagation();_dd.classList.toggle('open');});
+  document.addEventListener('click',function(){_dd.classList.remove('open');});
+}
+calc();
+</script>
+</body>
+</html>

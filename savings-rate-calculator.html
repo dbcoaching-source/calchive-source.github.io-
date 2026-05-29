@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Savings Rate Calculator - How Much Are You Saving? | CalcHive</title>
+<meta name="description" content="Free savings rate calculator. Find your personal savings rate and see how it affects your path to financial independence and early retirement.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--text)}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none}.nav-links a:hover{color:var(--text)}
+.dropdown{position:relative}
+.more-btn{background:none;border:none;color:var(--muted);font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif}
+.more-btn:hover{color:var(--text)}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 0;min-width:210px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.dropdown-menu a{display:block;padding:9px 16px;color:var(--muted);text-decoration:none;font-size:.82rem}
+.dropdown-menu a:hover{color:var(--text);background:var(--surface2)}
+.dropdown.open .dropdown-menu{display:block}
+@media(max-width:800px){.nav-links{display:none}}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin-bottom:.75rem}
+.hero h1 span{color:var(--accent)}.hero-sub{font-size:.95rem;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.6}
+.main{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:320px 1fr;gap:2rem;align-items:start}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.panel-head{background:var(--surface2);border-bottom:1px solid var(--border);padding:1rem 1.5rem;font-weight:700;font-size:.95rem}
+.panel-body{padding:1.5rem}
+.field{margin-bottom:1.25rem}
+.field label{display:block;font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+.input-wrap{position:relative}
+.input-prefix{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+.input-suffix{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+input[type=number]{width:100%;padding:.65rem .75rem .65rem 1.75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.95rem;outline:none}
+input[type=number].no-prefix{padding-left:.75rem}
+input[type=number]:focus{border-color:var(--accent)}
+input[type=number]::-webkit-inner-spin-button{opacity:0}
+.rate-display{text-align:center;padding:2rem;background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.2);border-radius:14px;margin-bottom:1.5rem}
+.rate-big{font-family:'Playfair Display',serif;font-weight:900;font-size:5rem;line-height:1;margin-bottom:.25rem}
+.rate-label{font-size:.88rem;color:var(--muted)}
+.rate-status{font-size:.82rem;font-weight:600;margin-top:.5rem}
+.gauge-wrap{margin-bottom:1.5rem}
+.gauge-track{height:20px;background:var(--surface2);border-radius:10px;overflow:hidden;position:relative;margin-bottom:.4rem}
+.gauge-fill{height:100%;border-radius:10px;transition:width .5s}
+.gauge-marks{display:flex;justify-content:space-between;font-size:.65rem;color:var(--muted)}
+.fi-table{width:100%;border-collapse:collapse;font-size:.82rem;margin-bottom:1.5rem}
+.fi-table th{padding:7px 10px;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);text-align:left}
+.fi-table td{padding:7px 10px;border-bottom:1px solid var(--border)}
+.fi-table tr:last-child td{border-bottom:none}
+.fi-table tr.current{background:rgba(59,130,246,.06)}
+.fi-table tr.current td{color:var(--accent2);font-weight:600}
+.stats-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.stat-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1.25rem;text-align:center}
+.stat-val{font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:var(--accent);line-height:1;margin-bottom:4px}
+.stat-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted)}
+.faq-section{max-width:900px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:700px){.main{grid-template-columns:1fr}.stats-row{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Calc<span>Hive</span></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/budget-planner.html">Budget Planner</a></li>
+  <li><a href="/retirement-calculator.html">Retirement</a></li>
+  <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
+  <li><a href="/net-worth-calculator.html">Net Worth</a></li>
+  <li class="dropdown">
+    <button class="more-btn">More &#9660;</button>
+    <div class="dropdown-menu">
+      <a href="/savings-goal-calculator.html">Savings Goal</a>
+      <a href="/credit-card-payoff-calculator.html">Credit Card Payoff</a>
+      <a href="/debt-snowball-calculator.html">Debt Snowball</a>
+      <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+      <a href="/investment-return-calculator.html">Investment Return</a>
+      <a href="/mortgage-calculator.html">Mortgage</a>
+      <a href="/rent-vs-buy-calculator.html">Rent vs Buy</a>
+      <a href="/car-loan-calculator.html">Car Loan</a>
+      <a href="/student-loan-calculator.html">Student Loan</a>
+      <a href="/tax-bracket-calculator.html">Tax Bracket</a>
+      <a href="/tip-calculator.html">Tip Calculator</a>
+      <a href="/hourly-to-salary-calculator.html">Hourly to Salary</a>
+      <a href="/break-even-calculator.html">Break Even</a>
+      <a href="/invoice-generator.html">Invoice Generator</a>
+      <a href="/currency-converter.html">Currency Converter</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/401k-calculator.html">401k Calculator</a>
+      <a href="/salary-comparison-calculator.html">Salary Comparison</a>
+      <a href="/inflation-calculator.html">Inflation Calculator</a>
+      <a href="/mortgage-refinance-calculator.html">Refinance</a>
+      <a href="/dividend-calculator.html">Dividend Calculator</a>
+      <a href="/debt-to-income-calculator.html">Debt-to-Income</a>
+      <a href="/paycheck-calculator.html">Paycheck Calculator</a>
+    </div>
+  </li>
+</ul>
+</header>
+<div class="hero">
+<div class="hero-eyebrow">Free · Instant · No Signup</div>
+<h1>Savings Rate <span>Calculator</span></h1>
+<p class="hero-sub">Calculate your personal savings rate and see how it determines your path to financial independence. Higher savings rate = earlier retirement.</p>
+</div>
+<div class="main">
+<div class="input-col">
+<div class="panel">
+<div class="panel-head">Your Monthly Finances</div>
+<div class="panel-body">
+<div class="field"><label>Monthly Take-Home Income</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="income" value="5000" oninput="calc()"></div></div>
+<div class="field"><label>Monthly Savings & Investments</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="savings" value="1000" oninput="calc()"></div></div>
+<div class="field"><label>401k / Employer Contributions (monthly)</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="retirement" value="300" oninput="calc()"></div></div>
+<div class="field"><label>Current Net Worth / Savings</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="netWorth" value="50000" oninput="calc()"></div></div>
+<div class="field"><label>Expected Investment Return</label><div class="input-wrap"><input type="number" id="returnRate" value="7" step="0.5" class="no-prefix" oninput="calc()"><span class="input-suffix">%/yr</span></div></div>
+<div class="field"><label>Safe Withdrawal Rate</label><div class="input-wrap"><input type="number" id="swr" value="4" step="0.5" class="no-prefix" oninput="calc()"><span class="input-suffix">%</span></div></div>
+</div></div>
+</div>
+<div class="output-col">
+<div class="panel">
+<div class="panel-head">Your Savings Rate</div>
+<div class="panel-body">
+<div class="rate-display">
+<div class="rate-big" id="rateVal">0%</div>
+<div class="rate-label">Personal Savings Rate</div>
+<div class="rate-status" id="rateStatus"></div>
+</div>
+<div class="gauge-wrap">
+<div class="gauge-track"><div class="gauge-fill" id="gaugeFill" style="width:0%"></div></div>
+<div class="gauge-marks"><span>0%</span><span>10%</span><span>20%</span><span>30%</span><span>50%+</span></div>
+</div>
+<div class="stats-row">
+<div class="stat-card"><div class="stat-val" id="monthlyTotal">$0</div><div class="stat-label">Monthly Saved</div></div>
+<div class="stat-card"><div class="stat-val" id="annualTotal" style="color:var(--green)">$0</div><div class="stat-label">Annual Saved</div></div>
+</div>
+<div style="font-weight:700;font-size:.88rem;margin-bottom:.75rem">Years to Financial Independence by Savings Rate</div>
+<table class="fi-table">
+<thead><tr><th>Savings Rate</th><th>Years to FI</th><th>FI Number</th></tr></thead>
+<tbody id="fiTable"></tbody>
+</table>
+<div class="ad-slot">Advertisement · Google AdSense</div>
+</div></div>
+</div>
+</div>
+<div class="faq-section">
+<h2>Frequently asked questions</h2>
+<div class="faq-item"><div class="faq-q">What is a savings rate?</div><div class="faq-a">Your savings rate is the percentage of your income that you save or invest rather than spend. It is the single most powerful lever for building wealth and reaching financial independence. A 10% savings rate is average; 20%+ is considered high; 50%+ is the FIRE (Financial Independence, Retire Early) path.</div></div>
+<div class="faq-item"><div class="faq-q">What is the 4% rule for retirement?</div><div class="faq-a">The 4% rule suggests you can safely withdraw 4% of your portfolio annually in retirement without running out of money over a 30-year period. Your FI number is 25x your annual expenses (100 ÷ 4%). The more you save, the sooner you reach this number.</div></div>
+<div class="faq-item"><div class="faq-q">Is this calculator free?</div><div class="faq-a">Yes — completely free with no account or signup required.</div></div>
+</div>
+<footer><p>&copy; 2025 CalcHive &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a><br>
+Also try: <a href="/retirement-calculator.html">Retirement Calculator</a> &middot; <a href="/budget-planner.html">Budget Planner</a></p></footer>
+<script>
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+function calc(){
+  var income=parseFloat(document.getElementById('income').value)||1;
+  var savings=parseFloat(document.getElementById('savings').value)||0;
+  var retirement=parseFloat(document.getElementById('retirement').value)||0;
+  var netWorth=parseFloat(document.getElementById('netWorth').value)||0;
+  var returnRate=parseFloat(document.getElementById('returnRate').value)||7;
+  var swr=parseFloat(document.getElementById('swr').value)||4;
+  var totalSavings=savings+retirement;
+  var rate=totalSavings/income*100;
+  var spending=(income-totalSavings)*12;
+  var fiNumber=spending/(swr/100);
+  var rateEl=document.getElementById('rateVal');
+  rateEl.textContent=rate.toFixed(1)+'%';
+  var color=rate>=50?'var(--green)':rate>=30?'var(--accent2)':rate>=20?'var(--yellow)':'var(--red)';
+  rateEl.style.color=color;
+  var status=rate>=50?'🔥 FIRE level — financial independence on the horizon!':rate>=30?'💪 Excellent — well above average savings rate':rate>=20?'✅ Good — meeting the recommended 20% target':rate>=10?'📈 Average — consider increasing to accelerate FI':'🔴 Below average — try to reach at least 10%';
+  document.getElementById('rateStatus').textContent=status;
+  document.getElementById('rateStatus').style.color=color;
+  document.getElementById('gaugeFill').style.width=Math.min(100,rate/50*100)+'%';
+  document.getElementById('gaugeFill').style.background=color;
+  document.getElementById('monthlyTotal').textContent=fmt(totalSavings);
+  document.getElementById('annualTotal').textContent=fmt(totalSavings*12);
+  // FI table
+  var rates=[5,10,15,20,25,30,40,50,60,70];
+  var mr=returnRate/100/12;
+  document.getElementById('fiTable').innerHTML=rates.map(function(r){
+    var monthlySave=income*r/100;
+    var annSpend=(income-monthlySave)*12;
+    var fi=annSpend/(swr/100);
+    // Months to FI from current net worth
+    var months=0,bal=netWorth;
+    while(bal<fi&&months<1200){bal=bal*(1+mr)+monthlySave;months++;}
+    var years=months>=1200?'50+':Math.ceil(months/12).toString();
+    var isCurrent=Math.abs(r-rate)<2.5;
+    return '<tr'+(isCurrent?' class="current"':'')+'>'+
+      '<td>'+r+'%'+(isCurrent?' ← you':'')+' </td>'+
+      '<td>'+years+' yrs</td>'+
+      '<td>'+fmt(fi)+'</td></tr>';
+  }).join('');
+}
+var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');
+if(_mb&&_dd){
+  _mb.addEventListener('click',function(e){e.stopPropagation();_dd.classList.toggle('open');});
+  document.addEventListener('click',function(){_dd.classList.remove('open');});
+}
+calc();
+</script>
+</body>
+</html>

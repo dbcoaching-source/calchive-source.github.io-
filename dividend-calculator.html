@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dividend Calculator - Calculate Dividend Income & DRIP Growth | CalcHive</title>
+<meta name="description" content="Free dividend calculator. Calculate annual dividend income, yield, and DRIP reinvestment growth over time. No signup required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--text)}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none}.nav-links a:hover{color:var(--text)}
+.dropdown{position:relative}
+.more-btn{background:none;border:none;color:var(--muted);font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif}
+.more-btn:hover{color:var(--text)}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 0;min-width:210px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.dropdown-menu a{display:block;padding:9px 16px;color:var(--muted);text-decoration:none;font-size:.82rem}
+.dropdown-menu a:hover{color:var(--text);background:var(--surface2)}
+.dropdown.open .dropdown-menu{display:block}
+@media(max-width:800px){.nav-links{display:none}}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin-bottom:.75rem}
+.hero h1 span{color:var(--green)}.hero-sub{font-size:.95rem;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.6}
+.main{max-width:1000px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:320px 1fr;gap:2rem;align-items:start}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.panel-head{background:var(--surface2);border-bottom:1px solid var(--border);padding:1rem 1.5rem;font-weight:700;font-size:.95rem}
+.panel-body{padding:1.5rem}
+.field{margin-bottom:1.25rem}
+.field label{display:block;font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+.input-wrap{position:relative}
+.input-prefix{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+.input-suffix{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+input[type=number]{width:100%;padding:.65rem .75rem .65rem 1.75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.95rem;outline:none}
+input[type=number].no-prefix{padding-left:.75rem}
+input[type=number]:focus{border-color:var(--accent)}
+input[type=number]::-webkit-inner-spin-button{opacity:0}
+input[type=range]{-webkit-appearance:none;width:100%;height:4px;background:var(--border);border-radius:2px;margin-top:.5rem;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.range-labels{display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted);margin-top:4px}
+select{width:100%;padding:.65rem .75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.9rem;outline:none;appearance:none;cursor:pointer}
+select:focus{border-color:var(--accent)}
+.income-hero{text-align:center;padding:1.5rem;background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);border-radius:12px;margin-bottom:1.5rem}
+.income-val{font-family:'Playfair Display',serif;font-weight:900;font-size:3rem;color:var(--green);line-height:1;margin-bottom:.25rem}
+.income-label{font-size:.82rem;color:var(--muted)}
+.income-breakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1.5rem}
+.income-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.875rem;text-align:center}
+.income-card-val{font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:var(--accent2);margin-bottom:3px}
+.income-card-label{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.drip-section{margin-bottom:1.5rem}
+.drip-title{font-weight:700;font-size:.88rem;margin-bottom:.75rem}
+.drip-row{display:flex;align-items:center;gap:.5rem;margin-bottom:5px}
+.drip-yr{font-size:.7rem;color:var(--muted);width:45px;flex-shrink:0;text-align:right}
+.drip-bar-wrap{flex:1;background:var(--surface2);border-radius:3px;height:16px;overflow:hidden;position:relative}
+.drip-bar-shares{height:100%;background:var(--accent);position:absolute;left:0}
+.drip-bar-drip{height:100%;background:var(--green);position:absolute}
+.drip-val{font-size:.7rem;color:var(--muted);min-width:60px;text-align:left}
+.drip-legend{display:flex;gap:1rem;margin-bottom:.5rem}
+.drip-leg-item{display:flex;align-items:center;gap:5px;font-size:.75rem;color:var(--muted)}
+.drip-leg-dot{width:8px;height:8px;border-radius:2px}
+.yield-gauge{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;margin-bottom:1.5rem}
+.gauge-title{font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem}
+.gauge-bar{height:12px;background:var(--surface);border-radius:6px;overflow:hidden;margin-bottom:.4rem}
+.gauge-fill{height:100%;border-radius:6px;transition:width .5s}
+.gauge-labels{display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted)}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted)}
+.faq-section{max-width:1000px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:700px){.main{grid-template-columns:1fr}.income-breakdown{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Calc<span>Hive</span></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/mortgage-calculator.html">Mortgage</a></li>
+  <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
+  <li><a href="/investment-return-calculator.html">Investment Return</a></li>
+  <li><a href="/retirement-calculator.html">Retirement</a></li>
+  <li class="dropdown">
+    <button class="more-btn">More &#9660;</button>
+    <div class="dropdown-menu">
+      <a href="/savings-goal-calculator.html">Savings Goal</a>
+      <a href="/credit-card-payoff-calculator.html">Credit Card Payoff</a>
+      <a href="/net-worth-calculator.html">Net Worth</a>
+      <a href="/debt-snowball-calculator.html">Debt Snowball</a>
+      <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+      <a href="/rent-vs-buy-calculator.html">Rent vs Buy</a>
+      <a href="/car-loan-calculator.html">Car Loan</a>
+      <a href="/student-loan-calculator.html">Student Loan</a>
+      <a href="/tax-bracket-calculator.html">Tax Bracket</a>
+      <a href="/tip-calculator.html">Tip Calculator</a>
+      <a href="/hourly-to-salary-calculator.html">Hourly to Salary</a>
+      <a href="/break-even-calculator.html">Break Even</a>
+      <a href="/invoice-generator.html">Invoice Generator</a>
+      <a href="/currency-converter.html">Currency Converter</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/401k-calculator.html">401k Calculator</a>
+      <a href="/salary-comparison-calculator.html">Salary Comparison</a>
+      <a href="/inflation-calculator.html">Inflation Calculator</a>
+      <a href="/mortgage-refinance-calculator.html">Refinance</a>
+      <a href="/savings-rate-calculator.html">Savings Rate</a>
+      <a href="/debt-to-income-calculator.html">Debt-to-Income</a>
+      <a href="/paycheck-calculator.html">Paycheck Calculator</a>
+    </div>
+  </li>
+</ul>
+</header>
+<div class="hero">
+<div class="hero-eyebrow">Free · Instant · No Signup</div>
+<h1>Dividend <span>Calculator</span></h1>
+<p class="hero-sub">Calculate your annual dividend income, yield on cost, and see how dividend reinvestment (DRIP) grows your portfolio over time.</p>
+</div>
+<div class="main">
+<div class="input-col">
+<div class="panel">
+<div class="panel-head">Investment Details</div>
+<div class="panel-body">
+<div class="field"><label>Stock/Fund Price per Share</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="price" value="50" step="0.01" oninput="calc()"></div></div>
+<div class="field"><label>Number of Shares</label><div class="input-wrap"><input type="number" id="shares" value="500" class="no-prefix" oninput="calc()"></div>
+<input type="range" min="1" max="10000" step="10" value="500" oninput="document.getElementById('shares').value=this.value;calc()">
+<div class="range-labels"><span>1</span><span>10,000</span></div></div>
+<div class="field"><label>Annual Dividend per Share</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="divPerShare" value="2.00" step="0.01" oninput="calc()"></div></div>
+<div class="field"><label>Dividend Frequency</label>
+<select id="frequency" onchange="calc()">
+  <option value="4">Quarterly</option>
+  <option value="12">Monthly</option>
+  <option value="2">Semi-annually</option>
+  <option value="1">Annually</option>
+</select></div>
+<div class="field"><label>Annual Dividend Growth Rate</label><div class="input-wrap"><input type="number" id="divGrowth" value="5" step="0.5" class="no-prefix" oninput="calc()"><span class="input-suffix">%/yr</span></div></div>
+<div class="field"><label>Annual Stock Price Appreciation</label><div class="input-wrap"><input type="number" id="priceGrowth" value="5" step="0.5" class="no-prefix" oninput="calc()"><span class="input-suffix">%/yr</span></div></div>
+<div class="field"><label>Years to Project</label><div class="input-wrap"><input type="number" id="years" value="20" min="1" max="40" class="no-prefix" oninput="calc()"><span class="input-suffix">years</span></div>
+<input type="range" min="1" max="40" value="20" oninput="document.getElementById('years').value=this.value;calc()">
+<div class="range-labels"><span>1 yr</span><span>40 yrs</span></div></div>
+<div class="field"><label>Reinvest Dividends (DRIP)?</label>
+<div style="display:flex;gap:.5rem">
+<button id="dripYes" onclick="setDrip(true)" style="flex:1;padding:.5rem;background:var(--accent);border:none;border-radius:6px;color:#fff;font-family:Inter,sans-serif;font-size:.82rem;font-weight:600;cursor:pointer">Yes — Reinvest</button>
+<button id="dripNo" onclick="setDrip(false)" style="flex:1;padding:.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--muted);font-family:Inter,sans-serif;font-size:.82rem;cursor:pointer">No — Take Cash</button>
+</div></div>
+</div></div>
+</div>
+<div class="output-col">
+<div class="panel">
+<div class="panel-head">Dividend Income Results</div>
+<div class="panel-body">
+<div class="income-hero">
+<div class="income-val" id="annualIncome">$0</div>
+<div class="income-label">Annual Dividend Income (Year 1)</div>
+</div>
+<div class="income-breakdown">
+<div class="income-card"><div class="income-card-val" id="monthlyIncome">$0</div><div class="income-card-label">Monthly</div></div>
+<div class="income-card"><div class="income-card-val" id="perPayment">$0</div><div class="income-card-label">Per Payment</div></div>
+<div class="income-card"><div class="income-card-val" id="yieldVal" style="color:var(--green)">0%</div><div class="income-card-label">Dividend Yield</div></div>
+</div>
+<div class="yield-gauge">
+<div class="gauge-title">Yield Rating</div>
+<div class="gauge-bar"><div class="gauge-fill" id="gaugeFill" style="width:0%"></div></div>
+<div class="gauge-labels"><span>0%</span><span>2% — Average</span><span>4% — Good</span><span>6%+</span></div>
+</div>
+<div class="drip-section">
+<div class="drip-legend">
+<div class="drip-leg-item"><div class="drip-leg-dot" style="background:var(--accent)"></div>Original shares</div>
+<div class="drip-leg-item"><div class="drip-leg-dot" style="background:var(--green)"></div>DRIP shares</div>
+</div>
+<div class="drip-title" id="dripTitle">Portfolio Growth with DRIP</div>
+<div id="dripBars"></div>
+</div>
+<div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;margin-bottom:1rem">
+<div style="display:flex;justify-content:space-between;font-size:.82rem;padding:4px 0;border-bottom:1px solid var(--border)"><span style="color:var(--muted)">Portfolio value in <span id="projYearLabel">20</span> years</span><span style="font-family:'Playfair Display',serif;font-weight:700;color:var(--accent2)" id="finalPortfolio">$0</span></div>
+<div style="display:flex;justify-content:space-between;font-size:.82rem;padding:4px 0;border-bottom:1px solid var(--border)"><span style="color:var(--muted)">Annual income in <span id="projYearLabel2">20</span> years</span><span style="font-family:'Playfair Display',serif;font-weight:700;color:var(--green)" id="finalIncome">$0</span></div>
+<div style="display:flex;justify-content:space-between;font-size:.82rem;padding:4px 0"><span style="color:var(--muted)">Total dividends received</span><span style="font-family:'Playfair Display',serif;font-weight:700;color:var(--yellow)" id="totalDivs">$0</span></div>
+</div>
+<div class="ad-slot">Advertisement · Google AdSense</div>
+</div></div>
+</div>
+</div>
+<div class="faq-section">
+<h2>Frequently asked questions</h2>
+<div class="faq-item"><div class="faq-q">What is DRIP investing?</div><div class="faq-a">DRIP stands for Dividend Reinvestment Plan. Instead of receiving dividend payments as cash, you automatically use them to buy more shares of the same stock. Over time this creates a compounding snowball effect as more shares generate more dividends which buy even more shares.</div></div>
+<div class="faq-item"><div class="faq-q">What is a good dividend yield?</div><div class="faq-a">A yield of 2-3% is considered average, 4-5% is high, and above 6% warrants extra scrutiny as very high yields can indicate the dividend may be unsustainable. The best dividend stocks combine a reasonable yield with consistent annual dividend growth.</div></div>
+<div class="faq-item"><div class="faq-q">Is this calculator free?</div><div class="faq-a">Yes — completely free with no account or signup required.</div></div>
+</div>
+<footer><p>&copy; 2025 CalcHive &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a><br>
+Also try: <a href="/investment-return-calculator.html">Investment Return</a> &middot; <a href="/compound-interest-calculator.html">Compound Interest</a></p></footer>
+<script>
+var drip=true;
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+function fmtD(n){return '$'+(Math.round(n*100)/100).toFixed(2);}
+function setDrip(v){
+  drip=v;
+  document.getElementById('dripYes').style.background=v?'var(--accent)':'var(--surface2)';
+  document.getElementById('dripYes').style.color=v?'#fff':'var(--muted)';
+  document.getElementById('dripYes').style.border=v?'none':'1px solid var(--border)';
+  document.getElementById('dripNo').style.background=v?'var(--surface2)':'var(--accent)';
+  document.getElementById('dripNo').style.color=v?'var(--muted)':'#fff';
+  document.getElementById('dripNo').style.border=v?'1px solid var(--border)':'none';
+  calc();
+}
+function calc(){
+  var price=parseFloat(document.getElementById('price').value)||0;
+  var shares=parseFloat(document.getElementById('shares').value)||0;
+  var divPS=parseFloat(document.getElementById('divPerShare').value)||0;
+  var freq=parseInt(document.getElementById('frequency').value)||4;
+  var divGrowth=parseFloat(document.getElementById('divGrowth').value)||0;
+  var priceGrowth=parseFloat(document.getElementById('priceGrowth').value)||0;
+  var years=parseInt(document.getElementById('years').value)||20;
+  var annualDiv=divPS*shares;
+  var yld=price>0?(divPS/price*100):0;
+  document.getElementById('annualIncome').textContent=fmt(annualDiv);
+  document.getElementById('monthlyIncome').textContent=fmt(annualDiv/12);
+  document.getElementById('perPayment').textContent=fmt(annualDiv/freq);
+  document.getElementById('yieldVal').textContent=yld.toFixed(2)+'%';
+  document.getElementById('projYearLabel').textContent=years;
+  document.getElementById('projYearLabel2').textContent=years;
+  document.getElementById('dripTitle').textContent=drip?'Portfolio Growth with DRIP':'Portfolio Growth (Cash Dividends)';
+  var gaugeColor=yld<2?'var(--muted)':yld<4?'var(--yellow)':'var(--green)';
+  document.getElementById('gaugeFill').style.width=Math.min(100,yld/6*100)+'%';
+  document.getElementById('gaugeFill').style.background=gaugeColor;
+  var curShares=shares,curPrice=price,curDivPS=divPS,totalDivs=0,chartData=[];
+  for(var y=1;y<=years;y++){
+    var annDiv=curDivPS*curShares;
+    totalDivs+=annDiv;
+    if(drip){
+      var newShares=annDiv/curPrice;
+      curShares+=newShares;
+    }
+    curPrice*=(1+priceGrowth/100);
+    curDivPS*=(1+divGrowth/100);
+    if(y%Math.max(1,Math.floor(years/8))===0||y===years)
+      chartData.push({yr:y,shares:curShares,origShares:shares,portVal:curShares*curPrice,annDiv:curDivPS*curShares});
+  }
+  document.getElementById('finalPortfolio').textContent=fmt(chartData[chartData.length-1].portVal);
+  document.getElementById('finalIncome').textContent=fmt(chartData[chartData.length-1].annDiv);
+  document.getElementById('totalDivs').textContent=fmt(totalDivs);
+  var maxShares=Math.max.apply(null,chartData.map(function(d){return d.shares;}));
+  document.getElementById('dripBars').innerHTML=chartData.map(function(d){
+    var origPct=Math.min(shares,d.shares)/maxShares*100;
+    var dripPct=(d.shares-Math.min(shares,d.shares))/maxShares*100;
+    return '<div class="drip-row"><span class="drip-yr">Yr '+d.yr+'</span>'+
+      '<div class="drip-bar-wrap"><div class="drip-bar-shares" style="width:'+origPct+'%"></div><div class="drip-bar-drip" style="left:'+origPct+'%;width:'+dripPct+'%"></div></div>'+
+      '<span class="drip-val">'+Math.round(d.shares).toLocaleString()+' sh</span></div>';
+  }).join('');
+}
+var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');
+if(_mb&&_dd){
+  _mb.addEventListener('click',function(e){e.stopPropagation();_dd.classList.toggle('open');});
+  document.addEventListener('click',function(){_dd.classList.remove('open');});
+}
+calc();
+</script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mortgage Refinance Calculator - Should You Refinance? | CalcHive</title>
+<meta name="description" content="Free mortgage refinance calculator. See how much you save by refinancing, calculate your break-even point, and compare your current vs new mortgage. No signup required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--text)}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none}.nav-links a:hover{color:var(--text)}
+.dropdown{position:relative}
+.more-btn{background:none;border:none;color:var(--muted);font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif}
+.more-btn:hover{color:var(--text)}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 0;min-width:210px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.dropdown-menu a{display:block;padding:9px 16px;color:var(--muted);text-decoration:none;font-size:.82rem}
+.dropdown-menu a:hover{color:var(--text);background:var(--surface2)}
+.dropdown.open .dropdown-menu{display:block}
+@media(max-width:800px){.nav-links{display:none}}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin-bottom:.75rem}
+.hero h1 span{color:var(--green)}.hero-sub{font-size:.95rem;color:var(--muted);max-width:500px;margin:0 auto;line-height:1.6}
+.main{max-width:1050px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:340px 1fr;gap:2rem;align-items:start}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.25rem}
+.panel:last-child{margin-bottom:0}
+.panel-head{background:var(--surface2);border-bottom:1px solid var(--border);padding:1rem 1.5rem;font-weight:700;font-size:.95rem}
+.panel-body{padding:1.5rem}
+.field{margin-bottom:1.1rem}
+.field label{display:block;font-size:.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.35rem}
+.input-wrap{position:relative}
+.input-prefix{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+.input-suffix{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+input[type=number]{width:100%;padding:.6rem .75rem .6rem 1.75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.92rem;outline:none}
+input[type=number].no-prefix{padding-left:.75rem}
+input[type=number]:focus{border-color:var(--accent)}
+input[type=number]::-webkit-inner-spin-button{opacity:0}
+.verdict{border-radius:14px;padding:1.5rem;text-align:center;margin-bottom:1.5rem;border:1px solid}
+.verdict.good{background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.3)}
+.verdict.bad{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.3)}
+.verdict.neutral{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.3)}
+.verdict-icon{font-size:2rem;margin-bottom:.4rem}
+.verdict-title{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;margin-bottom:.3rem}
+.verdict-sub{font-size:.82rem;color:var(--muted)}
+.compare-table{width:100%;border-collapse:collapse;font-size:.82rem;margin-bottom:1.5rem}
+.compare-table th{padding:8px 10px;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);text-align:left}
+.compare-table td{padding:8px 10px;border-bottom:1px solid var(--border)}
+.compare-table tr:last-child td{border-bottom:none;font-weight:700}
+.old-val{color:var(--muted)}.new-val{color:var(--accent2)}.diff-val{font-weight:600}
+.diff-pos{color:var(--green)}.diff-neg{color:var(--red)}
+.breakeven-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem}
+.breakeven-icon{font-size:2rem;flex-shrink:0}
+.breakeven-val{font-family:'Playfair Display',serif;font-weight:900;font-size:1.8rem;color:var(--yellow);line-height:1}
+.breakeven-label{font-size:.78rem;color:var(--muted);margin-top:2px}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted)}
+.faq-section{max-width:1050px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:700px){.main{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Calc<span>Hive</span></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/mortgage-calculator.html">Mortgage</a></li>
+  <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
+  <li><a href="/loan-calculator.html">Loan</a></li>
+  <li><a href="/budget-planner.html">Budget</a></li>
+  <li class="dropdown">
+    <button class="more-btn">More &#9660;</button>
+    <div class="dropdown-menu">
+      <a href="/savings-goal-calculator.html">Savings Goal</a>
+      <a href="/credit-card-payoff-calculator.html">Credit Card Payoff</a>
+      <a href="/retirement-calculator.html">Retirement</a>
+      <a href="/net-worth-calculator.html">Net Worth</a>
+      <a href="/debt-snowball-calculator.html">Debt Snowball</a>
+      <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+      <a href="/investment-return-calculator.html">Investment Return</a>
+      <a href="/rent-vs-buy-calculator.html">Rent vs Buy</a>
+      <a href="/car-loan-calculator.html">Car Loan</a>
+      <a href="/student-loan-calculator.html">Student Loan</a>
+      <a href="/tax-bracket-calculator.html">Tax Bracket</a>
+      <a href="/tip-calculator.html">Tip Calculator</a>
+      <a href="/hourly-to-salary-calculator.html">Hourly to Salary</a>
+      <a href="/break-even-calculator.html">Break Even</a>
+      <a href="/invoice-generator.html">Invoice Generator</a>
+      <a href="/currency-converter.html">Currency Converter</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/401k-calculator.html">401k Calculator</a>
+      <a href="/salary-comparison-calculator.html">Salary Comparison</a>
+      <a href="/inflation-calculator.html">Inflation Calculator</a>
+      <a href="/mortgage-refinance-calculator.html">Refinance Calculator</a>
+      <a href="/dividend-calculator.html">Dividend Calculator</a>
+      <a href="/savings-rate-calculator.html">Savings Rate</a>
+      <a href="/debt-to-income-calculator.html">Debt-to-Income</a>
+      <a href="/paycheck-calculator.html">Paycheck Calculator</a>
+    </div>
+  </li>
+</ul>
+</header>
+<div class="hero">
+<div class="hero-eyebrow">Free · Instant · No Signup</div>
+<h1>Mortgage Refinance <span>Calculator</span></h1>
+<p class="hero-sub">Should you refinance? See your monthly savings, break-even point, and lifetime savings from refinancing your mortgage.</p>
+</div>
+<div class="main">
+<div class="input-col">
+<div class="panel">
+<div class="panel-head">Current Mortgage</div>
+<div class="panel-body">
+<div class="field"><label>Remaining Balance</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="balance" value="320000" oninput="calc()"></div></div>
+<div class="field"><label>Current Interest Rate</label><div class="input-wrap"><input type="number" id="currentRate" value="7.5" step="0.1" class="no-prefix" oninput="calc()"><span class="input-suffix">%</span></div></div>
+<div class="field"><label>Remaining Term</label><div class="input-wrap"><input type="number" id="currentTerm" value="25" class="no-prefix" oninput="calc()"><span class="input-suffix">years</span></div></div>
+</div></div>
+<div class="panel">
+<div class="panel-head">New Mortgage</div>
+<div class="panel-body">
+<div class="field"><label>New Interest Rate</label><div class="input-wrap"><input type="number" id="newRate" value="6.5" step="0.1" class="no-prefix" oninput="calc()"><span class="input-suffix">%</span></div></div>
+<div class="field"><label>New Loan Term</label><div class="input-wrap"><input type="number" id="newTerm" value="30" class="no-prefix" oninput="calc()"><span class="input-suffix">years</span></div></div>
+<div class="field"><label>Closing Costs</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="closingCosts" value="6000" oninput="calc()"></div></div>
+<div class="field"><label>Roll Closing Costs Into Loan?</label>
+<div style="display:flex;gap:.5rem;margin-top:.25rem">
+<button id="rollNo" onclick="setRoll(false)" style="flex:1;padding:.5rem;background:var(--accent);border:none;border-radius:6px;color:#fff;font-family:Inter,sans-serif;font-size:.82rem;font-weight:600;cursor:pointer">No — pay upfront</button>
+<button id="rollYes" onclick="setRoll(true)" style="flex:1;padding:.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--muted);font-family:Inter,sans-serif;font-size:.82rem;cursor:pointer">Yes — roll in</button>
+</div></div>
+<div class="field"><label>How Long Will You Stay?</label><div class="input-wrap"><input type="number" id="stayYears" value="7" class="no-prefix" oninput="calc()"><span class="input-suffix">years</span></div></div>
+</div></div>
+</div>
+<div class="output-col">
+<div class="verdict" id="verdictBox">
+<div class="verdict-icon" id="verdictIcon">📊</div>
+<div class="verdict-title" id="verdictTitle">Calculating...</div>
+<div class="verdict-sub" id="verdictSub"></div>
+</div>
+<div class="breakeven-card">
+<div class="breakeven-icon">⏱️</div>
+<div><div class="breakeven-val" id="breakevenVal">—</div><div class="breakeven-label">Break-even point — how long until refinancing pays off</div></div>
+</div>
+<table class="compare-table">
+<thead><tr><th>Category</th><th>Current</th><th>New</th><th>Difference</th></tr></thead>
+<tbody id="compareBody"></tbody>
+</table>
+<div class="ad-slot">Advertisement · Google AdSense</div>
+</div>
+</div>
+<div class="faq-section">
+<h2>Frequently asked questions</h2>
+<div class="faq-item"><div class="faq-q">When does refinancing make sense?</div><div class="faq-a">Refinancing generally makes sense when you can lower your rate by at least 0.5-1%, you plan to stay in the home long enough to recoup closing costs, and your credit score qualifies you for a competitive rate.</div></div>
+<div class="faq-item"><div class="faq-q">What is the break-even point?</div><div class="faq-a">The break-even point is how many months it takes for your monthly savings to equal your closing costs. If you sell or refinance again before this point, you won't have saved money by refinancing.</div></div>
+<div class="faq-item"><div class="faq-q">Is this calculator free?</div><div class="faq-a">Yes — completely free with no account or signup required.</div></div>
+</div>
+<footer><p>&copy; 2025 CalcHive &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a><br>
+Also try: <a href="/mortgage-calculator.html">Mortgage Calculator</a> &middot; <a href="/loan-calculator.html">Loan Calculator</a></p></footer>
+<script>
+var rollIn = false;
+function setRoll(v){
+  rollIn=v;
+  document.getElementById('rollNo').style.background=v?'var(--surface2)':'var(--accent)';
+  document.getElementById('rollNo').style.color=v?'var(--muted)':'#fff';
+  document.getElementById('rollNo').style.border=v?'1px solid var(--border)':'none';
+  document.getElementById('rollYes').style.background=v?'var(--accent)':'var(--surface2)';
+  document.getElementById('rollYes').style.color=v?'#fff':'var(--muted)';
+  document.getElementById('rollYes').style.border=v?'none':'1px solid var(--border)';
+  calc();
+}
+function fmt(n){return '$'+Math.round(Math.abs(n)).toLocaleString();}
+function calcPayment(bal,rate,years){var mr=rate/100/12,m=years*12;if(mr===0)return bal/m;return bal*(mr*Math.pow(1+mr,m))/(Math.pow(1+mr,m)-1);}
+function calc(){
+  var balance=parseFloat(document.getElementById('balance').value)||0;
+  var curRate=parseFloat(document.getElementById('currentRate').value)||0;
+  var curTerm=parseFloat(document.getElementById('currentTerm').value)||25;
+  var newRate=parseFloat(document.getElementById('newRate').value)||0;
+  var newTerm=parseFloat(document.getElementById('newTerm').value)||30;
+  var closing=parseFloat(document.getElementById('closingCosts').value)||0;
+  var stayYears=parseFloat(document.getElementById('stayYears').value)||7;
+  var newBalance=rollIn?balance+closing:balance;
+  var curPayment=calcPayment(balance,curRate,curTerm);
+  var newPayment=calcPayment(newBalance,newRate,newTerm);
+  var monthlySavings=curPayment-newPayment;
+  var breakevenMonths=monthlySavings>0?Math.ceil(closing/monthlySavings):Infinity;
+  var curTotalInterest=curPayment*curTerm*12-balance;
+  var newTotalInterest=newPayment*newTerm*12-newBalance;
+  var lifetimeSavings=(curTotalInterest-newTotalInterest)-(rollIn?0:closing);
+  var staySavings=monthlySavings*stayYears*12-(rollIn?0:closing);
+  var verdict=document.getElementById('verdictBox');
+  var willBreakEven=breakevenMonths<=stayYears*12;
+  if(monthlySavings<=0){
+    verdict.className='verdict bad';
+    document.getElementById('verdictIcon').textContent='❌';
+    document.getElementById('verdictTitle').textContent='Refinancing Not Recommended';
+    document.getElementById('verdictSub').textContent='Your new rate would increase your monthly payment. Only refinance if you need to extend your term to lower payments.';
+  } else if(willBreakEven){
+    verdict.className='verdict good';
+    document.getElementById('verdictIcon').textContent='✅';
+    document.getElementById('verdictTitle').textContent='Refinancing Makes Sense!';
+    document.getElementById('verdictSub').textContent='You will break even in '+breakevenMonths+' months and save '+fmt(staySavings)+' over your '+stayYears+'-year stay.';
+  } else {
+    verdict.className='verdict neutral';
+    document.getElementById('verdictIcon').textContent='⚠️';
+    document.getElementById('verdictTitle').textContent='Maybe — Depends on How Long You Stay';
+    document.getElementById('verdictSub').textContent='You won\'t break even for '+breakevenMonths+' months but plan to stay only '+stayYears*12+' months. Consider staying longer or negotiating lower closing costs.';
+  }
+  document.getElementById('breakevenVal').textContent=breakevenMonths===Infinity?'Never':breakevenMonths+' months';
+  var rows=[
+    {label:'Monthly Payment',old:curPayment,nw:newPayment},
+    {label:'Total Interest',old:curTotalInterest,nw:newTotalInterest},
+    {label:'Total Cost',old:curPayment*curTerm*12,nw:newPayment*newTerm*12+(rollIn?0:closing)},
+    {label:'Savings over '+stayYears+' yrs',old:null,nw:null,custom:staySavings},
+  ];
+  document.getElementById('compareBody').innerHTML=rows.map(function(r){
+    if(r.custom!==undefined){
+      return '<tr><td>'+r.label+'</td><td colspan="2"></td><td class="'+(r.custom>=0?'diff-pos':'diff-neg')+'">'+(r.custom>=0?'+':'-')+fmt(r.custom)+'</td></tr>';
+    }
+    var diff=r.nw-r.old;
+    return '<tr><td>'+r.label+'</td><td class="old-val">'+fmt(r.old)+'</td><td class="new-val">'+fmt(r.nw)+'</td><td class="'+(diff<=0?'diff-pos':'diff-neg')+'">'+(diff<=0?'-':'+')+fmt(diff)+'</td></tr>';
+  }).join('');
+}
+var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');
+if(_mb&&_dd){
+  _mb.addEventListener('click',function(e){e.stopPropagation();_dd.classList.toggle('open');});
+  document.addEventListener('click',function(){_dd.classList.remove('open');});
+}
+calc();
+</script>
+</body>
+</html>

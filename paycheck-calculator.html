@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paycheck Calculator - Calculate Take-Home Pay | CalcHive</title>
+<meta name="description" content="Free paycheck calculator. Calculate your exact take-home pay after federal taxes, state taxes, Social Security, and Medicare. No signup required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--text)}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none}.nav-links a:hover{color:var(--text)}
+.dropdown{position:relative}
+.more-btn{background:none;border:none;color:var(--muted);font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif}
+.more-btn:hover{color:var(--text)}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 0;min-width:210px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.dropdown-menu a{display:block;padding:9px 16px;color:var(--muted);text-decoration:none;font-size:.82rem}
+.dropdown-menu a:hover{color:var(--text);background:var(--surface2)}
+.dropdown.open .dropdown-menu{display:block}
+@media(max-width:800px){.nav-links{display:none}}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin-bottom:.75rem}
+.hero h1 span{color:var(--green)}.hero-sub{font-size:.95rem;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.6}
+.main{max-width:1000px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:340px 1fr;gap:2rem;align-items:start}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.panel-head{background:var(--surface2);border-bottom:1px solid var(--border);padding:1rem 1.5rem;font-weight:700;font-size:.95rem}
+.panel-body{padding:1.5rem}
+.field{margin-bottom:1.1rem}
+.field label{display:block;font-size:.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.35rem}
+.input-wrap{position:relative}
+.input-prefix{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+.input-suffix{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+input[type=number]{width:100%;padding:.6rem .75rem .6rem 1.75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.9rem;outline:none}
+input[type=number].no-prefix{padding-left:.75rem}
+input[type=number]:focus{border-color:var(--accent)}
+input[type=number]::-webkit-inner-spin-button{opacity:0}
+select{width:100%;padding:.6rem .75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.88rem;outline:none;appearance:none;cursor:pointer}
+select:focus{border-color:var(--accent)}
+.take-home-hero{text-align:center;padding:1.5rem;background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);border-radius:12px;margin-bottom:1.5rem}
+.th-val{font-family:'Playfair Display',serif;font-weight:900;font-size:3rem;color:var(--green);line-height:1;margin-bottom:.25rem}
+.th-label{font-size:.82rem;color:var(--muted)}
+.pay-periods{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.5rem}
+.period-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.875rem;text-align:center}
+.period-val{font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:var(--accent2);margin-bottom:3px}
+.period-label{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.deduction-breakdown{margin-bottom:1.5rem}
+.deduct-title{font-weight:700;font-size:.88rem;margin-bottom:.75rem}
+.deduct-row{display:flex;align-items:center;gap:.75rem;padding:.5rem 0;border-bottom:1px solid var(--border)}
+.deduct-row:last-child{border-bottom:none;padding-top:.75rem;font-weight:700}
+.deduct-label{font-size:.82rem;flex:1;color:var(--muted)}
+.deduct-bar-wrap{flex:2;background:var(--surface2);border-radius:3px;height:7px;overflow:hidden}
+.deduct-bar{height:100%;border-radius:3px}
+.deduct-amount{font-size:.82rem;font-weight:600;min-width:65px;text-align:right}
+.deduct-pct{font-size:.7rem;color:var(--muted);min-width:35px;text-align:right}
+.effective-rate{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;margin-bottom:1.5rem;display:flex;justify-content:space-between;align-items:center}
+.eff-label{font-size:.82rem;color:var(--muted)}
+.eff-val{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;color:var(--yellow)}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted)}
+.faq-section{max-width:1000px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:700px){.main{grid-template-columns:1fr}.pay-periods{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Calc<span>Hive</span></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/tax-bracket-calculator.html">Tax Bracket</a></li>
+  <li><a href="/hourly-to-salary-calculator.html">Hourly to Salary</a></li>
+  <li><a href="/budget-planner.html">Budget</a></li>
+  <li><a href="/401k-calculator.html">401k</a></li>
+  <li class="dropdown">
+    <button class="more-btn">More &#9660;</button>
+    <div class="dropdown-menu">
+      <a href="/savings-goal-calculator.html">Savings Goal</a>
+      <a href="/credit-card-payoff-calculator.html">Credit Card Payoff</a>
+      <a href="/retirement-calculator.html">Retirement</a>
+      <a href="/net-worth-calculator.html">Net Worth</a>
+      <a href="/debt-snowball-calculator.html">Debt Snowball</a>
+      <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+      <a href="/investment-return-calculator.html">Investment Return</a>
+      <a href="/mortgage-calculator.html">Mortgage</a>
+      <a href="/rent-vs-buy-calculator.html">Rent vs Buy</a>
+      <a href="/car-loan-calculator.html">Car Loan</a>
+      <a href="/student-loan-calculator.html">Student Loan</a>
+      <a href="/tip-calculator.html">Tip Calculator</a>
+      <a href="/break-even-calculator.html">Break Even</a>
+      <a href="/invoice-generator.html">Invoice Generator</a>
+      <a href="/currency-converter.html">Currency Converter</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/salary-comparison-calculator.html">Salary Comparison</a>
+      <a href="/inflation-calculator.html">Inflation Calculator</a>
+      <a href="/mortgage-refinance-calculator.html">Refinance</a>
+      <a href="/dividend-calculator.html">Dividend Calculator</a>
+      <a href="/savings-rate-calculator.html">Savings Rate</a>
+      <a href="/debt-to-income-calculator.html">Debt-to-Income</a>
+    </div>
+  </li>
+</ul>
+</header>
+<div class="hero">
+<div class="hero-eyebrow">2026 Tax Year · Free · No Signup</div>
+<h1>Paycheck <span>Calculator</span></h1>
+<p class="hero-sub">Calculate your exact take-home pay after federal taxes, FICA, state taxes, and deductions. See every withholding broken down clearly.</p>
+</div>
+<div class="main">
+<div class="input-col">
+<div class="panel">
+<div class="panel-head">Pay Details</div>
+<div class="panel-body">
+<div class="field"><label>Annual Gross Salary</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="salary" value="75000" oninput="calc()"></div></div>
+<div class="field"><label>Pay Frequency</label>
+<select id="frequency" onchange="calc()">
+  <option value="52">Weekly (52x/year)</option>
+  <option value="26">Bi-weekly (26x/year)</option>
+  <option value="24">Semi-monthly (24x/year)</option>
+  <option value="12" selected>Monthly (12x/year)</option>
+</select></div>
+<div class="field"><label>Filing Status</label>
+<select id="filing" onchange="calc()">
+  <option value="single">Single</option>
+  <option value="married">Married Filing Jointly</option>
+  <option value="hoh">Head of Household</option>
+</select></div>
+<div class="field"><label>State Income Tax Rate</label><div class="input-wrap"><input type="number" id="stateTax" value="5" step="0.5" class="no-prefix" oninput="calc()"><span class="input-suffix">%</span></div></div>
+<div class="field"><label>401k Contribution (pre-tax)</label><div class="input-wrap"><input type="number" id="retirement401k" value="6" step="0.5" class="no-prefix" oninput="calc()"><span class="input-suffix">% of salary</span></div></div>
+<div class="field"><label>Health Insurance (monthly)</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="health" value="150" oninput="calc()"></div></div>
+<div class="field"><label>Other Pre-tax Deductions (monthly)</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="otherPretax" value="0" oninput="calc()"></div></div>
+<div class="field"><label>Other Post-tax Deductions (monthly)</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="otherPosttax" value="0" oninput="calc()"></div></div>
+</div></div>
+</div>
+<div class="output-col">
+<div class="panel">
+<div class="panel-head">Take-Home Pay</div>
+<div class="panel-body">
+<div class="take-home-hero">
+<div class="th-val" id="takeHomeVal">$0</div>
+<div class="th-label" id="takeHomeLabel">Monthly Take-Home Pay</div>
+</div>
+<div class="pay-periods">
+<div class="period-card"><div class="period-val" id="annualNet">$0</div><div class="period-label">Annual</div></div>
+<div class="period-card"><div class="period-val" id="monthlyNet">$0</div><div class="period-label">Monthly</div></div>
+<div class="period-card"><div class="period-val" id="biweeklyNet">$0</div><div class="period-label">Bi-weekly</div></div>
+<div class="period-card"><div class="period-val" id="weeklyNet">$0</div><div class="period-label">Weekly</div></div>
+</div>
+<div class="effective-rate">
+<span class="eff-label">Effective tax rate (all taxes)</span>
+<span class="eff-val" id="effectiveRate">0%</span>
+</div>
+<div class="deduction-breakdown">
+<div class="deduct-title">Paycheck Breakdown (Monthly)</div>
+<div id="deductRows"></div>
+</div>
+<div class="ad-slot">Advertisement · Google AdSense</div>
+</div></div>
+</div>
+</div>
+<div class="faq-section">
+<h2>Frequently asked questions</h2>
+<div class="faq-item"><div class="faq-q">What is FICA tax?</div><div class="faq-a">FICA stands for Federal Insurance Contributions Act. It includes Social Security tax (6.2% on wages up to $176,100 in 2026) and Medicare tax (1.45% on all wages, plus an additional 0.9% on wages over $200,000). Your employer matches these contributions.</div></div>
+<div class="faq-item"><div class="faq-q">Does my 401k contribution reduce my taxes?</div><div class="faq-a">Yes — traditional 401k contributions are pre-tax, meaning they reduce your taxable income for federal and state income tax purposes. A $6,000 annual 401k contribution could save you $1,320 or more in federal income taxes depending on your bracket.</div></div>
+<div class="faq-item"><div class="faq-q">Is this calculator free?</div><div class="faq-a">Yes — completely free with no account or signup required.</div></div>
+</div>
+<footer><p>&copy; 2025 CalcHive &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a><br>
+Also try: <a href="/tax-bracket-calculator.html">Tax Bracket Calculator</a> &middot; <a href="/hourly-to-salary-calculator.html">Hourly to Salary</a></p></footer>
+<script>
+var BRACKETS_2026={
+  single:[[0,12300,0.10],[12300,49950,0.12],[49950,106550,0.22],[106550,203300,0.24],[203300,258250,0.32],[258250,645000,0.35],[645000,Infinity,0.37]],
+  married:[[0,24600,0.10],[24600,99900,0.12],[99900,213100,0.22],[213100,406600,0.24],[406600,516500,0.32],[516500,774600,0.35],[774600,Infinity,0.37]],
+  hoh:[[0,17500,0.10],[17500,66800,0.12],[66800,106550,0.22],[106550,203300,0.24],[203300,258200,0.32],[258200,645000,0.35],[645000,Infinity,0.37]]
+};
+var STD_2026={single:15450,married:30900,hoh:23200};
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+function fmtD(n){return '$'+(Math.round(n*100)/100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',');}
+function calcFedTax(taxable,status){
+  var brackets=BRACKETS_2026[status]||BRACKETS_2026.single;
+  var tax=0;
+  brackets.forEach(function(b){
+    var low=b[0],high=b[1],rate=b[2];
+    if(taxable>low)tax+=Math.min(taxable,high===Infinity?taxable:high)-low)*rate;
+  });
+  return tax;
+}
+function calc(){
+  var salary=parseFloat(document.getElementById('salary').value)||0;
+  var freq=parseInt(document.getElementById('frequency').value)||12;
+  var filing=document.getElementById('filing').value;
+  var stateTaxRate=parseFloat(document.getElementById('stateTax').value)||0;
+  var ret401k=parseFloat(document.getElementById('retirement401k').value)||0;
+  var health=parseFloat(document.getElementById('health').value)||0;
+  var otherPre=parseFloat(document.getElementById('otherPretax').value)||0;
+  var otherPost=parseFloat(document.getElementById('otherPosttax').value)||0;
+  var ret401kAnn=salary*ret401k/100;
+  var healthAnn=health*12;
+  var otherPreAnn=otherPre*12;
+  var otherPostAnn=otherPost*12;
+  var stdDed=STD_2026[filing]||15450;
+  var taxable=Math.max(0,salary-ret401kAnn-healthAnn-otherPreAnn-stdDed);
+  var fedTax=calcFedTax(taxable,filing);
+  var stateTax=(salary-ret401kAnn-healthAnn-otherPreAnn)*stateTaxRate/100;
+  var ssTax=Math.min(salary,176100)*0.062;
+  var medicareTax=salary*0.0145+(salary>200000?(salary-200000)*0.009:0);
+  var totalTax=fedTax+stateTax+ssTax+medicareTax;
+  var totalDeductions=ret401kAnn+healthAnn+otherPreAnn+otherPostAnn+totalTax;
+  var netAnnual=salary-totalDeductions;
+  var effectiveRate=salary>0?(totalTax/salary*100):0;
+  document.getElementById('takeHomeVal').textContent=fmt(netAnnual/12);
+  document.getElementById('takeHomeLabel').textContent='Monthly Take-Home Pay';
+  document.getElementById('annualNet').textContent=fmt(netAnnual);
+  document.getElementById('monthlyNet').textContent=fmt(netAnnual/12);
+  document.getElementById('biweeklyNet').textContent=fmt(netAnnual/26);
+  document.getElementById('weeklyNet').textContent=fmt(netAnnual/52);
+  document.getElementById('effectiveRate').textContent=effectiveRate.toFixed(1)+'%';
+  var rows=[
+    {label:'Gross Pay',amount:salary/12,color:'var(--green)',pct:100,isGross:true},
+    {label:'Federal Income Tax',amount:fedTax/12,color:'var(--red)',pct:salary>0?fedTax/salary*100:0},
+    {label:'State Income Tax ('+stateTaxRate+'%)',amount:stateTax/12,color:'var(--red)',pct:salary>0?stateTax/salary*100:0},
+    {label:'Social Security (6.2%)',amount:ssTax/12,color:'#f97316',pct:salary>0?ssTax/salary*100:0},
+    {label:'Medicare (1.45%)',amount:medicareTax/12,color:'#f97316',pct:salary>0?medicareTax/salary*100:0},
+    {label:'401k Contribution ('+ret401k+'%)',amount:ret401kAnn/12,color:'var(--accent)',pct:ret401k},
+    {label:'Health Insurance',amount:health,color:'var(--accent2)',pct:salary>0?healthAnn/salary*100:0},
+    {label:'Other Deductions',amount:(otherPre+otherPost),color:'var(--muted)',pct:salary>0?(otherPreAnn+otherPostAnn)/salary*100:0},
+    {label:'Net Take-Home Pay',amount:netAnnual/12,color:'var(--green)',isTotal:true},
+  ];
+  var maxAmt=salary/12;
+  document.getElementById('deductRows').innerHTML=rows.map(function(r){
+    if(r.isTotal){
+      return '<div class="deduct-row"><span class="deduct-label" style="color:var(--text);font-weight:700">'+r.label+'</span><span></span><span class="deduct-amount" style="color:var(--green)">'+fmt(r.amount)+'</span><span></span></div>';
+    }
+    return '<div class="deduct-row">'+
+      '<span class="deduct-label"'+(r.isGross?' style="color:var(--text)"':'')+'">'+r.label+'</span>'+
+      '<div class="deduct-bar-wrap"><div class="deduct-bar" style="width:'+(r.amount/maxAmt*100)+'%;background:'+r.color+'"></div></div>'+
+      '<span class="deduct-amount" style="color:'+r.color+'">'+fmt(r.amount)+'</span>'+
+      '<span class="deduct-pct">'+r.pct.toFixed(1)+'%</span>'+
+    '</div>';
+  }).join('');
+}
+var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');
+if(_mb&&_dd){
+  _mb.addEventListener('click',function(e){e.stopPropagation();_dd.classList.toggle('open');});
+  document.addEventListener('click',function(){_dd.classList.remove('open');});
+}
+calc();
+</script>
+</body>
+</html>
