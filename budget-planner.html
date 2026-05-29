@@ -88,6 +88,17 @@ header{background:var(--surface);border-bottom:1px solid var(--border);padding:0
 footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted)}
 footer a{color:var(--accent2);text-decoration:none}
 @media(max-width:700px){.summary-grid{grid-template-columns:1fr 1fr}.budget-grid{grid-template-columns:1fr}.rule-grid{grid-template-columns:1fr}.how-grid{grid-template-columns:1fr}.nav-links{display:none}}
+
+  .nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
+  .nav-links a{color:var(--muted);text-decoration:none;transition:color .15s}
+  .nav-links a:hover{color:var(--text)}
+  .dropdown{position:relative}
+  .more-btn{background:none;border:none;color:var(--muted);font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif;transition:color .15s}
+  .more-btn:hover{color:var(--text)}
+  .dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 0;min-width:190px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+  .dropdown-menu a{display:block;padding:8px 16px;color:var(--muted);text-decoration:none;font-size:.82rem;transition:all .15s}
+  .dropdown-menu a:hover{color:var(--text);background:var(--surface2)}
+  .dropdown.open .dropdown-menu{display:block}
 </style>
 </head>
 <body>
@@ -99,7 +110,17 @@ footer a{color:var(--accent2);text-decoration:none}
   <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
   <li><a href="/loan-calculator.html">Loan</a></li>
   <li><a href="/budget-planner.html">Budget</a></li>
-  <li><a href="/savings-goal-calculator.html">Savings Goal</a></li>
+  <li class="dropdown">
+    <button class="more-btn">More &#9660;</button>
+    <div class="dropdown-menu">
+      <a href="/savings-goal-calculator.html">Savings Goal</a>
+      <a href="/credit-card-payoff-calculator.html">Credit Card Payoff</a>
+      <a href="/retirement-calculator.html">Retirement</a>
+      <a href="/net-worth-calculator.html">Net Worth</a>
+      <a href="/debt-snowball-calculator.html">Debt Snowball</a>
+      <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+    </div>
+  </li>
 </ul>
 </header>
 <div class="hero">
@@ -334,6 +355,15 @@ function update() {
 }
 
 buildSections();
+
+  var dd = document.querySelector('.dropdown');
+  if (dd) {
+    dd.querySelector('.more-btn').addEventListener('click', function(e) {
+      e.stopPropagation();
+      dd.classList.toggle('open');
+    });
+    document.addEventListener('click', function() { dd.classList.remove('open'); });
+  }
 </script>
 </body>
 </html>
