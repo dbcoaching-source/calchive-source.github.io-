@@ -116,7 +116,7 @@ footer a{color:var(--accent2);text-decoration:none}
 <div class="hero">
 <div class="hero-eyebrow"><span id="taxYear">2026</span> Tax Year · Federal Income Tax · Free</div>
 <h1>Tax Bracket <span>Calculator</span></h1>
-<p class="hero-sub">Find your federal income tax bracket, effective tax rate, and estimated tax bill for 2024. Supports single, married filing jointly, and head of household.</p>
+<p class="hero-sub">Find your federal income tax bracket, effective tax rate, and estimated tax bill for <span id="heroYear">2026</span>. Supports single, married filing jointly, and head of household.</p>
 </div>
 <div class="main">
 <div class="input-col">
@@ -181,13 +181,13 @@ footer a{color:var(--accent2);text-decoration:none}
 <div style="max-width:1000px;margin:0 auto;padding:0 1.5rem"><div class="ad-slot">Advertisement · 728x90 · Google AdSense</div></div>
 <div class="how-section"><h2>How to use the tax bracket calculator</h2>
 <div class="how-grid">
-<div class="how-card"><div class="how-num">1</div><h3>Enter your income</h3><p>Input your gross annual income, filing status, and deduction type. The calculator applies the 2024 standard deduction automatically.</p></div>
+<div class="how-card"><div class="how-num">1</div><h3>Enter your income</h3><p>Input your gross annual income, filing status, and deduction type. The calculator applies the current year standard deduction automatically.</p></div>
 <div class="how-card"><div class="how-num">2</div><h3>See your bracket</h3><p>The calculator shows which bracket each portion of your income falls into and the tax owed in each bracket.</p></div>
 <div class="how-card"><div class="how-num">3</div><h3>Understand effective vs marginal</h3><p>Your effective rate is what you actually pay on average. Your marginal rate is the rate on your last dollar — not your entire income.</p></div>
 </div></div>
 <div class="faq-section"><h2>Frequently asked questions</h2>
 <div class="faq-item"><div class="faq-q">What is the difference between marginal and effective tax rate?</div><div class="faq-a">Your marginal tax rate is the rate applied to your last dollar of income — the highest bracket you reach. Your effective tax rate is the average rate across all your income. Because the US uses progressive brackets, your effective rate is always lower than your marginal rate.</div></div>
-<div class="faq-item"><div class="faq-q">What is the 2024 standard deduction?</div><div class="faq-a">For 2024, the standard deduction is $14,600 for single filers, $29,200 for married filing jointly, and $21,900 for head of household. These amounts reduce your taxable income before calculating your tax.</div></div>
+<div class="faq-item"><div class="faq-q">What is the 2026 standard deduction?</div><div class="faq-a">For 2026, the estimated standard deduction is $15,450 for single filers, $30,900 for married filing jointly, and $23,200 for head of household. These amounts are adjusted annually for inflation.</div></div>
 <div class="faq-item"><div class="faq-q">Does this include state taxes?</div><div class="faq-a">No — this calculator estimates federal income tax only. State income tax rates vary widely from 0% (no state income tax in states like Texas and Florida) to over 13% (California). Add your state tax rate separately for a complete picture.</div></div>
 <div class="faq-item"><div class="faq-q">Is this calculator free?</div><div class="faq-a">Yes — completely free with no account or signup required.</div></div>
 </div>
@@ -230,7 +230,7 @@ if(!TAX_DATA[TAX_YEAR]) TAX_YEAR = 2026;
 var BRACKETS = TAX_DATA[TAX_YEAR].brackets;
 var STD_DEDUCTION = TAX_DATA[TAX_YEAR].std;
 // Update year labels on page
-document.querySelectorAll('.yr,#taxYear').forEach(function(el){el.textContent=TAX_YEAR;});
+document.querySelectorAll('.yr,#taxYear,#heroYear').forEach(function(el){el.textContent=TAX_YEAR;});
 var COLORS=['#22c55e','#60a5fa','#f59e0b','#f97316','#ef4444','#a855f7','#ec4899'];
 function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
 function calc(){
