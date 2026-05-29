@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tax Bracket Calculator - 2024 Federal Income Tax | CalcHive</title>
+<meta name="description" content="Free 2024 tax bracket calculator. Find your federal income tax bracket, effective tax rate, and estimated tax bill. Single, married, and head of household. No signup required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none}.nav-links a:hover{color:var(--text)}
+.dropdown{position:relative}
+.more-btn{background:none;border:none;color:var(--muted);font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif}
+.more-btn:hover{color:var(--text)}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 0;min-width:200px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.dropdown-menu a{display:block;padding:9px 16px;color:var(--muted);text-decoration:none;font-size:.82rem}
+.dropdown-menu a:hover{color:var(--text);background:var(--surface2)}
+.dropdown.open .dropdown-menu{display:block}
+@media(max-width:700px){.nav-links{display:none}}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin-bottom:.75rem}
+.hero h1 span{color:var(--yellow)}.hero-sub{font-size:.95rem;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.6}
+.main{max-width:1000px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:320px 1fr;gap:2rem;align-items:start}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.panel-head{background:var(--surface2);border-bottom:1px solid var(--border);padding:1rem 1.5rem}
+.panel-title{font-weight:700;font-size:.95rem}.panel-body{padding:1.5rem}
+.field{margin-bottom:1.25rem}
+.field label{display:block;font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+.input-wrap{position:relative}
+.input-prefix{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+.input-suffix{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+input[type=number]{width:100%;padding:.65rem .75rem .65rem 1.75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.95rem;outline:none}
+input[type=number].no-prefix{padding-left:.75rem}
+input[type=number]:focus{border-color:var(--accent)}
+input[type=number]::-webkit-inner-spin-button{opacity:0}
+input[type=range]{-webkit-appearance:none;width:100%;height:4px;background:var(--border);border-radius:2px;margin-top:.5rem;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.range-labels{display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted);margin-top:4px}
+select{width:100%;padding:.65rem .75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.9rem;outline:none;appearance:none;cursor:pointer}
+select:focus{border-color:var(--accent)}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.stat-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1.25rem;text-align:center}
+.stat-card.primary{grid-column:1/-1;border-color:var(--yellow);background:rgba(245,158,11,.06)}
+.stat-val{font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;color:var(--accent);line-height:1;margin-bottom:4px}
+.stat-card.primary .stat-val{font-size:2.2rem;color:var(--yellow)}
+.stat-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.bracket-table{width:100%;border-collapse:collapse;margin-bottom:1.5rem;font-size:.82rem}
+.bracket-table th{text-align:left;padding:7px 10px;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--border);font-weight:600}
+.bracket-table td{padding:7px 10px;border-bottom:1px solid var(--border)}
+.bracket-table tr:last-child td{border-bottom:none}
+.bracket-table tr.active-bracket{background:rgba(245,158,11,.08)}
+.bracket-table tr.active-bracket td{color:var(--yellow)}
+.bracket-rate{font-weight:700}
+.bracket-bar-cell{width:120px}
+.bracket-bar{height:8px;background:var(--surface2);border-radius:4px;overflow:hidden}
+.bracket-bar-fill{height:100%;border-radius:4px}
+.income-breakdown{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;margin-bottom:1.5rem}
+.breakdown-title{font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem}
+.breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border);font-size:.82rem}
+.breakdown-row:last-child{border-bottom:none;font-weight:700;padding-top:8px}
+.breakdown-key{color:var(--muted)}
+.breakdown-val{font-family:'Playfair Display',serif;font-weight:600}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted)}
+.how-section{max-width:1000px;margin:0 auto 3rem;padding:0 1.5rem}
+.how-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.how-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem}
+.how-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--accent);line-height:1;margin-bottom:.5rem}
+.how-card h3{font-size:.9rem;font-weight:600;margin-bottom:.4rem}
+.how-card p{font-size:.82rem;color:var(--muted);line-height:1.5}
+.faq-section{max-width:1000px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:700px){.main{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.how-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Calc<span>Hive</span></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/mortgage-calculator.html">Mortgage</a></li>
+  <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
+  <li><a href="/budget-planner.html">Budget</a></li>
+  <li><a href="/tax-bracket-calculator.html">Tax Bracket</a></li>
+  <li class="dropdown">
+    <button class="more-btn">More &#9660;</button>
+    <div class="dropdown-menu">
+      <a href="/savings-goal-calculator.html">Savings Goal</a>
+      <a href="/credit-card-payoff-calculator.html">Credit Card Payoff</a>
+      <a href="/retirement-calculator.html">Retirement</a>
+      <a href="/net-worth-calculator.html">Net Worth</a>
+      <a href="/debt-snowball-calculator.html">Debt Snowball</a>
+      <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+      <a href="/investment-return-calculator.html">Investment Return</a>
+      <a href="/rent-vs-buy-calculator.html">Rent vs Buy</a>
+      <a href="/car-loan-calculator.html">Car Loan</a>
+      <a href="/student-loan-calculator.html">Student Loan</a>
+      <a href="/loan-calculator.html">Loan Calculator</a>
+    </div>
+  </li>
+</ul>
+</header>
+<div class="hero">
+<div class="hero-eyebrow">2024 Tax Year · Federal Income Tax · Free</div>
+<h1>Tax Bracket <span>Calculator</span></h1>
+<p class="hero-sub">Find your federal income tax bracket, effective tax rate, and estimated tax bill for 2024. Supports single, married filing jointly, and head of household.</p>
+</div>
+<div class="main">
+<div class="input-col">
+<div class="panel">
+<div class="panel-head"><div class="panel-title">Your Tax Information</div></div>
+<div class="panel-body">
+<div class="field"><label>Gross Annual Income</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="income" value="75000" oninput="calc()"></div>
+<input type="range" min="0" max="500000" step="1000" value="75000" oninput="document.getElementById('income').value=this.value;calc()">
+<div class="range-labels"><span>$0</span><span>$500K</span></div></div>
+<div class="field"><label>Filing Status</label>
+<select id="status" onchange="calc()">
+  <option value="single">Single</option>
+  <option value="married">Married Filing Jointly</option>
+  <option value="hoh">Head of Household</option>
+  <option value="married-sep">Married Filing Separately</option>
+</select></div>
+<div class="field"><label>Deductions</label>
+<select id="deductType" onchange="calc()">
+  <option value="standard">Standard Deduction</option>
+  <option value="itemized">Itemized Deductions</option>
+</select></div>
+<div class="field" id="itemizedField" style="display:none"><label>Itemized Deduction Amount</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="itemized" value="0" oninput="calc()"></div></div>
+<div class="field"><label>Other Deductions (401k, HSA, etc.)</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="other" value="0" oninput="calc()"></div></div>
+<div class="field"><label>Tax Credits</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="credits" value="0" oninput="calc()"></div></div>
+</div></div></div>
+<div class="output-col">
+<div class="panel">
+<div class="panel-head"><div class="panel-title">2024 Tax Estimate</div></div>
+<div class="panel-body">
+<div class="stats-grid">
+<div class="stat-card primary">
+<div class="stat-val" id="taxOwed">$0</div>
+<div class="stat-label">Estimated Federal Tax Owed</div>
+</div>
+<div class="stat-card"><div class="stat-val" id="effectiveRate" style="color:var(--yellow)">0%</div><div class="stat-label">Effective Tax Rate</div></div>
+<div class="stat-card"><div class="stat-val" id="marginalRate" style="color:var(--red)">0%</div><div class="stat-label">Marginal (Top) Bracket</div></div>
+<div class="stat-card"><div class="stat-val" id="takeHome" style="color:var(--green)">$0</div><div class="stat-label">Est. Take-Home Pay</div></div>
+<div class="stat-card"><div class="stat-val" id="monthlyTakeHome" style="color:var(--accent2)">$0</div><div class="stat-label">Monthly Take-Home</div></div>
+<div class="stat-card"><div class="stat-val" id="taxableIncome">$0</div><div class="stat-label">Taxable Income</div></div>
+</div>
+<div class="income-breakdown">
+<div class="breakdown-title">Income Breakdown</div>
+<div class="breakdown-row"><span class="breakdown-key">Gross income</span><span class="breakdown-val" id="bd-gross">$0</span></div>
+<div class="breakdown-row"><span class="breakdown-key">Standard/itemized deduction</span><span class="breakdown-val" id="bd-deduction" style="color:var(--green)">-$0</span></div>
+<div class="breakdown-row"><span class="breakdown-key">Other deductions</span><span class="breakdown-val" id="bd-other" style="color:var(--green)">-$0</span></div>
+<div class="breakdown-row"><span class="breakdown-key">Taxable income</span><span class="breakdown-val" id="bd-taxable">$0</span></div>
+<div class="breakdown-row"><span class="breakdown-key">Tax before credits</span><span class="breakdown-val" id="bd-taxbefore" style="color:var(--red)">$0</span></div>
+<div class="breakdown-row"><span class="breakdown-key">Tax credits</span><span class="breakdown-val" id="bd-credits" style="color:var(--green)">-$0</span></div>
+<div class="breakdown-row"><span class="breakdown-key">Total federal tax</span><span class="breakdown-val" id="bd-total" style="color:var(--yellow)">$0</span></div>
+</div>
+<div style="font-weight:700;font-size:.88rem;margin-bottom:.75rem">2024 Tax Brackets (Federal)</div>
+<table class="bracket-table">
+<thead><tr><th>Rate</th><th>Income Range</th><th>Tax in Bracket</th><th>Visual</th></tr></thead>
+<tbody id="bracketTableBody"></tbody>
+</table>
+<div class="ad-slot">Advertisement · Google AdSense</div>
+</div></div></div></div>
+<div style="max-width:1000px;margin:0 auto;padding:0 1.5rem"><div class="ad-slot">Advertisement · 728x90 · Google AdSense</div></div>
+<div class="how-section"><h2>How to use the tax bracket calculator</h2>
+<div class="how-grid">
+<div class="how-card"><div class="how-num">1</div><h3>Enter your income</h3><p>Input your gross annual income, filing status, and deduction type. The calculator applies the 2024 standard deduction automatically.</p></div>
+<div class="how-card"><div class="how-num">2</div><h3>See your bracket</h3><p>The calculator shows which bracket each portion of your income falls into and the tax owed in each bracket.</p></div>
+<div class="how-card"><div class="how-num">3</div><h3>Understand effective vs marginal</h3><p>Your effective rate is what you actually pay on average. Your marginal rate is the rate on your last dollar — not your entire income.</p></div>
+</div></div>
+<div class="faq-section"><h2>Frequently asked questions</h2>
+<div class="faq-item"><div class="faq-q">What is the difference between marginal and effective tax rate?</div><div class="faq-a">Your marginal tax rate is the rate applied to your last dollar of income — the highest bracket you reach. Your effective tax rate is the average rate across all your income. Because the US uses progressive brackets, your effective rate is always lower than your marginal rate.</div></div>
+<div class="faq-item"><div class="faq-q">What is the 2024 standard deduction?</div><div class="faq-a">For 2024, the standard deduction is $14,600 for single filers, $29,200 for married filing jointly, and $21,900 for head of household. These amounts reduce your taxable income before calculating your tax.</div></div>
+<div class="faq-item"><div class="faq-q">Does this include state taxes?</div><div class="faq-a">No — this calculator estimates federal income tax only. State income tax rates vary widely from 0% (no state income tax in states like Texas and Florida) to over 13% (California). Add your state tax rate separately for a complete picture.</div></div>
+<div class="faq-item"><div class="faq-q">Is this calculator free?</div><div class="faq-a">Yes — completely free with no account or signup required.</div></div>
+</div>
+<footer><p>&copy; 2025 CalcHive &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a><br>
+Also try: <a href="/budget-planner.html">Budget Planner</a> &middot; <a href="/net-worth-calculator.html">Net Worth Calculator</a> &middot; <a href="/retirement-calculator.html">Retirement Calculator</a></p></footer>
+<script>
+var BRACKETS={
+  single:[[0,11600,0.10],[11600,47150,0.12],[47150,100525,0.22],[100525,191950,0.24],[191950,243725,0.32],[243725,609350,0.35],[609350,Infinity,0.37]],
+  married:[[0,23200,0.10],[23200,94300,0.12],[94300,201050,0.22],[201050,383900,0.24],[383900,487450,0.32],[487450,731200,0.35],[731200,Infinity,0.37]],
+  hoh:[[0,16550,0.10],[16550,63100,0.12],[63100,100500,0.22],[100500,191950,0.24],[191950,243700,0.32],[243700,609350,0.35],[609350,Infinity,0.37]],
+  'married-sep':[[0,11600,0.10],[11600,47150,0.12],[47150,100525,0.22],[100525,191950,0.24],[191950,243725,0.32],[243725,365600,0.35],[365600,Infinity,0.37]]
+};
+var STD_DEDUCTION={single:14600,married:29200,hoh:21900,'married-sep':14600};
+var COLORS=['#22c55e','#60a5fa','#f59e0b','#f97316','#ef4444','#a855f7','#ec4899'];
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+function calc(){
+  var income=parseFloat(document.getElementById('income').value)||0;
+  var status=document.getElementById('status').value;
+  var deductType=document.getElementById('deductType').value;
+  var itemized=parseFloat(document.getElementById('itemized').value)||0;
+  var other=parseFloat(document.getElementById('other').value)||0;
+  var credits=parseFloat(document.getElementById('credits').value)||0;
+  document.getElementById('itemizedField').style.display=deductType==='itemized'?'block':'none';
+  var stdDed=STD_DEDUCTION[status]||14600;
+  var deduction=deductType==='itemized'?Math.max(itemized,stdDed):stdDed;
+  var taxable=Math.max(0,income-deduction-other);
+  var brackets=BRACKETS[status]||BRACKETS.single;
+  var totalTax=0;
+  var bracketTaxes=brackets.map(function(b,i){
+    var low=b[0],high=b[1],rate=b[2];
+    var taxable_in=Math.max(0,Math.min(taxable,high)-low);
+    var tax=taxable_in*rate;
+    totalTax+=tax;
+    return{rate:rate,low:low,high:high,taxableIn:taxable_in,tax:tax};
+  });
+  var finalTax=Math.max(0,totalTax-credits);
+  var effective=income>0?finalTax/income*100:0;
+  var marginal=0;
+  for(var i=bracketTaxes.length-1;i>=0;i--){if(bracketTaxes[i].taxableIn>0){marginal=bracketTaxes[i].rate*100;break;}}
+  var takeHome=income-finalTax;
+  document.getElementById('taxOwed').textContent=fmt(finalTax);
+  document.getElementById('effectiveRate').textContent=effective.toFixed(1)+'%';
+  document.getElementById('marginalRate').textContent=marginal.toFixed(0)+'%';
+  document.getElementById('takeHome').textContent=fmt(takeHome);
+  document.getElementById('monthlyTakeHome').textContent=fmt(takeHome/12);
+  document.getElementById('taxableIncome').textContent=fmt(taxable);
+  document.getElementById('bd-gross').textContent=fmt(income);
+  document.getElementById('bd-deduction').textContent='-'+fmt(deduction);
+  document.getElementById('bd-other').textContent='-'+fmt(other);
+  document.getElementById('bd-taxable').textContent=fmt(taxable);
+  document.getElementById('bd-taxbefore').textContent=fmt(totalTax);
+  document.getElementById('bd-credits').textContent='-'+fmt(credits);
+  document.getElementById('bd-total').textContent=fmt(finalTax);
+  var maxTax=Math.max.apply(null,bracketTaxes.map(function(b){return b.tax;}))||1;
+  document.getElementById('bracketTableBody').innerHTML=bracketTaxes.filter(function(b){return b.high!==Infinity||b.taxableIn>0;}).map(function(b,i){
+    var isActive=b.taxableIn>0;
+    var highStr=b.high===Infinity?'No limit':fmt(b.high);
+    return '<tr class="'+(isActive?'active-bracket':'')+'">'+
+      '<td class="bracket-rate">'+(b.rate*100).toFixed(0)+'%</td>'+
+      '<td>'+fmt(b.low)+' – '+highStr+'</td>'+
+      '<td>'+(isActive?fmt(b.tax):'-')+'</td>'+
+      '<td class="bracket-bar-cell"><div class="bracket-bar"><div class="bracket-bar-fill" style="width:'+(isActive?b.tax/maxTax*100:0)+'%;background:'+COLORS[i%COLORS.length]+'"></div></div></td>'+
+    '</tr>';
+  }).join('');
+}
+var moreBtn=document.querySelector('.more-btn');
+var dropdown=document.querySelector('.dropdown');
+if(moreBtn&&dropdown){moreBtn.addEventListener('click',function(e){e.stopPropagation();dropdown.classList.toggle('open');});document.addEventListener('click',function(){dropdown.classList.remove('open');});}
+document.getElementById('deductType').addEventListener('change',function(){document.getElementById('itemizedField').style.display=this.value==='itemized'?'block':'none';calc();});
+calc();
+</script>
+</body>
+</html>

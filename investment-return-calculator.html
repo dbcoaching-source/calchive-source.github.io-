@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investment Return Calculator - ROI & Returns | CalcHive</title>
+<meta name="description" content="Free investment return calculator. Calculate ROI, annualized returns, and compare investments. See exactly how much your investment has grown. No signup required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none}.nav-links a:hover{color:var(--text)}
+.dropdown{position:relative}
+.more-btn{background:none;border:none;color:var(--muted);font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif}
+.more-btn:hover{color:var(--text)}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 0;min-width:200px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.dropdown-menu a{display:block;padding:9px 16px;color:var(--muted);text-decoration:none;font-size:.82rem}
+.dropdown-menu a:hover{color:var(--text);background:var(--surface2)}
+.dropdown.open .dropdown-menu{display:block}
+@media(max-width:700px){.nav-links{display:none}}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin-bottom:.75rem}
+.hero h1 span{color:var(--green)}.hero-sub{font-size:.95rem;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.6}
+.main{max-width:1000px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:340px 1fr;gap:2rem;align-items:start}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.panel-head{background:var(--surface2);border-bottom:1px solid var(--border);padding:1rem 1.5rem}
+.panel-title{font-weight:700;font-size:.95rem}.panel-body{padding:1.5rem}
+.field{margin-bottom:1.25rem}
+.field label{display:block;font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+.input-wrap{position:relative}
+.input-prefix{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+.input-suffix{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+input[type=number]{width:100%;padding:.65rem .75rem .65rem 1.75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.95rem;outline:none;transition:border-color .2s}
+input[type=number].no-prefix{padding-left:.75rem}
+input[type=number]:focus{border-color:var(--accent)}
+input[type=number]::-webkit-inner-spin-button{opacity:0}
+input[type=range]{-webkit-appearance:none;width:100%;height:4px;background:var(--border);border-radius:2px;margin-top:.5rem;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.range-labels{display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted);margin-top:4px}
+.result-hero{text-align:center;padding:1.5rem;background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);border-radius:12px;margin-bottom:1.5rem}
+.result-roi{font-family:'Playfair Display',serif;font-weight:900;font-size:3.5rem;color:var(--green);line-height:1;margin-bottom:.25rem}
+.result-label{font-size:.82rem;color:var(--muted)}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.stat-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1.25rem;text-align:center}
+.stat-val{font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;color:var(--accent);line-height:1;margin-bottom:4px}
+.stat-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.compare-section{margin-bottom:1.5rem}
+.compare-title{font-weight:700;font-size:.88rem;margin-bottom:.75rem}
+.compare-row{display:flex;align-items:center;gap:.75rem;padding:.75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;margin-bottom:.5rem}
+.compare-name{font-size:.82rem;flex:1}
+.compare-bar-wrap{flex:2;background:var(--surface);border-radius:4px;height:8px;overflow:hidden}
+.compare-bar{height:100%;border-radius:4px;transition:width .5s}
+.compare-val{font-family:'Playfair Display',serif;font-weight:700;font-size:.88rem;min-width:60px;text-align:right}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted)}
+.how-section{max-width:1000px;margin:0 auto 3rem;padding:0 1.5rem}
+.how-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.how-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem}
+.how-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--accent);line-height:1;margin-bottom:.5rem}
+.how-card h3{font-size:.9rem;font-weight:600;margin-bottom:.4rem}
+.how-card p{font-size:.82rem;color:var(--muted);line-height:1.5}
+.faq-section{max-width:1000px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:700px){.main{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.how-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Calc<span>Hive</span></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/mortgage-calculator.html">Mortgage</a></li>
+  <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
+  <li><a href="/loan-calculator.html">Loan</a></li>
+  <li><a href="/budget-planner.html">Budget</a></li>
+  <li class="dropdown">
+    <button class="more-btn">More &#9660;</button>
+    <div class="dropdown-menu">
+      <a href="/savings-goal-calculator.html">Savings Goal</a>
+      <a href="/credit-card-payoff-calculator.html">Credit Card Payoff</a>
+      <a href="/retirement-calculator.html">Retirement</a>
+      <a href="/net-worth-calculator.html">Net Worth</a>
+      <a href="/debt-snowball-calculator.html">Debt Snowball</a>
+      <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+      <a href="/investment-return-calculator.html">Investment Return</a>
+      <a href="/rent-vs-buy-calculator.html">Rent vs Buy</a>
+      <a href="/car-loan-calculator.html">Car Loan</a>
+      <a href="/student-loan-calculator.html">Student Loan</a>
+      <a href="/tax-bracket-calculator.html">Tax Bracket</a>
+    </div>
+  </li>
+</ul>
+</header>
+<div class="hero">
+<div class="hero-eyebrow">Free · Instant · No Signup</div>
+<h1>Investment Return <span>Calculator</span></h1>
+<p class="hero-sub">Calculate your ROI, annualized return, and total profit on any investment. Compare against savings accounts, bonds, and the S&P 500.</p>
+</div>
+<div class="main">
+<div class="input-col">
+<div class="panel">
+<div class="panel-head"><div class="panel-title">Investment Details</div></div>
+<div class="panel-body">
+<div class="field"><label>Initial Investment</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="initial" value="10000" min="0" oninput="calc()"></div></div>
+<div class="field"><label>Final Value</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="final" value="15000" min="0" oninput="calc()"></div></div>
+<div class="field"><label>Investment Period</label>
+<div class="input-wrap"><input type="number" id="years" value="3" min="0" step="0.5" class="no-prefix" oninput="calc()"><span class="input-suffix">years</span></div>
+<input type="range" min="0.5" max="30" step="0.5" value="3" oninput="document.getElementById('years').value=this.value;calc()">
+<div class="range-labels"><span>0.5 yr</span><span>30 yrs</span></div></div>
+<div class="field"><label>Additional Contributions (annual)</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="contributions" value="0" min="0" oninput="calc()"></div></div>
+</div></div></div>
+<div class="output-col">
+<div class="panel">
+<div class="panel-head"><div class="panel-title">Your Returns</div></div>
+<div class="panel-body">
+<div class="result-hero">
+<div class="result-roi" id="roiVal">0%</div>
+<div class="result-label">Total Return on Investment (ROI)</div>
+</div>
+<div class="stats-grid">
+<div class="stat-card"><div class="stat-val" id="totalProfit" style="color:var(--green)">$0</div><div class="stat-label">Total Profit</div></div>
+<div class="stat-card"><div class="stat-val" id="annualReturn" style="color:var(--accent2)">0%</div><div class="stat-label">Annualized Return</div></div>
+<div class="stat-card"><div class="stat-val" id="finalValue">$0</div><div class="stat-label">Final Value</div></div>
+<div class="stat-card"><div class="stat-val" id="multiplier" style="color:var(--yellow)">0x</div><div class="stat-label">Money Multiplier</div></div>
+</div>
+<div class="compare-section">
+<div class="compare-title">How does it compare?</div>
+<div id="compareRows"></div>
+</div>
+<div class="ad-slot">Advertisement · Google AdSense</div>
+</div></div></div></div>
+<div style="max-width:1000px;margin:0 auto;padding:0 1.5rem"><div class="ad-slot">Advertisement · 728x90 · Google AdSense</div></div>
+<div class="how-section"><h2>How to use the investment return calculator</h2>
+<div class="how-grid">
+<div class="how-card"><div class="how-num">1</div><h3>Enter your investment</h3><p>Input your initial investment amount, the final value, and how long you held the investment.</p></div>
+<div class="how-card"><div class="how-num">2</div><h3>See your ROI</h3><p>Instantly see your total return, annualized return, total profit, and how much your money multiplied.</p></div>
+<div class="how-card"><div class="how-num">3</div><h3>Compare benchmarks</h3><p>See how your investment return compares to savings accounts, bonds, and the historical S&P 500 average.</p></div>
+</div></div>
+<div class="faq-section"><h2>Frequently asked questions</h2>
+<div class="faq-item"><div class="faq-q">What is ROI?</div><div class="faq-a">Return on Investment (ROI) is the percentage gain or loss on an investment relative to its cost. It is calculated as (Final Value - Initial Cost) / Initial Cost × 100. A 50% ROI means you gained half your original investment back as profit.</div></div>
+<div class="faq-item"><div class="faq-q">What is annualized return?</div><div class="faq-a">The annualized return (also called CAGR — Compound Annual Growth Rate) converts a total return into a yearly rate, making it easy to compare investments held for different time periods. It accounts for the compounding effect over time.</div></div>
+<div class="faq-item"><div class="faq-q">What is a good ROI?</div><div class="faq-a">The S&P 500 has historically returned about 10% annually before inflation. A good ROI depends on the investment type and risk level. Real estate averages 8-12%, bonds 2-5%, and savings accounts 4-5% currently.</div></div>
+<div class="faq-item"><div class="faq-q">Is this calculator free?</div><div class="faq-a">Yes — completely free with no account or signup required.</div></div>
+</div>
+<footer><p>&copy; 2025 CalcHive &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a><br>
+Also try: <a href="/compound-interest-calculator.html">Compound Interest</a> &middot; <a href="/retirement-calculator.html">Retirement Calculator</a> &middot; <a href="/savings-goal-calculator.html">Savings Goal</a></p></footer>
+<script>
+function fmt(n){return '$'+Math.round(Math.abs(n)).toLocaleString();}
+function calc(){
+  var initial=parseFloat(document.getElementById('initial').value)||0;
+  var final=parseFloat(document.getElementById('final').value)||0;
+  var years=parseFloat(document.getElementById('years').value)||1;
+  var contrib=parseFloat(document.getElementById('contributions').value)||0;
+  var totalInvested=initial+contrib*years;
+  var profit=final-totalInvested;
+  var roi=totalInvested>0?(profit/totalInvested*100):0;
+  var cagr=initial>0&&years>0?(Math.pow(final/initial,1/years)-1)*100:0;
+  var mult=initial>0?final/initial:0;
+  document.getElementById('roiVal').textContent=(roi>=0?'+':'')+roi.toFixed(1)+'%';
+  document.getElementById('roiVal').style.color=roi>=0?'var(--green)':'var(--red)';
+  document.getElementById('totalProfit').textContent=(profit>=0?'+':'-')+fmt(profit);
+  document.getElementById('totalProfit').style.color=profit>=0?'var(--green)':'var(--red)';
+  document.getElementById('annualReturn').textContent=(cagr>=0?'+':'')+cagr.toFixed(1)+'%';
+  document.getElementById('annualReturn').style.color=cagr>=0?'var(--accent2)':'var(--red)';
+  document.getElementById('finalValue').textContent=fmt(final);
+  document.getElementById('multiplier').textContent=mult.toFixed(2)+'x';
+  var benchmarks=[
+    {name:'High-Yield Savings (4.5%)',rate:4.5,color:'#94a3b8'},
+    {name:'US Bonds avg (4%)',rate:4,color:'#60a5fa'},
+    {name:'Real Estate avg (9%)',rate:9,color:'#f59e0b'},
+    {name:'S&P 500 avg (10%)',rate:10,color:'#22c55e'},
+    {name:'Your Investment',rate:cagr,color:cagr>=10?'#22c55e':cagr>=5?'#f59e0b':'#ef4444',highlight:true},
+  ];
+  var maxRate=Math.max.apply(null,benchmarks.map(function(b){return Math.abs(b.rate);}));
+  document.getElementById('compareRows').innerHTML=benchmarks.map(function(b){
+    var val=initial*Math.pow(1+b.rate/100,years);
+    return '<div class="compare-row" style="'+(b.highlight?'border-color:var(--accent);background:rgba(59,130,246,.06)':'')+'">'+
+      '<span class="compare-name">'+b.name+'</span>'+
+      '<div class="compare-bar-wrap"><div class="compare-bar" style="width:'+(Math.abs(b.rate)/maxRate*100)+'%;background:'+b.color+'"></div></div>'+
+      '<span class="compare-val" style="color:'+b.color+'">'+fmt(val)+'</span>'+
+    '</div>';
+  }).join('');
+}
+var moreBtn=document.querySelector('.more-btn');
+var dropdown=document.querySelector('.dropdown');
+if(moreBtn&&dropdown){moreBtn.addEventListener('click',function(e){e.stopPropagation();dropdown.classList.toggle('open');});document.addEventListener('click',function(){dropdown.classList.remove('open');});}
+calc();
+</script>
+</body>
+</html>
