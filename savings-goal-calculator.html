@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Savings Goal Calculator - How Long to Save Your Goal | CalcHive</title>
+<meta name="description" content="Free savings goal calculator. Find out how long it takes to reach any savings goal, or how much you need to save monthly to hit your target. No signup required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500}
+.nav-links a{color:var(--muted);text-decoration:none}
+.nav-links a:hover{color:var(--text)}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin-bottom:.75rem}
+.hero h1 span{color:var(--green)}
+.hero-sub{font-size:.95rem;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.6}
+.mode-tabs{display:flex;gap:0;max-width:400px;margin:1.5rem auto 0;background:var(--surface2);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.mode-tab{flex:1;padding:10px;font-size:.85rem;font-weight:600;cursor:pointer;border:none;background:none;color:var(--muted);font-family:'Inter',sans-serif;transition:all .15s}
+.mode-tab.active{background:var(--accent);color:#fff}
+.main{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:340px 1fr;gap:2rem;align-items:start}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.panel-head{background:var(--surface2);border-bottom:1px solid var(--border);padding:1rem 1.5rem}
+.panel-title{font-weight:700;font-size:.95rem}
+.panel-body{padding:1.5rem}
+.field{margin-bottom:1.25rem}
+.field label{display:block;font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+.input-wrap{position:relative}
+.input-prefix{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+.input-suffix{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+input[type=number]{width:100%;padding:.65rem .75rem .65rem 1.75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.95rem;outline:none;transition:border-color .2s}
+input[type=number].no-prefix{padding-left:.75rem}
+input[type=number]:focus{border-color:var(--accent)}
+input[type=number]::-webkit-inner-spin-button{opacity:0}
+input[type=range]{-webkit-appearance:none;width:100%;height:4px;background:var(--border);border-radius:2px;margin-top:.5rem;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.range-labels{display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted);margin-top:4px}
+.result-hero{background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);border-radius:12px;padding:2rem;text-align:center;margin-bottom:1.5rem}
+.result-hero-val{font-family:'Playfair Display',serif;font-weight:900;font-size:3rem;color:var(--green);line-height:1;margin-bottom:.5rem}
+.result-hero-label{font-size:.88rem;color:var(--muted)}
+.result-hero-sub{font-size:.82rem;color:var(--muted);margin-top:.5rem}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.stat-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1.25rem;text-align:center}
+.stat-val{font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;color:var(--accent);line-height:1;margin-bottom:4px}
+.stat-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.progress-section{margin-bottom:1.5rem}
+.progress-label{font-size:.78rem;color:var(--muted);margin-bottom:.5rem;display:flex;justify-content:space-between}
+.progress-bar{height:12px;background:var(--surface2);border-radius:6px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:6px;transition:width .5s ease}
+.milestones{margin-bottom:1.5rem}
+.milestone-title{font-weight:700;font-size:.88rem;margin-bottom:.75rem}
+.milestone-row{display:flex;align-items:center;gap:.75rem;padding:8px 0;border-bottom:1px solid var(--border)}
+.milestone-row:last-child{border-bottom:none}
+.milestone-pct{font-family:'DM Mono',monospace;font-size:.78rem;color:var(--accent2);width:40px;flex-shrink:0}
+.milestone-bar-wrap{flex:1;background:var(--surface2);border-radius:4px;height:6px;overflow:hidden}
+.milestone-bar{height:100%;background:var(--accent);border-radius:4px}
+.milestone-val{font-size:.78rem;color:var(--muted);min-width:50px;text-align:right}
+.milestone-date{font-family:'Playfair Display',serif;font-weight:700;font-size:.82rem;color:var(--text);min-width:80px;text-align:right}
+.tips-section{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.5rem}
+.tips-title{font-weight:700;font-size:.88rem;margin-bottom:.75rem;color:var(--yellow)}
+.tip-item{font-size:.82rem;color:var(--muted);padding:4px 0;line-height:1.5;padding-left:.75rem;position:relative}
+.tip-item::before{content:'→';position:absolute;left:0;color:var(--yellow)}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted)}
+.how-section{max-width:900px;margin:0 auto 3rem;padding:0 1.5rem}
+.how-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.how-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem}
+.how-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--accent);line-height:1;margin-bottom:.5rem}
+.how-card h3{font-size:.9rem;font-weight:600;margin-bottom:.4rem}
+.how-card p{font-size:.82rem;color:var(--muted);line-height:1.5}
+.faq-section{max-width:900px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:700px){.main{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.how-grid{grid-template-columns:1fr}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Calc<span>Hive</span></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/mortgage-calculator.html">Mortgage</a></li>
+  <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
+  <li><a href="/loan-calculator.html">Loan</a></li>
+  <li><a href="/budget-planner.html">Budget</a></li>
+  <li><a href="/savings-goal-calculator.html">Savings Goal</a></li>
+</ul>
+</header>
+<div class="hero">
+  <div class="hero-eyebrow">Free · Instant · No Signup</div>
+  <h1>Savings Goal <span>Calculator</span></h1>
+  <p class="hero-sub">Find out how long it takes to reach your savings goal, or calculate exactly how much you need to save each month to get there on time.</p>
+  <div class="mode-tabs">
+    <button class="mode-tab active" id="tab-time" onclick="switchMode('time')">How long will it take?</button>
+    <button class="mode-tab" id="tab-amount" onclick="switchMode('amount')">How much to save monthly?</button>
+  </div>
+</div>
+<div class="main">
+  <div class="input-col">
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title" id="panelTitle">Time to Goal</div></div>
+      <div class="panel-body">
+        <div class="field">
+          <label>Savings Goal</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="goal" value="20000" min="0" oninput="calc()"></div>
+          <input type="range" id="goalSlider" min="1000" max="500000" step="1000" value="20000" oninput="document.getElementById('goal').value=this.value;calc()">
+          <div class="range-labels"><span>$1K</span><span>$500K</span></div>
+        </div>
+        <div class="field">
+          <label>Current Savings</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="current" value="2000" min="0" oninput="calc()"></div>
+        </div>
+        <div id="monthly-field" class="field">
+          <label>Monthly Contribution</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="monthly" value="500" min="0" oninput="calc()"></div>
+          <input type="range" id="monthlySlider" min="50" max="5000" step="50" value="500" oninput="document.getElementById('monthly').value=this.value;calc()">
+          <div class="range-labels"><span>$50</span><span>$5K</span></div>
+        </div>
+        <div id="deadline-field" class="field" style="display:none">
+          <label>Target Date (months from now)</label>
+          <div class="input-wrap"><input type="number" id="deadline" value="24" min="1" class="no-prefix" oninput="calc()"><span class="input-suffix">months</span></div>
+          <input type="range" id="deadlineSlider" min="1" max="120" step="1" value="24" oninput="document.getElementById('deadline').value=this.value;calc()">
+          <div class="range-labels"><span>1 mo</span><span>10 yrs</span></div>
+        </div>
+        <div class="field">
+          <label>Annual Interest Rate</label>
+          <div class="input-wrap"><input type="number" id="rate" value="4.5" min="0" max="20" step="0.1" class="no-prefix" oninput="calc()"><span class="input-suffix">%</span></div>
+          <input type="range" id="rateSlider" min="0" max="12" step="0.25" value="4.5" oninput="document.getElementById('rate').value=this.value;calc()">
+          <div class="range-labels"><span>0%</span><span>12%</span></div>
+        </div>
+        <div class="field">
+          <label>What are you saving for?</label>
+          <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:4px" id="goalTypes">
+            <button class="loan-tab active" style="padding:4px 10px;border:1px solid var(--border);border-radius:16px;font-size:.75rem;font-weight:500;cursor:pointer;color:var(--muted);background:var(--surface2);font-family:Inter,sans-serif" onclick="setGoalType(this,20000,'Emergency Fund')">Emergency Fund</button>
+            <button class="loan-tab" style="padding:4px 10px;border:1px solid var(--border);border-radius:16px;font-size:.75rem;font-weight:500;cursor:pointer;color:var(--muted);background:var(--surface2);font-family:Inter,sans-serif" onclick="setGoalType(this,50000,'House Down Payment')">House Down Payment</button>
+            <button class="loan-tab" style="padding:4px 10px;border:1px solid var(--border);border-radius:16px;font-size:.75rem;font-weight:500;cursor:pointer;color:var(--muted);background:var(--surface2);font-family:Inter,sans-serif" onclick="setGoalType(this,5000,'Vacation')">Vacation</button>
+            <button class="loan-tab" style="padding:4px 10px;border:1px solid var(--border);border-radius:16px;font-size:.75rem;font-weight:500;cursor:pointer;color:var(--muted);background:var(--surface2);font-family:Inter,sans-serif" onclick="setGoalType(this,30000,'Car')">Car</button>
+            <button class="loan-tab" style="padding:4px 10px;border:1px solid var(--border);border-radius:16px;font-size:.75rem;font-weight:500;cursor:pointer;color:var(--muted);background:var(--surface2);font-family:Inter,sans-serif" onclick="setGoalType(this,10000,'Wedding')">Wedding</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="output-col">
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title">Your Results</div></div>
+      <div class="panel-body">
+        <div class="result-hero">
+          <div class="result-hero-val" id="heroVal">—</div>
+          <div class="result-hero-label" id="heroLabel">Time to reach your goal</div>
+          <div class="result-hero-sub" id="heroSub"></div>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-val" id="stat1">$0</div>
+            <div class="stat-label" id="stat1Label">Monthly Needed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val" id="stat2" style="color:var(--green)">$0</div>
+            <div class="stat-label">Interest Earned</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val" id="stat3">$0</div>
+            <div class="stat-label">Total Contributed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val" id="stat4" style="color:var(--yellow)">0%</div>
+            <div class="stat-label">Already Saved</div>
+          </div>
+        </div>
+        <div class="progress-section">
+          <div class="progress-label"><span>Current progress</span><span id="progressPct">0%</span></div>
+          <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+        </div>
+        <div class="milestones">
+          <div class="milestone-title">Savings Milestones</div>
+          <div id="milestoneRows"></div>
+        </div>
+        <div class="ad-slot">Advertisement · Google AdSense</div>
+        <div class="tips-section">
+          <div class="tips-title">&#128161; Tips to reach your goal faster</div>
+          <div class="tip-item">Automate your savings — set up an automatic transfer on payday</div>
+          <div class="tip-item">Use a high-yield savings account to earn more interest</div>
+          <div class="tip-item">Round up daily purchases and save the difference</div>
+          <div class="tip-item">Save any windfalls — tax refunds, bonuses, or gifts</div>
+          <div class="tip-item">Review subscriptions and redirect unused spending to savings</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><div class="ad-slot">Advertisement · 728x90 · Google AdSense</div></div>
+<div class="how-section">
+<h2>How to use the savings goal calculator</h2>
+<div class="how-grid">
+<div class="how-card"><div class="how-num">1</div><h3>Set your goal</h3><p>Enter your savings target, current savings, and interest rate. Use the quick-select buttons for common goals like emergency fund or house down payment.</p></div>
+<div class="how-card"><div class="how-num">2</div><h3>Choose your mode</h3><p>Use "How long" mode to find your timeline, or switch to "How much monthly" mode to work backwards from a deadline.</p></div>
+<div class="how-card"><div class="how-num">3</div><h3>Track milestones</h3><p>See exactly when you will hit 25%, 50%, 75%, and 100% of your goal with specific target dates.</p></div>
+</div>
+</div>
+<div class="faq-section">
+<h2>Frequently asked questions</h2>
+<div class="faq-item"><div class="faq-q">What interest rate should I use?</div><div class="faq-a">Use the current rate of your savings account. High-yield savings accounts currently offer 4-5% APY. A regular bank savings account typically offers 0.01-0.5%. Using the actual rate of where your money will be held gives the most accurate result.</div></div>
+<div class="faq-item"><div class="faq-q">How much should I have in an emergency fund?</div><div class="faq-a">Most financial experts recommend 3-6 months of living expenses. If your monthly expenses are $3,000, aim for $9,000-$18,000. Those with variable income or jobs in volatile industries should aim for 6-12 months.</div></div>
+<div class="faq-item"><div class="faq-q">Is this calculator free?</div><div class="faq-a">Yes — completely free with no account or signup required. No data is stored or saved.</div></div>
+</div>
+<footer>
+<p>&copy; 2025 CalcHive &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a> &middot; <a href="#">Contact</a><br>
+Also try: <a href="/compound-interest-calculator.html">Compound Interest</a> &middot; <a href="/budget-planner.html">Budget Planner</a> &middot; <a href="/mortgage-calculator.html">Mortgage Calculator</a></p>
+</footer>
+<script>
+var mode = 'time';
+
+function switchMode(m) {
+  mode = m;
+  document.getElementById('tab-time').classList.toggle('active', m==='time');
+  document.getElementById('tab-amount').classList.toggle('active', m==='amount');
+  document.getElementById('panelTitle').textContent = m==='time' ? 'Time to Goal' : 'Monthly Amount Needed';
+  document.getElementById('monthly-field').style.display = m==='time' ? 'block' : 'none';
+  document.getElementById('deadline-field').style.display = m==='amount' ? 'block' : 'none';
+  document.getElementById('stat1Label').textContent = m==='time' ? 'Monthly Contribution' : 'Monthly Needed';
+  calc();
+}
+
+function setGoalType(btn, amount, label) {
+  document.querySelectorAll('#goalTypes button').forEach(function(b){ b.style.background='var(--surface2)'; b.style.color='var(--muted)'; b.style.borderColor='var(--border)'; });
+  btn.style.background='var(--accent)'; btn.style.color='#fff'; btn.style.borderColor='var(--accent)';
+  document.getElementById('goal').value = amount;
+  document.getElementById('goalSlider').value = amount;
+  calc();
+}
+
+function fmt(n){ return '$' + Math.round(Math.max(0,n)).toLocaleString(); }
+
+function monthsToStr(m) {
+  m = Math.ceil(m);
+  if (m < 1) return 'Already reached!';
+  var y = Math.floor(m/12);
+  var mo = m%12;
+  var parts = [];
+  if (y > 0) parts.push(y + ' year' + (y!==1?'s':''));
+  if (mo > 0) parts.push(mo + ' month' + (mo!==1?'s':''));
+  return parts.join(' and ');
+}
+
+function getTargetDate(months) {
+  var d = new Date();
+  d.setMonth(d.getMonth() + Math.ceil(months));
+  var monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return monthNames[d.getMonth()] + ' ' + d.getFullYear();
+}
+
+function calc() {
+  var goal = parseFloat(document.getElementById('goal').value)||0;
+  var current = parseFloat(document.getElementById('current').value)||0;
+  var rate = parseFloat(document.getElementById('rate').value)||0;
+  var mr = rate/100/12;
+  var remaining = Math.max(0, goal - current);
+  var currentPct = goal > 0 ? Math.min(100, current/goal*100) : 0;
+
+  document.getElementById('progressFill').style.width = currentPct + '%';
+  document.getElementById('progressPct').textContent = currentPct.toFixed(0) + '%';
+  document.getElementById('stat4').textContent = currentPct.toFixed(0) + '%';
+
+  if (mode === 'time') {
+    var monthly = parseFloat(document.getElementById('monthly').value)||0;
+    // Calculate months needed
+    var months;
+    if (mr === 0) {
+      months = monthly > 0 ? remaining/monthly : Infinity;
+    } else {
+      if (monthly <= 0) { months = Infinity; }
+      else {
+        // FV = current*(1+r)^n + monthly*((1+r)^n - 1)/r = goal
+        // Solve numerically
+        months = 0;
+        var bal = current;
+        while (bal < goal && months < 1200) {
+          bal = bal*(1+mr) + monthly;
+          months++;
+        }
+        if (months >= 1200) months = Infinity;
+      }
+    }
+
+    var totalContrib = current + monthly * months;
+    var interestEarned = goal - totalContrib;
+
+    document.getElementById('heroVal').textContent = months === Infinity ? '∞' : monthsToStr(months);
+    document.getElementById('heroLabel').textContent = 'Time to reach ' + fmt(goal);
+    document.getElementById('heroSub').textContent = months === Infinity ? 'Increase your monthly contribution to reach this goal.' : 'You will reach your goal around ' + getTargetDate(months);
+    document.getElementById('stat1').textContent = fmt(monthly);
+    document.getElementById('stat2').textContent = fmt(Math.max(0, interestEarned));
+    document.getElementById('stat3').textContent = fmt(totalContrib);
+
+    // Milestones
+    var msPcts = [25,50,75,100];
+    document.getElementById('milestoneRows').innerHTML = msPcts.map(function(pct) {
+      var msGoal = goal * pct/100;
+      var msRemaining = Math.max(0, msGoal - current);
+      var msMonths = mr===0 ? (monthly>0?msRemaining/monthly:Infinity) : (function(){
+        var b=current, m=0;
+        while(b<msGoal&&m<1200){b=b*(1+mr)+monthly;m++;}
+        return m>=1200?Infinity:m;
+      })();
+      return '<div class="milestone-row">'+
+        '<span class="milestone-pct">'+pct+'%</span>'+
+        '<div class="milestone-bar-wrap"><div class="milestone-bar" style="width:'+(currentPct>=pct?100:currentPct/pct*100)+'%"></div></div>'+
+        '<span class="milestone-val">'+fmt(msGoal)+'</span>'+
+        '<span class="milestone-date">'+(msMonths===Infinity?'—':getTargetDate(msMonths))+'</span>'+
+      '</div>';
+    }).join('');
+
+  } else {
+    var deadline = parseFloat(document.getElementById('deadline').value)||1;
+    // Calculate required monthly payment
+    var needed;
+    if (mr === 0) {
+      needed = (remaining) / deadline;
+    } else {
+      needed = remaining * mr / (Math.pow(1+mr, deadline) - 1);
+      needed -= current * mr; // adjust for starting balance growth
+      if (needed < 0) needed = 0;
+    }
+
+    var totalContrib2 = current + needed * deadline;
+    var interest2 = goal - totalContrib2;
+
+    document.getElementById('heroVal').textContent = fmt(Math.max(0,needed));
+    document.getElementById('heroLabel').textContent = 'Monthly savings needed';
+    document.getElementById('heroSub').textContent = 'To reach ' + fmt(goal) + ' in ' + deadline + ' months (' + getTargetDate(deadline) + ')';
+    document.getElementById('stat1').textContent = fmt(Math.max(0,needed));
+    document.getElementById('stat2').textContent = fmt(Math.max(0,interest2));
+    document.getElementById('stat3').textContent = fmt(Math.max(0,totalContrib2));
+
+    var msPcts2 = [25,50,75,100];
+    document.getElementById('milestoneRows').innerHTML = msPcts2.map(function(pct) {
+      var msMonths = deadline * pct/100;
+      return '<div class="milestone-row">'+
+        '<span class="milestone-pct">'+pct+'%</span>'+
+        '<div class="milestone-bar-wrap"><div class="milestone-bar" style="width:'+(currentPct>=pct?100:0)+'%"></div></div>'+
+        '<span class="milestone-val">'+fmt(goal*pct/100)+'</span>'+
+        '<span class="milestone-date">'+getTargetDate(msMonths)+'</span>'+
+      '</div>';
+    }).join('');
+  }
+}
+
+calc();
+</script>
+</body>
+</html>

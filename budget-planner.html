@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Budget Planner - Monthly Budget Calculator | CalcHive</title>
+<meta name="description" content="Free monthly budget planner. Track income and expenses, see where your money goes, and find out how much you can save each month. No signup required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500}
+.nav-links a{color:var(--muted);text-decoration:none}
+.nav-links a:hover{color:var(--text)}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin-bottom:.75rem}
+.hero h1 span{color:var(--green)}
+.hero-sub{font-size:.95rem;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.6}
+.main{max-width:1000px;margin:0 auto;padding:2.5rem 1.5rem}
+.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+.sum-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-align:center}
+.sum-card.income{border-color:var(--green);background:rgba(34,197,94,.06)}
+.sum-card.expenses{border-color:var(--red);background:rgba(239,68,68,.06)}
+.sum-card.savings{border-color:var(--accent);background:rgba(59,130,246,.06)}
+.sum-card.rate{border-color:var(--yellow);background:rgba(245,158,11,.06)}
+.sum-val{font-family:'Playfair Display',serif;font-weight:700;font-size:1.6rem;line-height:1;margin-bottom:4px}
+.sum-card.income .sum-val{color:var(--green)}
+.sum-card.expenses .sum-val{color:var(--red)}
+.sum-card.savings .sum-val{color:var(--accent)}
+.sum-card.rate .sum-val{color:var(--yellow)}
+.sum-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.budget-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem}
+.section-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.section-head{background:var(--surface2);border-bottom:1px solid var(--border);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between}
+.section-title{font-weight:700;font-size:.95rem}
+.section-total{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem}
+.income-total{color:var(--green)}
+.expense-total{color:var(--red)}
+.section-body{padding:1.25rem}
+.budget-row{display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem}
+.row-label{font-size:.82rem;color:var(--text);flex:1;min-width:0}
+.row-input{width:110px;padding:.45rem .65rem .45rem 1.4rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'Inter',sans-serif;font-size:.85rem;outline:none;position:relative;flex-shrink:0}
+.row-input:focus{border-color:var(--accent)}
+.row-input::-webkit-inner-spin-button{opacity:0}
+.input-cell{position:relative;flex-shrink:0}
+.input-cell::before{content:'$';position:absolute;left:.5rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.82rem;pointer-events:none;z-index:1}
+.add-row-btn{width:100%;padding:6px;background:none;border:1px dashed var(--border);border-radius:6px;color:var(--muted);font-size:.78rem;cursor:pointer;font-family:'Inter',sans-serif;margin-top:.25rem;transition:all .15s}
+.add-row-btn:hover{border-color:var(--accent);color:var(--accent)}
+.del-btn{width:20px;height:20px;border:none;background:none;color:var(--muted);cursor:pointer;font-size:.9rem;flex-shrink:0;opacity:.5;padding:0}
+.del-btn:hover{opacity:1;color:var(--red)}
+.breakdown-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:2rem}
+.breakdown-head{background:var(--surface2);border-bottom:1px solid var(--border);padding:1rem 1.25rem;font-weight:700;font-size:.95rem}
+.breakdown-body{padding:1.25rem}
+.category-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem}
+.cat-label{font-size:.82rem;min-width:140px;color:var(--text)}
+.cat-bar-wrap{flex:1;background:var(--surface2);border-radius:4px;height:8px;overflow:hidden}
+.cat-bar{height:100%;border-radius:4px;transition:width .4s ease}
+.cat-val{font-size:.78rem;color:var(--muted);min-width:60px;text-align:right;font-family:'Playfair Display',serif;font-weight:700}
+.cat-pct{font-size:.7rem;color:var(--muted);min-width:35px;text-align:right}
+.fifty-rule{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:2rem}
+.fifty-title{font-weight:700;font-size:.95rem;margin-bottom:1rem}
+.rule-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.rule-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem;text-align:center}
+.rule-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem}
+.rule-target{font-size:.78rem;color:var(--muted);margin-bottom:.25rem}
+.rule-actual{font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem}
+.rule-status{font-size:.7rem;margin-top:.25rem}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted)}
+.how-section{max-width:1000px;margin:0 auto 3rem;padding:0 1.5rem}
+.how-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.how-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem}
+.how-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--accent);line-height:1;margin-bottom:.5rem}
+.how-card h3{font-size:.9rem;font-weight:600;margin-bottom:.4rem}
+.how-card p{font-size:.82rem;color:var(--muted);line-height:1.5}
+.faq-section{max-width:1000px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:700px){.summary-grid{grid-template-columns:1fr 1fr}.budget-grid{grid-template-columns:1fr}.rule-grid{grid-template-columns:1fr}.how-grid{grid-template-columns:1fr}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Calc<span>Hive</span></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/mortgage-calculator.html">Mortgage</a></li>
+  <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
+  <li><a href="/loan-calculator.html">Loan</a></li>
+  <li><a href="/budget-planner.html">Budget</a></li>
+  <li><a href="/savings-goal-calculator.html">Savings Goal</a></li>
+</ul>
+</header>
+<div class="hero">
+  <div class="hero-eyebrow">Free · Instant · No Signup</div>
+  <h1>Monthly Budget <span>Planner</span></h1>
+  <p class="hero-sub">Track your income and expenses, see exactly where your money goes, and find out how much you can save each month.</p>
+</div>
+<div class="main">
+  <div class="summary-grid">
+    <div class="sum-card income"><div class="sum-val" id="totalIncome">$0</div><div class="sum-label">Monthly Income</div></div>
+    <div class="sum-card expenses"><div class="sum-val" id="totalExpenses">$0</div><div class="sum-label">Total Expenses</div></div>
+    <div class="sum-card savings"><div class="sum-val" id="monthlySavings">$0</div><div class="sum-label">Monthly Savings</div></div>
+    <div class="sum-card rate"><div class="sum-val" id="savingsRate">0%</div><div class="sum-label">Savings Rate</div></div>
+  </div>
+
+  <div class="budget-grid">
+    <div class="section-card">
+      <div class="section-head">
+        <span class="section-title">&#128176; Income</span>
+        <span class="section-total income-total" id="incomeTotal">$0</span>
+      </div>
+      <div class="section-body" id="incomeRows"></div>
+    </div>
+    <div class="section-card">
+      <div class="section-head">
+        <span class="section-title">&#128184; Expenses</span>
+        <span class="section-total expense-total" id="expenseTotal">$0</span>
+      </div>
+      <div class="section-body" id="expenseRows"></div>
+    </div>
+  </div>
+
+  <div class="ad-slot">Advertisement · Google AdSense</div>
+
+  <div class="breakdown-card">
+    <div class="breakdown-head">Spending Breakdown</div>
+    <div class="breakdown-body" id="breakdownBody"></div>
+  </div>
+
+  <div class="fifty-rule">
+    <div class="fifty-title">50/30/20 Budget Rule Check</div>
+    <div class="rule-grid">
+      <div class="rule-card">
+        <div class="rule-label">Needs</div>
+        <div class="rule-target">Target: 50%</div>
+        <div class="rule-actual" id="needsActual">0%</div>
+        <div class="rule-status" id="needsStatus"></div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-label">Wants</div>
+        <div class="rule-target">Target: 30%</div>
+        <div class="rule-actual" id="wantsActual">0%</div>
+        <div class="rule-status" id="wantsStatus"></div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-label">Savings</div>
+        <div class="rule-target">Target: 20%</div>
+        <div class="rule-actual" id="savingsActual">0%</div>
+        <div class="rule-status" id="savingsStatus"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-slot">Advertisement · 728x90 · Google AdSense</div>
+</div>
+
+<div class="how-section">
+<h2>How to use the budget planner</h2>
+<div class="how-grid">
+<div class="how-card"><div class="how-num">1</div><h3>Enter your income</h3><p>Add all your monthly income sources — salary, freelance, side income, and any other regular earnings.</p></div>
+<div class="how-card"><div class="how-num">2</div><h3>Add your expenses</h3><p>Enter each monthly expense category. Add custom rows for anything not listed. All totals update instantly.</p></div>
+<div class="how-card"><div class="how-num">3</div><h3>Check your balance</h3><p>See your monthly savings, savings rate, spending breakdown chart, and how your budget compares to the 50/30/20 rule.</p></div>
+</div>
+</div>
+<div class="faq-section">
+<h2>Frequently asked questions</h2>
+<div class="faq-item"><div class="faq-q">What is the 50/30/20 budget rule?</div><div class="faq-a">The 50/30/20 rule is a simple budgeting framework: spend 50% of after-tax income on needs (housing, food, utilities), 30% on wants (dining out, entertainment, hobbies), and save 20%. It is a starting point, not a strict rule.</div></div>
+<div class="faq-item"><div class="faq-q">What is a good savings rate?</div><div class="faq-a">Financial experts generally recommend saving at least 20% of your income. However, even 5-10% is a meaningful start. The most important thing is consistency — saving something every month is better than saving nothing.</div></div>
+<div class="faq-item"><div class="faq-q">Should I use net or gross income?</div><div class="faq-a">Use your net (after-tax) income — the amount that actually hits your bank account. This gives you a realistic picture of what you have available to spend and save each month.</div></div>
+<div class="faq-item"><div class="faq-q">Is my budget data saved?</div><div class="faq-a">No data is saved or stored. Everything stays in your browser and is cleared when you close the page. This calculator is completely private.</div></div>
+</div>
+<footer>
+<p>&copy; 2025 CalcHive &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a> &middot; <a href="#">Contact</a><br>
+Also try: <a href="/mortgage-calculator.html">Mortgage Calculator</a> &middot; <a href="/savings-goal-calculator.html">Savings Goal</a> &middot; <a href="/loan-calculator.html">Loan Calculator</a></p>
+</footer>
+<script>
+var COLORS = ['#3b82f6','#22c55e','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#f97316','#ec4899','#84cc16','#14b8a6'];
+var NEEDS_CATS = ['Housing','Utilities','Groceries','Transportation','Insurance','Healthcare','Minimum Debt Payments'];
+var WANTS_CATS = ['Dining Out','Entertainment','Shopping','Subscriptions','Gym','Travel','Personal Care'];
+
+var INCOME_DEFAULTS = [
+  {label:'Salary / Wages', val:5000},
+  {label:'Side Income', val:0},
+  {label:'Other Income', val:0},
+];
+
+var EXPENSE_DEFAULTS = [
+  {label:'Housing (rent/mortgage)', val:1500, cat:'needs'},
+  {label:'Utilities', val:150, cat:'needs'},
+  {label:'Groceries', val:400, cat:'needs'},
+  {label:'Transportation', val:300, cat:'needs'},
+  {label:'Insurance', val:200, cat:'needs'},
+  {label:'Healthcare', val:100, cat:'needs'},
+  {label:'Dining Out', val:200, cat:'wants'},
+  {label:'Entertainment', val:100, cat:'wants'},
+  {label:'Shopping', val:150, cat:'wants'},
+  {label:'Subscriptions', val:50, cat:'wants'},
+  {label:'Savings / Investing', val:500, cat:'savings'},
+  {label:'Other', val:100, cat:'wants'},
+];
+
+function fmt(n){ return '$' + Math.round(Math.max(0,n)).toLocaleString(); }
+
+function makeRow(container, label, val, onDelete) {
+  var row = document.createElement('div');
+  row.className = 'budget-row';
+  var lbl = document.createElement('span');
+  lbl.className = 'row-label';
+  lbl.textContent = label;
+  var cell = document.createElement('div');
+  cell.className = 'input-cell';
+  var inp = document.createElement('input');
+  inp.type = 'number';
+  inp.className = 'row-input';
+  inp.value = val;
+  inp.min = 0;
+  inp.addEventListener('input', update);
+  cell.appendChild(inp);
+  var del = document.createElement('button');
+  del.className = 'del-btn';
+  del.innerHTML = '&times;';
+  del.addEventListener('click', function(){ row.remove(); update(); });
+  row.appendChild(lbl); row.appendChild(cell); row.appendChild(del);
+  container.appendChild(row);
+}
+
+function buildSections() {
+  var ic = document.getElementById('incomeRows');
+  var ec = document.getElementById('expenseRows');
+  ic.innerHTML = ''; ec.innerHTML = '';
+
+  INCOME_DEFAULTS.forEach(function(d){ makeRow(ic, d.label, d.val); });
+  var addInc = document.createElement('button');
+  addInc.className = 'add-row-btn';
+  addInc.textContent = '+ Add income source';
+  addInc.addEventListener('click', function(){ makeRow(ic, 'New Income', 0); ic.insertBefore(addInc, null); update(); });
+  ic.appendChild(addInc);
+
+  EXPENSE_DEFAULTS.forEach(function(d){ makeRow(ec, d.label, d.val); });
+  var addExp = document.createElement('button');
+  addExp.className = 'add-row-btn';
+  addExp.textContent = '+ Add expense';
+  addExp.addEventListener('click', function(){ makeRow(ec, 'New Expense', 0); ec.insertBefore(addExp, null); update(); });
+  ec.appendChild(addExp);
+
+  update();
+}
+
+function getValues(containerId) {
+  var rows = document.getElementById(containerId).querySelectorAll('.budget-row');
+  var total = 0;
+  rows.forEach(function(r){
+    var inp = r.querySelector('input');
+    if(inp) total += parseFloat(inp.value)||0;
+  });
+  return total;
+}
+
+function update() {
+  var income = getValues('incomeRows');
+  var expenses = getValues('expenseRows');
+  var savings = income - expenses;
+  var savingsRate = income > 0 ? (savings/income*100) : 0;
+
+  document.getElementById('totalIncome').textContent = fmt(income);
+  document.getElementById('totalExpenses').textContent = fmt(expenses);
+  document.getElementById('monthlySavings').textContent = fmt(savings);
+  document.getElementById('savingsRate').textContent = Math.max(0,savingsRate).toFixed(0)+'%';
+  document.getElementById('incomeTotal').textContent = fmt(income);
+  document.getElementById('expenseTotal').textContent = fmt(expenses);
+
+  // Breakdown
+  var expRows = document.getElementById('expenseRows').querySelectorAll('.budget-row');
+  var cats = [];
+  expRows.forEach(function(r){
+    var lbl = r.querySelector('.row-label');
+    var inp = r.querySelector('input');
+    if(lbl && inp){
+      var v = parseFloat(inp.value)||0;
+      if(v > 0) cats.push({label:lbl.textContent, val:v});
+    }
+  });
+  cats.sort(function(a,b){return b.val-a.val;});
+  var maxVal = cats.length > 0 ? cats[0].val : 1;
+  document.getElementById('breakdownBody').innerHTML = cats.map(function(c,i){
+    var pct = expenses > 0 ? (c.val/expenses*100) : 0;
+    return '<div class="category-row">'+
+      '<span class="cat-label">'+c.label+'</span>'+
+      '<div class="cat-bar-wrap"><div class="cat-bar" style="width:'+(c.val/maxVal*100)+'%;background:'+COLORS[i%COLORS.length]+'"></div></div>'+
+      '<span class="cat-val">'+fmt(c.val)+'</span>'+
+      '<span class="cat-pct">'+pct.toFixed(0)+'%</span>'+
+    '</div>';
+  }).join('') || '<p style="color:var(--muted);font-size:.85rem">Add expenses above to see your breakdown.</p>';
+
+  // 50/30/20
+  var needsTotal = 0, wantsTotal = 0, savingsTotal = 0;
+  expRows.forEach(function(r){
+    var lbl = r.querySelector('.row-label');
+    var inp = r.querySelector('input');
+    if(!lbl||!inp) return;
+    var v = parseFloat(inp.value)||0;
+    var l = lbl.textContent.toLowerCase();
+    if(l.includes('sav')||l.includes('invest')) savingsTotal += v;
+    else if(NEEDS_CATS.some(function(n){ return l.includes(n.toLowerCase().split('/')[0]); })) needsTotal += v;
+    else wantsTotal += v;
+  });
+
+  function ruleStatus(actual, target) {
+    if(actual <= target) return '<span style="color:var(--green)">✓ On track</span>';
+    return '<span style="color:var(--red)">↑ Over by '+(actual-target).toFixed(0)+'%</span>';
+  }
+
+  var needsPct = income>0?(needsTotal/income*100):0;
+  var wantsPct = income>0?(wantsTotal/income*100):0;
+  var savPct = income>0?(savingsTotal/income*100):0;
+  document.getElementById('needsActual').textContent = needsPct.toFixed(0)+'%';
+  document.getElementById('wantsActual').textContent = wantsPct.toFixed(0)+'%';
+  document.getElementById('savingsActual').textContent = savPct.toFixed(0)+'%';
+  document.getElementById('needsStatus').innerHTML = income>0?ruleStatus(needsPct,50):'';
+  document.getElementById('wantsStatus').innerHTML = income>0?ruleStatus(wantsPct,30):'';
+  document.getElementById('savingsStatus').innerHTML = income>0?(savPct>=20?'<span style="color:var(--green)">✓ On track</span>':'<span style="color:var(--red)">↓ Under 20%</span>'):'';
+}
+
+buildSections();
+</script>
+</body>
+</html>

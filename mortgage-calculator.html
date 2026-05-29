@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mortgage Calculator - Monthly Payment & Amortization Schedule | CalcHive</title>
+<meta name="description" content="Free mortgage calculator. Calculate your monthly payment, total interest, and full amortization schedule instantly. No signup required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--text)}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500}
+.nav-links a{color:var(--muted);text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--text)}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin-bottom:.75rem}
+.hero h1 span{color:var(--accent)}
+.hero-sub{font-size:.95rem;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.6}
+.main{max-width:1000px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:380px 1fr;gap:2rem;align-items:start}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.panel-head{background:var(--surface2);border-bottom:1px solid var(--border);padding:1rem 1.5rem}
+.panel-title{font-weight:700;font-size:.95rem;color:var(--text)}
+.panel-body{padding:1.5rem}
+.field{margin-bottom:1.25rem}
+.field label{display:block;font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+.input-wrap{position:relative;display:flex;align-items:center}
+.input-prefix{position:absolute;left:.75rem;color:var(--muted);font-size:.9rem;font-weight:500;pointer-events:none}
+.input-suffix{position:absolute;right:.75rem;color:var(--muted);font-size:.9rem;pointer-events:none}
+input[type=number],input[type=range]{width:100%}
+input[type=number]{padding:.65rem .75rem .65rem 1.75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.95rem;outline:none;transition:border-color .2s}
+input[type=number].no-prefix{padding-left:.75rem}
+input[type=number]:focus{border-color:var(--accent)}
+input[type=number]::-webkit-inner-spin-button{opacity:0}
+input[type=range]{-webkit-appearance:none;height:4px;background:var(--border);border-radius:2px;margin-top:.5rem;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);cursor:pointer}
+.range-labels{display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted);margin-top:4px}
+.btn-calc{width:100%;padding:.9rem;background:var(--accent);color:#fff;border:none;border-radius:8px;font-family:'Inter',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;transition:background .2s;margin-top:.5rem}
+.btn-calc:hover{background:#2563eb}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.stat-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1.25rem;text-align:center}
+.stat-card.primary{border-color:var(--accent);background:rgba(59,130,246,.08)}
+.stat-val{font-family:'Playfair Display',serif;font-weight:700;font-size:1.6rem;color:var(--accent);line-height:1;margin-bottom:4px}
+.stat-card.primary .stat-val{font-size:2rem}
+.stat-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.breakdown-bar{height:12px;border-radius:6px;overflow:hidden;display:flex;margin-bottom:1rem}
+.bar-principal{background:var(--accent);transition:width .5s ease}
+.bar-interest{background:var(--red);transition:width .5s ease}
+.bar-legend{display:flex;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted)}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.amort-section{border-top:1px solid var(--border);padding-top:1.25rem;margin-top:1.25rem}
+.amort-title{font-weight:700;font-size:.88rem;margin-bottom:.75rem;color:var(--text)}
+.amort-table{width:100%;border-collapse:collapse;font-size:.78rem}
+.amort-table th{text-align:left;padding:6px 8px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em}
+.amort-table td{padding:6px 8px;border-bottom:1px solid var(--border);color:var(--text)}
+.amort-table tr:last-child td{border-bottom:none}
+.amort-table td.green{color:var(--green)}
+.amort-table td.red{color:var(--red)}
+.show-more{width:100%;padding:8px;background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:.78rem;cursor:pointer;margin-top:.75rem;font-family:'Inter',sans-serif}
+.show-more:hover{border-color:var(--accent);color:var(--accent)}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted);letter-spacing:.05em}
+.how-section{max-width:1000px;margin:0 auto 3rem;padding:0 1.5rem}
+.how-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.how-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem}
+.how-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--accent);line-height:1;margin-bottom:.5rem}
+.how-card h3{font-size:.9rem;font-weight:600;margin-bottom:.4rem}
+.how-card p{font-size:.82rem;color:var(--muted);line-height:1.5}
+.faq-section{max-width:1000px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:700px){.main{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.how-grid{grid-template-columns:1fr}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Calc<span>Hive</span></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/mortgage-calculator.html">Mortgage</a></li>
+  <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
+  <li><a href="/loan-calculator.html">Loan</a></li>
+  <li><a href="/budget-planner.html">Budget</a></li>
+</ul>
+</header>
+<div class="hero">
+  <div class="hero-eyebrow">Free · Instant · No Signup</div>
+  <h1>Mortgage <span>Calculator</span></h1>
+  <p class="hero-sub">Calculate your monthly payment, total interest paid, and full amortization schedule in seconds.</p>
+</div>
+<div class="main">
+  <div class="input-col">
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title">Loan Details</div></div>
+      <div class="panel-body">
+        <div class="field">
+          <label>Home Price</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="homePrice" value="400000" min="0" oninput="calc()"></div>
+          <input type="range" id="homePriceSlider" min="50000" max="2000000" step="5000" value="400000" oninput="syncSlider('homePrice','homePriceSlider');calc()">
+          <div class="range-labels"><span>$50K</span><span>$2M</span></div>
+        </div>
+        <div class="field">
+          <label>Down Payment</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="downPayment" value="80000" min="0" oninput="calc()"></div>
+          <input type="range" id="downSlider" min="0" max="500000" step="1000" value="80000" oninput="syncSlider('downPayment','downSlider');calc()">
+          <div class="range-labels"><span>$0</span><span>$500K</span></div>
+        </div>
+        <div class="field">
+          <label>Annual Interest Rate</label>
+          <div class="input-wrap"><input type="number" id="rate" value="6.5" min="0" max="30" step="0.1" class="no-prefix" oninput="calc()"><span class="input-suffix">%</span></div>
+          <input type="range" id="rateSlider" min="1" max="15" step="0.1" value="6.5" oninput="syncSlider('rate','rateSlider');calc()">
+          <div class="range-labels"><span>1%</span><span>15%</span></div>
+        </div>
+        <div class="field">
+          <label>Loan Term</label>
+          <div class="input-wrap"><input type="number" id="term" value="30" min="1" max="30" class="no-prefix" oninput="calc()"><span class="input-suffix">years</span></div>
+          <input type="range" id="termSlider" min="5" max="30" step="5" value="30" oninput="syncSlider('term','termSlider');calc()">
+          <div class="range-labels"><span>5 yr</span><span>30 yr</span></div>
+        </div>
+        <div class="field">
+          <label>Property Tax (annual)</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="tax" value="4800" min="0" oninput="calc()"></div>
+        </div>
+        <div class="field">
+          <label>Home Insurance (annual)</label>
+          <div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="insurance" value="1200" min="0" oninput="calc()"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="output-col">
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title">Your Results</div></div>
+      <div class="panel-body">
+        <div class="stats-grid">
+          <div class="stat-card primary" style="grid-column:1/-1">
+            <div class="stat-val" id="monthlyPayment">$0</div>
+            <div class="stat-label">Monthly Payment (total)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val" id="principalInterest">$0</div>
+            <div class="stat-label">Principal & Interest</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val" id="taxInsurance">$0</div>
+            <div class="stat-label">Tax & Insurance</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val" id="totalInterest" style="color:var(--red)">$0</div>
+            <div class="stat-label">Total Interest Paid</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val" id="totalCost">$0</div>
+            <div class="stat-label">Total Cost of Loan</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val" id="loanAmount">$0</div>
+            <div class="stat-label">Loan Amount</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val" id="downPct" style="color:var(--green)">0%</div>
+            <div class="stat-label">Down Payment %</div>
+          </div>
+        </div>
+        <div class="breakdown-bar">
+          <div class="bar-principal" id="barPrincipal" style="width:50%"></div>
+          <div class="bar-interest" id="barInterest" style="width:50%"></div>
+        </div>
+        <div class="bar-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>Principal</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Interest</div>
+        </div>
+        <div class="ad-slot">Advertisement · Google AdSense</div>
+        <div class="amort-section">
+          <div class="amort-title">Amortization Schedule</div>
+          <table class="amort-table">
+            <thead><tr><th>Year</th><th>Principal</th><th>Interest</th><th>Balance</th></tr></thead>
+            <tbody id="amortBody"></tbody>
+          </table>
+          <button class="show-more" id="showMoreBtn" onclick="toggleAmort()">Show all years</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="max-width:1000px;margin:0 auto;padding:0 1.5rem">
+<div class="ad-slot">Advertisement · 728x90 · Google AdSense</div>
+</div>
+
+<div class="how-section">
+<h2>How to use the mortgage calculator</h2>
+<div class="how-grid">
+<div class="how-card"><div class="how-num">1</div><h3>Enter your details</h3><p>Input your home price, down payment, interest rate, and loan term. Use the sliders for quick adjustments.</p></div>
+<div class="how-card"><div class="how-num">2</div><h3>See your payment</h3><p>Your monthly payment, total interest, and full loan cost update instantly as you adjust any value.</p></div>
+<div class="how-card"><div class="how-num">3</div><h3>Review amortization</h3><p>The year-by-year amortization schedule shows exactly how much of each payment goes to principal vs interest.</p></div>
+</div>
+</div>
+<div class="faq-section">
+<h2>Frequently asked questions</h2>
+<div class="faq-item"><div class="faq-q">What is included in the monthly payment?</div><div class="faq-a">The total monthly payment includes principal and interest on the loan, plus your monthly property tax and homeowners insurance estimates. This gives you a realistic picture of your true monthly housing cost.</div></div>
+<div class="faq-item"><div class="faq-q">How does the down payment affect my mortgage?</div><div class="faq-a">A larger down payment reduces your loan amount, which lowers your monthly payment and total interest paid. Putting down 20% or more also eliminates the need for private mortgage insurance (PMI).</div></div>
+<div class="faq-item"><div class="faq-q">What is an amortization schedule?</div><div class="faq-a">An amortization schedule shows how each payment is split between paying down principal and paying interest over the life of the loan. In the early years, most of your payment goes to interest. Over time, more goes to principal.</div></div>
+<div class="faq-item"><div class="faq-q">Is this calculator free?</div><div class="faq-a">Yes — completely free with no account or signup required.</div></div>
+</div>
+<footer>
+<p>&copy; 2025 CalcHive &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a> &middot; <a href="#">Contact</a><br>
+Also try: <a href="/compound-interest-calculator.html">Compound Interest Calculator</a> &middot; <a href="/loan-calculator.html">Loan Calculator</a> &middot; <a href="/budget-planner.html">Budget Planner</a></p>
+</footer>
+<script>
+var showAllAmort = false;
+
+function fmt(n){ return '$' + Math.round(n).toLocaleString(); }
+function fmtD(n){ return '$' + n.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,','); }
+
+function syncSlider(inputId, sliderId){
+  document.getElementById(sliderId).value = document.getElementById(inputId).value;
+}
+
+function syncInput(inputId, sliderId){
+  document.getElementById(inputId).value = document.getElementById(sliderId).value;
+}
+
+function calc(){
+  var homePrice = parseFloat(document.getElementById('homePrice').value)||0;
+  var downPayment = parseFloat(document.getElementById('downPayment').value)||0;
+  var rate = parseFloat(document.getElementById('rate').value)||0;
+  var term = parseFloat(document.getElementById('term').value)||30;
+  var tax = parseFloat(document.getElementById('tax').value)||0;
+  var insurance = parseFloat(document.getElementById('insurance').value)||0;
+
+  var loan = homePrice - downPayment;
+  if (loan < 0) loan = 0;
+  var months = term * 12;
+  var monthlyRate = rate / 100 / 12;
+
+  var pi = 0;
+  if (monthlyRate === 0) {
+    pi = loan / months;
+  } else {
+    pi = loan * (monthlyRate * Math.pow(1+monthlyRate, months)) / (Math.pow(1+monthlyRate, months) - 1);
+  }
+
+  var monthlyTaxIns = (tax + insurance) / 12;
+  var total = pi + monthlyTaxIns;
+  var totalPaid = pi * months;
+  var totalInterest = totalPaid - loan;
+  var downPct = homePrice > 0 ? (downPayment/homePrice*100) : 0;
+
+  document.getElementById('monthlyPayment').textContent = fmt(total);
+  document.getElementById('principalInterest').textContent = fmt(pi);
+  document.getElementById('taxInsurance').textContent = fmt(monthlyTaxIns);
+  document.getElementById('totalInterest').textContent = fmt(totalInterest);
+  document.getElementById('totalCost').textContent = fmt(totalPaid);
+  document.getElementById('loanAmount').textContent = fmt(loan);
+  document.getElementById('downPct').textContent = downPct.toFixed(1) + '%';
+
+  var principalPct = totalPaid > 0 ? (loan/totalPaid*100) : 50;
+  document.getElementById('barPrincipal').style.width = principalPct + '%';
+  document.getElementById('barInterest').style.width = (100-principalPct) + '%';
+
+  // Amortization
+  var balance = loan;
+  var rows = [];
+  for (var y = 1; y <= term; y++) {
+    var yearPrincipal = 0, yearInterest = 0;
+    for (var m = 0; m < 12; m++) {
+      var intPayment = balance * monthlyRate;
+      var prinPayment = pi - intPayment;
+      yearInterest += intPayment;
+      yearPrincipal += prinPayment;
+      balance -= prinPayment;
+      if (balance < 0) balance = 0;
+    }
+    rows.push({year:y, principal:yearPrincipal, interest:yearInterest, balance:Math.max(0,balance)});
+  }
+
+  window._amortRows = rows;
+  renderAmort();
+}
+
+function renderAmort(){
+  var rows = window._amortRows || [];
+  var display = showAllAmort ? rows : rows.slice(0,5);
+  var tbody = document.getElementById('amortBody');
+  tbody.innerHTML = display.map(function(r){
+    return '<tr><td>Year '+r.year+'</td><td class="green">'+fmtD(r.principal)+'</td><td class="red">'+fmtD(r.interest)+'</td><td>'+fmtD(r.balance)+'</td></tr>';
+  }).join('');
+  var btn = document.getElementById('showMoreBtn');
+  if (rows.length <= 5) { btn.style.display='none'; return; }
+  btn.style.display='block';
+  btn.textContent = showAllAmort ? 'Show less' : 'Show all '+rows.length+' years';
+}
+
+function toggleAmort(){
+  showAllAmort = !showAllAmort;
+  renderAmort();
+}
+
+// Sync sliders on input change
+['homePrice','downPayment','rate','term'].forEach(function(id){
+  document.getElementById(id).addEventListener('input', function(){
+    var sliderMap = {homePrice:'homePriceSlider',downPayment:'downSlider',rate:'rateSlider',term:'termSlider'};
+    if(sliderMap[id]) document.getElementById(sliderMap[id]).value = this.value;
+  });
+});
+
+calc();
+</script>
+</body>
+</html>

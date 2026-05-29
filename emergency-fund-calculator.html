@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emergency Fund Calculator - How Much Do You Need? | CalcHive</title>
+<meta name="description" content="Free emergency fund calculator. Find out exactly how much you need in your emergency fund based on your expenses and situation. No signup required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500}
+.nav-links a{color:var(--muted);text-decoration:none}.nav-links a:hover{color:var(--text)}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin-bottom:.75rem}
+.hero h1 span{color:var(--yellow)}.hero-sub{font-size:.95rem;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.6}
+.main{max-width:1000px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:360px 1fr;gap:2rem;align-items:start}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.panel-head{background:var(--surface2);border-bottom:1px solid var(--border);padding:1rem 1.5rem}
+.panel-title{font-weight:700;font-size:.95rem}.panel-body{padding:1.5rem}
+.field{margin-bottom:1.25rem}
+.field label{display:block;font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+.input-wrap{position:relative}
+.input-prefix{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+.input-suffix{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+input[type=number]{width:100%;padding:.65rem .75rem .65rem 1.75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.95rem;outline:none;transition:border-color .2s}
+input[type=number].no-prefix{padding-left:.75rem}
+input[type=number]:focus{border-color:var(--accent)}
+input[type=number]::-webkit-inner-spin-button{opacity:0}
+select{width:100%;padding:.65rem .75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.9rem;outline:none;appearance:none;cursor:pointer}
+select:focus{border-color:var(--accent)}
+.risk-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.risk-btn{padding:.5rem;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--muted);font-size:.78rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;text-align:center;transition:all .15s}
+.risk-btn.active{background:var(--yellow);border-color:var(--yellow);color:var(--bg)}
+.risk-btn:hover:not(.active){border-color:var(--yellow);color:var(--yellow)}
+.result-hero{text-align:center;padding:2rem;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:12px;margin-bottom:1.5rem}
+.result-range{font-family:'Playfair Display',serif;font-weight:900;font-size:1.8rem;color:var(--yellow);line-height:1;margin-bottom:.4rem}
+.result-label{font-size:.82rem;color:var(--muted);margin-bottom:1rem}
+.recommended-val{font-family:'Playfair Display',serif;font-weight:900;font-size:2.8rem;color:var(--green);line-height:1;margin-bottom:.25rem}
+.recommended-label{font-size:.82rem;color:var(--muted)}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.stat-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1.25rem;text-align:center}
+.stat-val{font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:var(--accent);line-height:1;margin-bottom:4px}
+.stat-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.progress-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem}
+.progress-title{font-weight:700;font-size:.88rem;margin-bottom:.75rem}
+.progress-labels{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-bottom:.4rem}
+.progress-bar{height:16px;background:var(--surface);border-radius:8px;overflow:hidden;margin-bottom:.5rem}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:8px;transition:width .5s}
+.progress-status{font-size:.82rem;text-align:center;font-weight:600}
+.months-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1.5rem}
+.month-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.75rem;text-align:center;cursor:pointer;transition:all .15s}
+.month-card.recommended{border-color:var(--green);background:rgba(34,197,94,.08)}
+.month-card.selected{border-color:var(--accent);background:rgba(59,130,246,.08)}
+.month-num{font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem;color:var(--accent2)}
+.month-label{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin:2px 0}
+.month-amount{font-size:.78rem;color:var(--text);font-weight:600}
+.build-plan{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem}
+.build-title{font-weight:700;font-size:.88rem;margin-bottom:.75rem;color:var(--accent2)}
+.build-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.82rem}
+.build-row:last-child{border-bottom:none}
+.build-label{color:var(--muted)}
+.build-val{font-weight:600;color:var(--text)}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted)}
+.how-section{max-width:1000px;margin:0 auto 3rem;padding:0 1.5rem}
+.how-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.how-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem}
+.how-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--accent);line-height:1;margin-bottom:.5rem}
+.how-card h3{font-size:.9rem;font-weight:600;margin-bottom:.4rem}
+.how-card p{font-size:.82rem;color:var(--muted);line-height:1.5}
+.faq-section{max-width:1000px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:700px){.main{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.months-grid{grid-template-columns:1fr 1fr}.how-grid{grid-template-columns:1fr}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Calc<span>Hive</span></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/budget-planner.html">Budget</a></li>
+  <li><a href="/savings-goal-calculator.html">Savings Goal</a></li>
+  <li><a href="/retirement-calculator.html">Retirement</a></li>
+  <li><a href="/emergency-fund-calculator.html">Emergency Fund</a></li>
+</ul>
+</header>
+<div class="hero">
+<div class="hero-eyebrow">Free · Instant · No Signup</div>
+<h1>Emergency Fund <span>Calculator</span></h1>
+<p class="hero-sub">Find out exactly how much you need in your emergency fund based on your monthly expenses, job stability, and personal situation.</p>
+</div>
+<div class="main">
+<div class="input-col">
+<div class="panel">
+<div class="panel-head"><div class="panel-title">Your Monthly Expenses</div></div>
+<div class="panel-body">
+<div class="field"><label>Housing (rent or mortgage)</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="housing" value="1500" min="0" oninput="calc()"></div></div>
+<div class="field"><label>Food & Groceries</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="food" value="400" min="0" oninput="calc()"></div></div>
+<div class="field"><label>Transportation</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="transport" value="300" min="0" oninput="calc()"></div></div>
+<div class="field"><label>Utilities & Bills</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="utilities" value="200" min="0" oninput="calc()"></div></div>
+<div class="field"><label>Insurance</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="insurance" value="200" min="0" oninput="calc()"></div></div>
+<div class="field"><label>Minimum Debt Payments</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="debt" value="200" min="0" oninput="calc()"></div></div>
+<div class="field"><label>Other Essential Expenses</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="other" value="200" min="0" oninput="calc()"></div></div>
+<div class="field"><label>Current Emergency Fund</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="current" value="2000" min="0" oninput="calc()"></div></div>
+<div class="field"><label>Monthly Savings Toward Emergency Fund</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="monthly" value="200" min="0" oninput="calc()"></div></div>
+<div class="field"><label>Job / Income Stability</label>
+<div class="risk-grid" id="riskGrid">
+<button class="risk-btn" onclick="setRisk(this,3)">Very Stable<br><span style="font-size:.68rem;font-weight:400">Government/tenure</span></button>
+<button class="risk-btn active" onclick="setRisk(this,6)">Stable<br><span style="font-size:.68rem;font-weight:400">Salaried employee</span></button>
+<button class="risk-btn" onclick="setRisk(this,9)">Variable<br><span style="font-size:.68rem;font-weight:400">Freelance/contract</span></button>
+<button class="risk-btn" onclick="setRisk(this,12)">High Risk<br><span style="font-size:.68rem;font-weight:400">Business owner</span></button>
+</div></div>
+</div></div></div>
+<div class="output-col">
+<div class="panel">
+<div class="panel-head"><div class="panel-title">Your Emergency Fund Goal</div></div>
+<div class="panel-body">
+<div class="result-hero">
+<div class="result-range" id="resultRange">$0 — $0</div>
+<div class="result-label">Recommended range (3-12 months of expenses)</div>
+<div class="recommended-val" id="recommendedVal">$0</div>
+<div class="recommended-label" id="recommendedLabel">Recommended for your situation</div>
+</div>
+<div class="stats-grid">
+<div class="stat-card"><div class="stat-val" id="monthlyExpenses">$0</div><div class="stat-label">Monthly Expenses</div></div>
+<div class="stat-card"><div class="stat-val" id="currentCoverage" style="color:var(--yellow)">0 mo</div><div class="stat-label">Current Coverage</div></div>
+<div class="stat-card"><div class="stat-val" id="stillNeeded" style="color:var(--red)">$0</div><div class="stat-label">Still Needed</div></div>
+<div class="stat-card"><div class="stat-val" id="timeToGoal" style="color:var(--green)">—</div><div class="stat-label">Months to Goal</div></div>
+</div>
+<div class="progress-card">
+<div class="progress-title">Progress to Goal</div>
+<div class="progress-labels"><span id="progressLeft">$0 saved</span><span id="progressRight">$0 goal</span></div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div class="progress-status" id="progressStatus"></div>
+</div>
+<div class="months-grid" id="monthsGrid"></div>
+<div class="ad-slot">Advertisement · Google AdSense</div>
+<div class="build-plan">
+<div class="build-title">&#128161; Build Your Emergency Fund Plan</div>
+<div class="build-row"><span class="build-label">Monthly savings amount</span><span class="build-val" id="buildMonthly">$0</span></div>
+<div class="build-row"><span class="build-label">Months to fully funded</span><span class="build-val" id="buildMonths">—</span></div>
+<div class="build-row"><span class="build-label">Recommended account type</span><span class="build-val">High-yield savings</span></div>
+<div class="build-row"><span class="build-label">Current HYSA rates</span><span class="build-val">4.5 - 5.0% APY</span></div>
+<div class="build-row"><span class="build-label">Interest earned while saving</span><span class="build-val" id="buildInterest">$0</span></div>
+</div>
+</div></div></div></div>
+<div style="max-width:1000px;margin:0 auto;padding:0 1.5rem"><div class="ad-slot">Advertisement · 728x90 · Google AdSense</div></div>
+<div class="how-section"><h2>How to use the emergency fund calculator</h2>
+<div class="how-grid">
+<div class="how-card"><div class="how-num">1</div><h3>Enter your expenses</h3><p>Add your monthly essential expenses — housing, food, transportation, utilities, insurance, and minimum debt payments.</p></div>
+<div class="how-card"><div class="how-num">2</div><h3>Choose your risk level</h3><p>Select your job stability. More variable income means you need a larger emergency fund to cover longer potential gaps.</p></div>
+<div class="how-card"><div class="how-num">3</div><h3>Get your target</h3><p>See your personalized recommended emergency fund amount and how long it will take to reach your goal at your current savings rate.</p></div>
+</div></div>
+<div class="faq-section"><h2>Frequently asked questions</h2>
+<div class="faq-item"><div class="faq-q">How much should I have in an emergency fund?</div><div class="faq-a">The general rule is 3-6 months of essential expenses. People with stable salaried jobs need less (3 months), while freelancers, business owners, or single-income households should aim for 6-12 months. This calculator personalizes the recommendation based on your situation.</div></div>
+<div class="faq-item"><div class="faq-q">Where should I keep my emergency fund?</div><div class="faq-a">A high-yield savings account (HYSA) is ideal — your money is safe, accessible within 1-3 business days, and currently earns 4-5% APY. Avoid investing your emergency fund in stocks since the value can drop right when you need it most.</div></div>
+<div class="faq-item"><div class="faq-q">Should I pay off debt or build an emergency fund first?</div><div class="faq-a">Most financial experts recommend building a small starter emergency fund of $1,000-$2,000 before aggressively paying off debt. This prevents you from going further into debt when unexpected expenses arise during your debt payoff journey.</div></div>
+<div class="faq-item"><div class="faq-q">Is this calculator free?</div><div class="faq-a">Yes — completely free with no account or signup required.</div></div>
+</div>
+<footer><p>&copy; 2025 CalcHive &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a><br>
+Also try: <a href="/savings-goal-calculator.html">Savings Goal Calculator</a> &middot; <a href="/budget-planner.html">Budget Planner</a> &middot; <a href="/retirement-calculator.html">Retirement Calculator</a></p></footer>
+<script>
+var recommendedMonths=6;
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+function setRisk(btn,months){
+  document.querySelectorAll('.risk-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  recommendedMonths=months;
+  calc();
+}
+function calc(){
+  var housing=parseFloat(document.getElementById('housing').value)||0;
+  var food=parseFloat(document.getElementById('food').value)||0;
+  var transport=parseFloat(document.getElementById('transport').value)||0;
+  var utilities=parseFloat(document.getElementById('utilities').value)||0;
+  var insurance=parseFloat(document.getElementById('insurance').value)||0;
+  var debt=parseFloat(document.getElementById('debt').value)||0;
+  var other=parseFloat(document.getElementById('other').value)||0;
+  var current=parseFloat(document.getElementById('current').value)||0;
+  var monthly=parseFloat(document.getElementById('monthly').value)||0;
+  var totalMonthly=housing+food+transport+utilities+insurance+debt+other;
+  var min3=totalMonthly*3,max12=totalMonthly*12,recommended=totalMonthly*recommendedMonths;
+  var stillNeeded=Math.max(0,recommended-current);
+  var coverage=totalMonthly>0?current/totalMonthly:0;
+  var pct=recommended>0?Math.min(100,current/recommended*100):0;
+  var months=monthly>0?Math.ceil(stillNeeded/monthly):null;
+  var interest=months&&monthly>0?stillNeeded*(4.5/100/12)*months/2:0;
+  document.getElementById('monthlyExpenses').textContent=fmt(totalMonthly);
+  document.getElementById('currentCoverage').textContent=coverage.toFixed(1)+' mo';
+  document.getElementById('currentCoverage').style.color=coverage>=recommendedMonths?'var(--green)':coverage>=3?'var(--yellow)':'var(--red)';
+  document.getElementById('stillNeeded').textContent=fmt(stillNeeded);
+  document.getElementById('timeToGoal').textContent=months?months+' mo':'—';
+  document.getElementById('resultRange').textContent=fmt(min3)+' — '+fmt(max12);
+  document.getElementById('recommendedVal').textContent=fmt(recommended);
+  document.getElementById('recommendedLabel').textContent='Recommended: '+recommendedMonths+' months of expenses for your situation';
+  document.getElementById('progressLeft').textContent=fmt(current)+' saved';
+  document.getElementById('progressRight').textContent=fmt(recommended)+' goal';
+  document.getElementById('progressFill').style.width=pct+'%';
+  var status=pct>=100?'<span style="color:var(--green)">✅ Fully funded! Great work.</span>':pct>=66?'<span style="color:var(--yellow)">Almost there — keep going!</span>':pct>=33?'<span style="color:var(--accent2)">Good progress — you\'re on your way.</span>':'<span style="color:var(--red)">Just getting started — every dollar counts.</span>';
+  document.getElementById('progressStatus').innerHTML=status;
+  var mOptions=[3,6,9,12];
+  document.getElementById('monthsGrid').innerHTML=mOptions.map(function(m){
+    var amt=totalMonthly*m;
+    var isRec=m===recommendedMonths;
+    return '<div class="month-card'+(isRec?' recommended':'')+'">'+
+      '<div class="month-num">'+m+'</div>'+
+      '<div class="month-label">month'+(m!==1?'s':'')+' '+(isRec?'★ recommended':'')+'</div>'+
+      '<div class="month-amount">'+fmt(amt)+'</div>'+
+    '</div>';
+  }).join('');
+  document.getElementById('buildMonthly').textContent=fmt(monthly);
+  document.getElementById('buildMonths').textContent=months?months+' months':'Increase savings';
+  document.getElementById('buildInterest').textContent=fmt(interest);
+}
+calc();
+</script>
+</body>
+</html>

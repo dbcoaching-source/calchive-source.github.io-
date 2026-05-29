@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retirement Calculator - How Much Do You Need to Retire? | CalcHive</title>
+<meta name="description" content="Free retirement calculator. Find out if you're on track for retirement, how much you need to save, and when you can retire. No signup required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500}
+.nav-links a{color:var(--muted);text-decoration:none}.nav-links a:hover{color:var(--text)}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin-bottom:.75rem}
+.hero h1 span{color:var(--green)}.hero-sub{font-size:.95rem;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.6}
+.main{max-width:1000px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:340px 1fr;gap:2rem;align-items:start}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.panel-head{background:var(--surface2);border-bottom:1px solid var(--border);padding:1rem 1.5rem}
+.panel-title{font-weight:700;font-size:.95rem}.panel-body{padding:1.5rem}
+.field{margin-bottom:1.25rem}
+.field label{display:block;font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+.input-wrap{position:relative}
+.input-prefix{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+.input-suffix{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+input[type=number]{width:100%;padding:.65rem .75rem .65rem 1.75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.95rem;outline:none;transition:border-color .2s}
+input[type=number].no-prefix{padding-left:.75rem}
+input[type=number]:focus{border-color:var(--accent)}
+input[type=number]::-webkit-inner-spin-button{opacity:0}
+input[type=range]{-webkit-appearance:none;width:100%;height:4px;background:var(--border);border-radius:2px;margin-top:.5rem;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.range-labels{display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted);margin-top:4px}
+.status-banner{border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:1.5rem;border:1px solid}
+.status-banner.good{background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.3)}
+.status-banner.warn{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.3)}
+.status-banner.bad{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.3)}
+.status-icon{font-size:2rem;margin-bottom:.5rem}
+.status-title{font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;margin-bottom:.25rem}
+.status-sub{font-size:.82rem;color:var(--muted)}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.stat-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1.25rem;text-align:center}
+.stat-val{font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;color:var(--accent);line-height:1;margin-bottom:4px}
+.stat-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.growth-chart{margin-bottom:1.5rem}
+.chart-title{font-weight:700;font-size:.88rem;margin-bottom:.75rem}
+.chart-bars{display:flex;flex-direction:column;gap:5px}
+.chart-row{display:flex;align-items:center;gap:.5rem}
+.chart-age{font-size:.68rem;color:var(--muted);width:35px;flex-shrink:0;text-align:right}
+.chart-bar-wrap{flex:1;height:16px;background:var(--surface2);border-radius:3px;overflow:hidden;position:relative}
+.chart-bar-contrib{height:100%;background:var(--accent);position:absolute;left:0}
+.chart-bar-growth{height:100%;background:var(--green);position:absolute}
+.chart-val{font-size:.68rem;color:var(--muted);width:65px;text-align:left}
+.milestone-title{font-weight:700;font-size:.88rem;margin-bottom:.75rem}
+.milestone-item{display:flex;align-items:center;gap:.75rem;padding:.6rem 0;border-bottom:1px solid var(--border)}
+.milestone-item:last-child{border-bottom:none}
+.milestone-age{font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:var(--accent2);width:40px;flex-shrink:0}
+.milestone-text{font-size:.82rem;color:var(--text);flex:1}
+.milestone-val{font-family:'Playfair Display',serif;font-weight:700;font-size:.88rem;color:var(--green)}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted)}
+.how-section{max-width:1000px;margin:0 auto 3rem;padding:0 1.5rem}
+.how-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.how-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem}
+.how-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--accent);line-height:1;margin-bottom:.5rem}
+.how-card h3{font-size:.9rem;font-weight:600;margin-bottom:.4rem}
+.how-card p{font-size:.82rem;color:var(--muted);line-height:1.5}
+.faq-section{max-width:1000px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:700px){.main{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.how-grid{grid-template-columns:1fr}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Calc<span>Hive</span></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/mortgage-calculator.html">Mortgage</a></li>
+  <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
+  <li><a href="/savings-goal-calculator.html">Savings Goal</a></li>
+  <li><a href="/retirement-calculator.html">Retirement</a></li>
+</ul>
+</header>
+<div class="hero">
+<div class="hero-eyebrow">Free · Instant · No Signup</div>
+<h1>Retirement <span>Calculator</span></h1>
+<p class="hero-sub">Find out if you are on track for retirement, how much you need to save, and what your nest egg will look like when you retire.</p>
+</div>
+<div class="main">
+<div class="input-col">
+<div class="panel">
+<div class="panel-head"><div class="panel-title">Your Details</div></div>
+<div class="panel-body">
+<div class="field"><label>Current Age</label>
+<div class="input-wrap"><input type="number" id="age" value="35" min="18" max="80" class="no-prefix" oninput="calc()"><span class="input-suffix">years old</span></div>
+<input type="range" min="18" max="70" value="35" oninput="document.getElementById('age').value=this.value;calc()">
+<div class="range-labels"><span>18</span><span>70</span></div></div>
+<div class="field"><label>Retirement Age</label>
+<div class="input-wrap"><input type="number" id="retAge" value="65" min="50" max="80" class="no-prefix" oninput="calc()"><span class="input-suffix">years old</span></div>
+<input type="range" min="50" max="80" value="65" oninput="document.getElementById('retAge').value=this.value;calc()">
+<div class="range-labels"><span>50</span><span>80</span></div></div>
+<div class="field"><label>Current Retirement Savings</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="current" value="50000" min="0" oninput="calc()"></div>
+<input type="range" min="0" max="2000000" step="5000" value="50000" oninput="document.getElementById('current').value=this.value;calc()">
+<div class="range-labels"><span>$0</span><span>$2M</span></div></div>
+<div class="field"><label>Monthly Contribution</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="monthly" value="500" min="0" oninput="calc()"></div>
+<input type="range" min="0" max="5000" step="50" value="500" oninput="document.getElementById('monthly').value=this.value;calc()">
+<div class="range-labels"><span>$0</span><span>$5K</span></div></div>
+<div class="field"><label>Expected Annual Return</label>
+<div class="input-wrap"><input type="number" id="rate" value="7" min="0" max="20" step="0.5" class="no-prefix" oninput="calc()"><span class="input-suffix">%</span></div>
+<input type="range" min="1" max="15" step="0.5" value="7" oninput="document.getElementById('rate').value=this.value;calc()">
+<div class="range-labels"><span>1%</span><span>15%</span></div></div>
+<div class="field"><label>Desired Annual Income in Retirement</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="income" value="60000" min="0" oninput="calc()"></div></div>
+<div class="field"><label>Expected Annual Return in Retirement</label>
+<div class="input-wrap"><input type="number" id="retRate" value="4" min="0" max="10" step="0.5" class="no-prefix" oninput="calc()"><span class="input-suffix">%</span></div></div>
+</div></div></div>
+<div class="output-col">
+<div class="panel">
+<div class="panel-head"><div class="panel-title">Retirement Outlook</div></div>
+<div class="panel-body">
+<div class="status-banner" id="statusBanner">
+<div class="status-icon" id="statusIcon">📊</div>
+<div class="status-title" id="statusTitle">Calculating...</div>
+<div class="status-sub" id="statusSub"></div>
+</div>
+<div class="stats-grid">
+<div class="stat-card"><div class="stat-val" id="nestEgg" style="color:var(--green)">$0</div><div class="stat-label">Projected Nest Egg</div></div>
+<div class="stat-card"><div class="stat-val" id="needed">$0</div><div class="stat-label">Amount Needed</div></div>
+<div class="stat-card"><div class="stat-val" id="yearsLeft">0</div><div class="stat-label">Years to Retirement</div></div>
+<div class="stat-card"><div class="stat-val" id="monthlyIncome" style="color:var(--accent2)">$0</div><div class="stat-label">Monthly Income in Retirement</div></div>
+</div>
+<div class="growth-chart">
+<div class="chart-title">Portfolio Growth Over Time</div>
+<div style="display:flex;gap:1rem;margin-bottom:.5rem;flex-wrap:wrap">
+<div style="display:flex;align-items:center;gap:5px;font-size:.75rem;color:var(--muted)"><div style="width:8px;height:8px;border-radius:2px;background:var(--accent)"></div>Contributions</div>
+<div style="display:flex;align-items:center;gap:5px;font-size:.75rem;color:var(--muted)"><div style="width:8px;height:8px;border-radius:2px;background:var(--green)"></div>Investment Growth</div>
+</div>
+<div class="chart-bars" id="chartBars"></div>
+</div>
+<div class="ad-slot">Advertisement · Google AdSense</div>
+<div class="milestone-title">Key Milestones</div>
+<div id="milestones"></div>
+</div></div></div></div>
+<div style="max-width:1000px;margin:0 auto;padding:0 1.5rem"><div class="ad-slot">Advertisement · 728x90 · Google AdSense</div></div>
+<div class="how-section"><h2>How to use the retirement calculator</h2>
+<div class="how-grid">
+<div class="how-card"><div class="how-num">1</div><h3>Enter your details</h3><p>Input your current age, retirement age, existing savings, monthly contributions, and expected investment return.</p></div>
+<div class="how-card"><div class="how-num">2</div><h3>Set your income goal</h3><p>Enter how much annual income you want in retirement. The calculator uses the 4% rule to determine how much you need saved.</p></div>
+<div class="how-card"><div class="how-num">3</div><h3>Check your status</h3><p>See if you are on track, how your portfolio grows year by year, and key milestones along the way to retirement.</p></div>
+</div></div>
+<div class="faq-section"><h2>Frequently asked questions</h2>
+<div class="faq-item"><div class="faq-q">How much do I need to retire?</div><div class="faq-a">A common rule of thumb is the 4% rule: you need 25 times your annual retirement expenses saved. If you want $60,000 per year in retirement, aim for $1,500,000 in savings. This allows you to withdraw 4% annually with a high probability the money will last 30 years.</div></div>
+<div class="faq-item"><div class="faq-q">What return rate should I use?</div><div class="faq-a">The S&P 500 has historically returned about 10% annually before inflation, or about 7% after inflation. Using 6-7% is a reasonable conservative estimate for a diversified stock portfolio over the long term.</div></div>
+<div class="faq-item"><div class="faq-q">What is the 4% rule?</div><div class="faq-a">The 4% rule suggests you can safely withdraw 4% of your retirement savings each year without running out of money over a 30-year retirement. It comes from the Trinity Study, a landmark analysis of historical portfolio performance.</div></div>
+<div class="faq-item"><div class="faq-q">Is this calculator free?</div><div class="faq-a">Yes — completely free with no account or signup required.</div></div>
+</div>
+<footer><p>&copy; 2025 CalcHive &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a><br>
+Also try: <a href="/compound-interest-calculator.html">Compound Interest</a> &middot; <a href="/savings-goal-calculator.html">Savings Goal</a> &middot; <a href="/budget-planner.html">Budget Planner</a></p></footer>
+<script>
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+function calc(){
+  var age=parseInt(document.getElementById('age').value)||35;
+  var retAge=parseInt(document.getElementById('retAge').value)||65;
+  var current=parseFloat(document.getElementById('current').value)||0;
+  var monthly=parseFloat(document.getElementById('monthly').value)||0;
+  var rate=parseFloat(document.getElementById('rate').value)||7;
+  var income=parseFloat(document.getElementById('income').value)||60000;
+  var retRate=parseFloat(document.getElementById('retRate').value)||4;
+  var years=Math.max(0,retAge-age);
+  var mr=rate/100/12;
+  var needed=income/((retRate||4)/100);
+  document.getElementById('needed').textContent=fmt(needed);
+  document.getElementById('yearsLeft').textContent=years;
+  document.getElementById('monthlyIncome').textContent=fmt(income/12);
+  var balance=current;
+  var totalContrib=current;
+  var chartData=[];
+  for(var y=0;y<=years;y++){
+    if(y>0){for(var m=0;m<12;m++){balance=balance*(1+mr)+monthly;totalContrib+=monthly;}}
+    if(y%5===0||y===years)chartData.push({age:age+y,balance:balance,contrib:totalContrib});
+  }
+  var nestEgg=balance;
+  document.getElementById('nestEgg').textContent=fmt(nestEgg);
+  var gap=nestEgg-needed;
+  var banner=document.getElementById('statusBanner');
+  if(nestEgg>=needed){
+    banner.className='status-banner good';
+    document.getElementById('statusIcon').textContent='✅';
+    document.getElementById('statusTitle').textContent='On Track for Retirement!';
+    document.getElementById('statusSub').textContent='Your projected nest egg exceeds your goal by '+fmt(gap)+'. Great work!';
+  } else if(nestEgg>=needed*0.75){
+    banner.className='status-banner warn';
+    document.getElementById('statusIcon').textContent='⚠️';
+    document.getElementById('statusTitle').textContent='Almost There';
+    document.getElementById('statusSub').textContent='You are '+fmt(Math.abs(gap))+' short of your goal. Consider increasing contributions.';
+  } else {
+    banner.className='status-banner bad';
+    document.getElementById('statusIcon').textContent='🔴';
+    document.getElementById('statusTitle').textContent='Needs Attention';
+    document.getElementById('statusSub').textContent='You are currently '+fmt(Math.abs(gap))+' short of your retirement goal.';
+  }
+  var maxBal=chartData[chartData.length-1].balance||1;
+  document.getElementById('chartBars').innerHTML=chartData.map(function(d){
+    var cpct=d.contrib/maxBal*100;
+    var gpct=(d.balance-d.contrib)/maxBal*100;
+    return '<div class="chart-row"><span class="chart-age">'+d.age+'</span>'+
+      '<div class="chart-bar-wrap"><div class="chart-bar-contrib" style="width:'+cpct+'%"></div>'+
+      '<div class="chart-bar-growth" style="left:'+cpct+'%;width:'+gpct+'%"></div></div>'+
+      '<span class="chart-val">'+fmt(d.balance)+'</span></div>';
+  }).join('');
+  var ms=[];
+  var bal2=current,tc2=current;
+  for(var y2=1;y2<=years;y2++){
+    for(var m2=0;m2<12;m2++){bal2=bal2*(1+mr)+monthly;tc2+=monthly;}
+    if(Math.round(bal2/100000)*100000>Math.round((bal2-monthly*12)/(100000))*100000||y2===Math.round(years/2)||y2===years){
+      ms.push({age:age+y2,val:bal2,label:'Portfolio value at age '+(age+y2)});
+    }
+  }
+  var keyMS=[
+    {label:'Reach $100K milestone',target:100000},
+    {label:'Reach $250K milestone',target:250000},
+    {label:'Reach $500K milestone',target:500000},
+    {label:'Reach $1M milestone',target:1000000},
+    {label:'Retirement goal reached',target:needed},
+  ].filter(function(m){return m.target<=nestEgg*1.1;});
+  document.getElementById('milestones').innerHTML=keyMS.map(function(ms){
+    var bal3=current,y3=0;
+    while(bal3<ms.target&&y3<years*12){bal3=bal3*(1+mr)+monthly;y3++;}
+    var ageAt=age+Math.ceil(y3/12);
+    var reached=bal3>=ms.target;
+    return '<div class="milestone-item">'+
+      '<span class="milestone-age" style="color:'+(reached?'var(--green)':'var(--red)')+'">'+ageAt+'</span>'+
+      '<span class="milestone-text">'+ms.label+'</span>'+
+      '<span class="milestone-val">'+fmt(ms.target)+'</span>'+
+    '</div>';
+  }).join('');
+}
+calc();
+</script>
+</body>
+</html>
