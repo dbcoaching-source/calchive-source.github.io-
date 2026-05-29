@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hourly to Salary Calculator - Convert Hourly Rate to Annual Salary | CalcHive</title>
+<meta name="description" content="Free hourly to salary calculator. Convert any hourly wage to annual, monthly, weekly, and daily salary. Includes overtime and tax estimates. No signup required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--text)}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none}.nav-links a:hover{color:var(--text)}
+.dropdown{position:relative}
+.more-btn{background:none;border:none;color:var(--muted);font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif}
+.more-btn:hover{color:var(--text)}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 0;min-width:210px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.dropdown-menu a{display:block;padding:9px 16px;color:var(--muted);text-decoration:none;font-size:.82rem}
+.dropdown-menu a:hover{color:var(--text);background:var(--surface2)}
+.dropdown.open .dropdown-menu{display:block}
+@media(max-width:800px){.nav-links{display:none}}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin-bottom:.75rem}
+.hero h1 span{color:var(--accent2)}.hero-sub{font-size:.95rem;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.6}
+.main{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:320px 1fr;gap:2rem;align-items:start}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.panel-head{background:var(--surface2);border-bottom:1px solid var(--border);padding:1rem 1.5rem}
+.panel-title{font-weight:700;font-size:.95rem}.panel-body{padding:1.5rem}
+.field{margin-bottom:1.25rem}
+.field label{display:block;font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+.input-wrap{position:relative}
+.input-prefix{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+.input-suffix{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+input[type=number]{width:100%;padding:.65rem .75rem .65rem 1.75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.95rem;outline:none}
+input[type=number].no-prefix{padding-left:.75rem}
+input[type=number]:focus{border-color:var(--accent)}
+input[type=number]::-webkit-inner-spin-button{opacity:0}
+input[type=range]{-webkit-appearance:none;width:100%;height:4px;background:var(--border);border-radius:2px;margin-top:.5rem;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.range-labels{display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted);margin-top:4px}
+.stat-hero{text-align:center;padding:1.5rem;background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.2);border-radius:12px;margin-bottom:1.5rem}
+.stat-hero-val{font-family:'Playfair Display',serif;font-weight:900;font-size:3rem;color:var(--accent);line-height:1;margin-bottom:.25rem}
+.stat-hero-label{font-size:.82rem;color:var(--muted)}
+.salary-breakdown{margin-bottom:1.5rem}
+.breakdown-title{font-weight:700;font-size:.88rem;margin-bottom:.75rem}
+.breakdown-row{display:flex;align-items:center;justify-content:space-between;padding:.75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;margin-bottom:.5rem}
+.breakdown-period{font-size:.82rem;color:var(--muted)}
+.breakdown-gross{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;color:var(--text)}
+.breakdown-net{font-size:.78rem;color:var(--green);margin-top:2px}
+.compare-section{margin-bottom:1.5rem}
+.compare-title{font-weight:700;font-size:.88rem;margin-bottom:.75rem}
+.compare-row{display:flex;align-items:center;gap:.75rem;padding:.6rem 0;border-bottom:1px solid var(--border)}
+.compare-row:last-child{border-bottom:none}
+.compare-label{font-size:.78rem;color:var(--muted);flex:1}
+.compare-bar-wrap{flex:2;background:var(--surface2);border-radius:4px;height:7px;overflow:hidden}
+.compare-bar{height:100%;background:var(--accent);border-radius:4px}
+.compare-val{font-size:.78rem;font-weight:600;min-width:60px;text-align:right;color:var(--text)}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted)}
+.how-section{max-width:900px;margin:0 auto 3rem;padding:0 1.5rem}
+.how-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.how-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem}
+.how-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--accent);line-height:1;margin-bottom:.5rem}
+.how-card h3{font-size:.9rem;font-weight:600;margin-bottom:.4rem}
+.how-card p{font-size:.82rem;color:var(--muted);line-height:1.5}
+.faq-section{max-width:900px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:700px){.main{grid-template-columns:1fr}.how-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Calc<span>Hive</span></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/mortgage-calculator.html">Mortgage</a></li>
+  <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
+  <li><a href="/loan-calculator.html">Loan</a></li>
+  <li><a href="/budget-planner.html">Budget</a></li>
+  <li class="dropdown">
+    <button class="more-btn">More &#9660;</button>
+    <div class="dropdown-menu">
+      <a href="/savings-goal-calculator.html">Savings Goal</a>
+      <a href="/credit-card-payoff-calculator.html">Credit Card Payoff</a>
+      <a href="/retirement-calculator.html">Retirement</a>
+      <a href="/net-worth-calculator.html">Net Worth</a>
+      <a href="/debt-snowball-calculator.html">Debt Snowball</a>
+      <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+      <a href="/investment-return-calculator.html">Investment Return</a>
+      <a href="/rent-vs-buy-calculator.html">Rent vs Buy</a>
+      <a href="/car-loan-calculator.html">Car Loan</a>
+      <a href="/student-loan-calculator.html">Student Loan</a>
+      <a href="/tax-bracket-calculator.html">Tax Bracket</a>
+      <a href="/tip-calculator.html">Tip Calculator</a>
+      <a href="/hourly-to-salary-calculator.html">Hourly to Salary</a>
+      <a href="/break-even-calculator.html">Break Even</a>
+      <a href="/invoice-generator.html">Invoice Generator</a>
+    </div>
+  </li>
+</ul>
+</header>
+<div class="hero">
+<div class="hero-eyebrow">Free · Instant · No Signup</div>
+<h1>Hourly to Salary <span>Calculator</span></h1>
+<p class="hero-sub">Convert any hourly wage to annual, monthly, weekly, and daily salary. Includes overtime calculation and estimated take-home pay.</p>
+</div>
+<div class="main">
+<div class="input-col">
+<div class="panel">
+<div class="panel-head"><div class="panel-title">Your Pay Details</div></div>
+<div class="panel-body">
+<div class="field"><label>Hourly Rate</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="hourly" value="25" min="0" step="0.01" oninput="calc()"></div>
+<input type="range" min="7.25" max="200" step="0.25" value="25" oninput="document.getElementById('hourly').value=this.value;calc()">
+<div class="range-labels"><span>$7.25</span><span>$200</span></div></div>
+<div class="field"><label>Hours per Week</label>
+<div class="input-wrap"><input type="number" id="hours" value="40" min="1" max="80" class="no-prefix" oninput="calc()"><span class="input-suffix">hrs/week</span></div>
+<input type="range" min="10" max="80" value="40" oninput="document.getElementById('hours').value=this.value;calc()">
+<div class="range-labels"><span>10 hrs</span><span>80 hrs</span></div></div>
+<div class="field"><label>Weeks per Year</label>
+<div class="input-wrap"><input type="number" id="weeks" value="52" min="1" max="52" class="no-prefix" oninput="calc()"><span class="input-suffix">weeks</span></div></div>
+<div class="field"><label>Overtime Hours per Week</label>
+<div class="input-wrap"><input type="number" id="overtime" value="0" min="0" class="no-prefix" oninput="calc()"><span class="input-suffix">hrs OT</span></div></div>
+<div class="field"><label>Overtime Rate</label>
+<div class="input-wrap"><input type="number" id="otRate" value="1.5" min="1" max="3" step="0.5" class="no-prefix" oninput="calc()"><span class="input-suffix">x regular</span></div></div>
+<div class="field"><label>Estimated Tax Rate</label>
+<div class="input-wrap"><input type="number" id="taxRate" value="22" min="0" max="50" class="no-prefix" oninput="calc()"><span class="input-suffix">%</span></div></div>
+</div></div></div>
+<div class="output-col">
+<div class="panel">
+<div class="panel-head"><div class="panel-title">Salary Breakdown</div></div>
+<div class="panel-body">
+<div class="stat-hero">
+<div class="stat-hero-val" id="annualSalary">$0</div>
+<div class="stat-hero-label">Annual Gross Salary</div>
+</div>
+<div class="salary-breakdown">
+<div class="breakdown-title">Pay by Period</div>
+<div class="breakdown-row"><span class="breakdown-period">Annual</span><div><div class="breakdown-gross" id="annual">$0</div><div class="breakdown-net" id="annualNet">$0 take-home</div></div></div>
+<div class="breakdown-row"><span class="breakdown-period">Monthly</span><div><div class="breakdown-gross" id="monthly">$0</div><div class="breakdown-net" id="monthlyNet">$0 take-home</div></div></div>
+<div class="breakdown-row"><span class="breakdown-period">Bi-weekly</span><div><div class="breakdown-gross" id="biweekly">$0</div><div class="breakdown-net" id="biweeklyNet">$0 take-home</div></div></div>
+<div class="breakdown-row"><span class="breakdown-period">Weekly</span><div><div class="breakdown-gross" id="weekly">$0</div><div class="breakdown-net" id="weeklyNet">$0 take-home</div></div></div>
+<div class="breakdown-row"><span class="breakdown-period">Daily (8 hrs)</span><div><div class="breakdown-gross" id="daily">$0</div><div class="breakdown-net" id="dailyNet">$0 take-home</div></div></div>
+</div>
+<div class="compare-section">
+<div class="compare-title">How your rate compares</div>
+<div id="compareRows"></div>
+</div>
+<div class="ad-slot">Advertisement · Google AdSense</div>
+</div></div></div></div>
+<div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><div class="ad-slot">Advertisement · 728x90 · Google AdSense</div></div>
+<div class="how-section"><h2>How to use the hourly to salary calculator</h2>
+<div class="how-grid">
+<div class="how-card"><div class="how-num">1</div><h3>Enter your rate</h3><p>Input your hourly wage and hours per week. Adjust weeks per year if you take unpaid time off.</p></div>
+<div class="how-card"><div class="how-num">2</div><h3>Add overtime</h3><p>If you work overtime, enter the weekly overtime hours. The default overtime rate is 1.5x but you can adjust it.</p></div>
+<div class="how-card"><div class="how-num">3</div><h3>See take-home</h3><p>Enter your estimated tax rate to see net take-home pay for every pay period alongside your gross salary.</p></div>
+</div></div>
+<div class="faq-section"><h2>Frequently asked questions</h2>
+<div class="faq-item"><div class="faq-q">How do I convert hourly to annual salary?</div><div class="faq-a">Multiply your hourly rate by hours per week, then multiply by 52 weeks. For a standard 40-hour week: hourly rate × 40 × 52 = annual salary. A $25/hour rate equals $52,000 per year.</div></div>
+<div class="faq-item"><div class="faq-q">What is the federal minimum wage?</div><div class="faq-a">The federal minimum wage is $7.25 per hour as of 2025. Many states and cities have higher minimum wages. Always check your state's minimum wage as it may be higher than the federal rate.</div></div>
+<div class="faq-item"><div class="faq-q">Is this calculator free?</div><div class="faq-a">Yes — completely free with no account or signup required.</div></div>
+</div>
+<footer><p>&copy; 2025 CalcHive &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a><br>
+Also try: <a href="/budget-planner.html">Budget Planner</a> &middot; <a href="/tax-bracket-calculator.html">Tax Bracket Calculator</a></p></footer>
+<script>
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+function fmtD(n){return '$'+(Math.round(n*100)/100).toFixed(2);}
+function calc(){
+  var h=parseFloat(document.getElementById('hourly').value)||0;
+  var hrs=parseFloat(document.getElementById('hours').value)||40;
+  var wks=parseFloat(document.getElementById('weeks').value)||52;
+  var ot=parseFloat(document.getElementById('overtime').value)||0;
+  var otRate=parseFloat(document.getElementById('otRate').value)||1.5;
+  var tax=parseFloat(document.getElementById('taxRate').value)||0;
+  var weeklyGross=h*Math.min(hrs,40)+ot*h*otRate+(hrs>40?(hrs-40)*h*(otRate-1):0);
+  var annual=weeklyGross*wks;
+  var monthly=annual/12;
+  var biweekly=weeklyGross*2;
+  var weekly=weeklyGross;
+  var daily=h*8;
+  var net=function(n){return n*(1-tax/100);};
+  document.getElementById('annualSalary').textContent=fmt(annual);
+  document.getElementById('annual').textContent=fmt(annual);
+  document.getElementById('annualNet').textContent=fmt(net(annual))+' take-home';
+  document.getElementById('monthly').textContent=fmt(monthly);
+  document.getElementById('monthlyNet').textContent=fmt(net(monthly))+' take-home';
+  document.getElementById('biweekly').textContent=fmt(biweekly);
+  document.getElementById('biweeklyNet').textContent=fmt(net(biweekly))+' take-home';
+  document.getElementById('weekly').textContent=fmt(weekly);
+  document.getElementById('weeklyNet').textContent=fmt(net(weekly))+' take-home';
+  document.getElementById('daily').textContent=fmtD(daily);
+  document.getElementById('dailyNet').textContent=fmtD(net(daily))+' take-home';
+  var benchmarks=[
+    {label:'Federal minimum ($7.25/hr)',annual:7.25*40*52},
+    {label:'US median wage (~$23/hr)',annual:23*40*52},
+    {label:'Your salary',annual:annual,highlight:true},
+    {label:'6-figure ($48.08/hr)',annual:100000},
+    {label:'$200K salary ($96.15/hr)',annual:200000},
+  ];
+  var maxA=Math.max.apply(null,benchmarks.map(function(b){return b.annual;}));
+  document.getElementById('compareRows').innerHTML=benchmarks.map(function(b){
+    return '<div class="compare-row">'+
+      '<span class="compare-label">'+b.label+'</span>'+
+      '<div class="compare-bar-wrap"><div class="compare-bar" style="width:'+(b.annual/maxA*100)+'%;background:'+(b.highlight?'var(--accent2)':'var(--border)')+'"></div></div>'+
+      '<span class="compare-val" style="color:'+(b.highlight?'var(--accent2)':'var(--muted)')+'">'+fmt(b.annual)+'</span>'+
+    '</div>';
+  }).join('');
+}
+var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');
+if(_mb&&_dd){
+  _mb.addEventListener('click',function(e){e.stopPropagation();_dd.classList.toggle('open');});
+  document.addEventListener('click',function(){_dd.classList.remove('open');});
+}
+calc();
+</script>
+</body>
+</html>

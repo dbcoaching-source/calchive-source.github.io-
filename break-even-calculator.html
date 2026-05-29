@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Break Even Calculator - Find Your Break Even Point | CalcHive</title>
+<meta name="description" content="Free break even calculator. Find how many units you need to sell to cover your costs. Essential for business planning and pricing decisions. No signup required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--text)}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none}.nav-links a:hover{color:var(--text)}
+.dropdown{position:relative}
+.more-btn{background:none;border:none;color:var(--muted);font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif}
+.more-btn:hover{color:var(--text)}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 0;min-width:210px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.dropdown-menu a{display:block;padding:9px 16px;color:var(--muted);text-decoration:none;font-size:.82rem}
+.dropdown-menu a:hover{color:var(--text);background:var(--surface2)}
+.dropdown.open .dropdown-menu{display:block}
+@media(max-width:800px){.nav-links{display:none}}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin-bottom:.75rem}
+.hero h1 span{color:var(--yellow)}.hero-sub{font-size:.95rem;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.6}
+.main{max-width:1000px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:340px 1fr;gap:2rem;align-items:start}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.panel-head{background:var(--surface2);border-bottom:1px solid var(--border);padding:1rem 1.5rem}
+.panel-title{font-weight:700;font-size:.95rem}.panel-body{padding:1.5rem}
+.field{margin-bottom:1.25rem}
+.field label{display:block;font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+.field-hint{font-size:.72rem;color:var(--muted);margin-top:3px}
+.input-wrap{position:relative}
+.input-prefix{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+.input-suffix{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+input[type=number]{width:100%;padding:.65rem .75rem .65rem 1.75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.95rem;outline:none}
+input[type=number].no-prefix{padding-left:.75rem}
+input[type=number]:focus{border-color:var(--accent)}
+input[type=number]::-webkit-inner-spin-button{opacity:0}
+.result-hero{text-align:center;padding:1.5rem;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:12px;margin-bottom:1.5rem}
+.result-hero-val{font-family:'Playfair Display',serif;font-weight:900;font-size:3rem;color:var(--yellow);line-height:1;margin-bottom:.25rem}
+.result-hero-label{font-size:.82rem;color:var(--muted)}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.stat-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1.25rem;text-align:center}
+.stat-val{font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:var(--accent);line-height:1;margin-bottom:4px}
+.stat-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.chart-section{margin-bottom:1.5rem}
+.chart-title{font-weight:700;font-size:.88rem;margin-bottom:.75rem}
+.chart-wrap{position:relative;height:200px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;overflow:hidden;padding:.75rem}
+canvas{width:100%!important;height:100%!important}
+.profit-table{width:100%;border-collapse:collapse;font-size:.78rem;margin-bottom:1.5rem}
+.profit-table th{text-align:left;padding:6px 10px;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--border);font-weight:600}
+.profit-table td{padding:6px 10px;border-bottom:1px solid var(--border)}
+.profit-table tr:last-child td{border-bottom:none}
+.profit-positive{color:var(--green)}
+.profit-negative{color:var(--red)}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted)}
+.how-section{max-width:1000px;margin:0 auto 3rem;padding:0 1.5rem}
+.how-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.how-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem}
+.how-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--accent);line-height:1;margin-bottom:.5rem}
+.how-card h3{font-size:.9rem;font-weight:600;margin-bottom:.4rem}
+.how-card p{font-size:.82rem;color:var(--muted);line-height:1.5}
+.faq-section{max-width:1000px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:700px){.main{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.how-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Calc<span>Hive</span></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/mortgage-calculator.html">Mortgage</a></li>
+  <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
+  <li><a href="/loan-calculator.html">Loan</a></li>
+  <li><a href="/budget-planner.html">Budget</a></li>
+  <li class="dropdown">
+    <button class="more-btn">More &#9660;</button>
+    <div class="dropdown-menu">
+      <a href="/savings-goal-calculator.html">Savings Goal</a>
+      <a href="/credit-card-payoff-calculator.html">Credit Card Payoff</a>
+      <a href="/retirement-calculator.html">Retirement</a>
+      <a href="/net-worth-calculator.html">Net Worth</a>
+      <a href="/debt-snowball-calculator.html">Debt Snowball</a>
+      <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+      <a href="/investment-return-calculator.html">Investment Return</a>
+      <a href="/rent-vs-buy-calculator.html">Rent vs Buy</a>
+      <a href="/car-loan-calculator.html">Car Loan</a>
+      <a href="/student-loan-calculator.html">Student Loan</a>
+      <a href="/tax-bracket-calculator.html">Tax Bracket</a>
+      <a href="/tip-calculator.html">Tip Calculator</a>
+      <a href="/hourly-to-salary-calculator.html">Hourly to Salary</a>
+      <a href="/break-even-calculator.html">Break Even</a>
+      <a href="/invoice-generator.html">Invoice Generator</a>
+    </div>
+  </li>
+</ul>
+</header>
+<div class="hero">
+<div class="hero-eyebrow">Free · Instant · No Signup</div>
+<h1>Break Even <span>Calculator</span></h1>
+<p class="hero-sub">Find exactly how many units you need to sell to cover your costs. Essential for pricing decisions, business planning, and profitability analysis.</p>
+</div>
+<div class="main">
+<div class="input-col">
+<div class="panel">
+<div class="panel-head"><div class="panel-title">Business Inputs</div></div>
+<div class="panel-body">
+<div class="field"><label>Fixed Costs (monthly)</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="fixedCosts" value="5000" min="0" oninput="calc()"></div>
+<div class="field-hint">Rent, salaries, insurance, subscriptions</div></div>
+<div class="field"><label>Price per Unit</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="price" value="50" min="0" step="0.01" oninput="calc()"></div></div>
+<div class="field"><label>Variable Cost per Unit</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="varCost" value="20" min="0" step="0.01" oninput="calc()"></div>
+<div class="field-hint">Materials, packaging, shipping per unit</div></div>
+<div class="field"><label>Expected Monthly Sales (units)</label>
+<div class="input-wrap"><input type="number" id="expectedSales" value="300" min="0" class="no-prefix" oninput="calc()"><span class="input-suffix">units</span></div></div>
+</div></div></div>
+<div class="output-col">
+<div class="panel">
+<div class="panel-head"><div class="panel-title">Break Even Analysis</div></div>
+<div class="panel-body">
+<div class="result-hero">
+<div class="result-hero-val" id="beUnits">0</div>
+<div class="result-hero-label">Units needed to break even per month</div>
+</div>
+<div class="stats-grid">
+<div class="stat-card"><div class="stat-val" id="beRevenue" style="color:var(--green)">$0</div><div class="stat-label">Break Even Revenue</div></div>
+<div class="stat-card"><div class="stat-val" id="contributionMargin" style="color:var(--accent2)">$0</div><div class="stat-label">Contribution Margin</div></div>
+<div class="stat-card"><div class="stat-val" id="marginPct" style="color:var(--accent2)">0%</div><div class="stat-label">Margin %</div></div>
+<div class="stat-card"><div class="stat-val" id="monthlyProfit" style="color:var(--green)">$0</div><div class="stat-label">Profit at Expected Sales</div></div>
+</div>
+<div class="chart-title">Profit / Loss by Units Sold</div>
+<div style="margin-bottom:1.5rem">
+<div id="profitBars"></div>
+</div>
+<table class="profit-table">
+<thead><tr><th>Units Sold</th><th>Revenue</th><th>Total Cost</th><th>Profit/Loss</th></tr></thead>
+<tbody id="profitTable"></tbody>
+</table>
+<div class="ad-slot">Advertisement · Google AdSense</div>
+</div></div></div></div>
+<div style="max-width:1000px;margin:0 auto;padding:0 1.5rem"><div class="ad-slot">Advertisement · 728x90 · Google AdSense</div></div>
+<div class="how-section"><h2>How to use the break even calculator</h2>
+<div class="how-grid">
+<div class="how-card"><div class="how-num">1</div><h3>Enter your costs</h3><p>Input your total fixed monthly costs (rent, salaries, insurance) and your variable cost per unit sold.</p></div>
+<div class="how-card"><div class="how-num">2</div><h3>Set your price</h3><p>Enter your selling price per unit. The calculator shows your contribution margin — how much each sale contributes toward fixed costs.</p></div>
+<div class="how-card"><div class="how-num">3</div><h3>See your break even</h3><p>See exactly how many units you must sell to cover all costs, plus profit at your expected sales volume.</p></div>
+</div></div>
+<div class="faq-section"><h2>Frequently asked questions</h2>
+<div class="faq-item"><div class="faq-q">What is break even analysis?</div><div class="faq-a">Break even analysis determines the sales volume at which total revenue equals total costs — you are neither making a profit nor a loss. It helps businesses set prices, plan production, and understand minimum sales targets.</div></div>
+<div class="faq-item"><div class="faq-q">What is contribution margin?</div><div class="faq-a">Contribution margin is the selling price minus variable costs per unit. It represents how much each unit sold contributes toward covering your fixed costs. Once fixed costs are covered, the contribution margin becomes profit.</div></div>
+<div class="faq-item"><div class="faq-q">Is this calculator free?</div><div class="faq-a">Yes — completely free with no account or signup required.</div></div>
+</div>
+<footer><p>&copy; 2025 CalcHive &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a><br>
+Also try: <a href="/budget-planner.html">Budget Planner</a> &middot; <a href="/invoice-generator.html">Invoice Generator</a></p></footer>
+<script>
+function fmt(n){return '$'+Math.round(Math.abs(n)).toLocaleString();}
+function calc(){
+  var fixed=parseFloat(document.getElementById('fixedCosts').value)||0;
+  var price=parseFloat(document.getElementById('price').value)||0;
+  var varCost=parseFloat(document.getElementById('varCost').value)||0;
+  var expected=parseFloat(document.getElementById('expectedSales').value)||0;
+  var cm=price-varCost;
+  var beUnits=cm>0?Math.ceil(fixed/cm):Infinity;
+  var beRevenue=beUnits*price;
+  var cmPct=price>0?(cm/price*100):0;
+  var monthlyProfit=expected*cm-fixed;
+  document.getElementById('beUnits').textContent=beUnits===Infinity?'∞':beUnits.toLocaleString();
+  document.getElementById('beRevenue').textContent=beUnits===Infinity?'N/A':fmt(beRevenue);
+  document.getElementById('contributionMargin').textContent=fmt(cm)+'/unit';
+  document.getElementById('marginPct').textContent=cmPct.toFixed(1)+'%';
+  document.getElementById('monthlyProfit').textContent=(monthlyProfit>=0?'+':'-')+fmt(monthlyProfit);
+  document.getElementById('monthlyProfit').style.color=monthlyProfit>=0?'var(--green)':'var(--red)';
+  // Profit bars
+  var maxUnits=Math.max(beUnits===Infinity?500:beUnits*2, expected*1.5, 100);
+  var steps=[0.25,0.5,0.75,1,1.25,1.5,1.75,2].map(function(m){return Math.round(maxUnits*m/2);});
+  var uniqueSteps=[...new Set(steps)].sort(function(a,b){return a-b;}).slice(0,8);
+  var maxProfit=Math.max.apply(null,uniqueSteps.map(function(u){return Math.abs(u*cm-fixed);}));
+  document.getElementById('profitBars').innerHTML = uniqueSteps.map(function(u){
+    var profit=u*cm-fixed;
+    var isProfit=profit>=0;
+    var pct=maxProfit>0?Math.abs(profit)/maxProfit*100:0;
+    return '<div style="display:flex;align-items:center;gap:.5rem;margin-bottom:5px">'+
+      '<span style="font-size:.68rem;color:var(--muted);width:55px;text-align:right;flex-shrink:0">'+u.toLocaleString()+' units</span>'+
+      '<div style="flex:1;background:var(--surface2);border-radius:3px;height:14px;overflow:hidden">'+
+        '<div style="height:100%;width:'+pct+'%;background:'+(isProfit?'var(--green)':'var(--red)')+';border-radius:3px"></div>'+
+      '</div>'+
+      '<span style="font-size:.68rem;font-weight:600;min-width:70px;color:'+(isProfit?'var(--green)':'var(--red)')+'">'+
+        (isProfit?'+':'-')+fmt(profit)+'</span>'+
+    '</div>';
+  }).join('');
+  // Table
+  document.getElementById('profitTable').innerHTML=uniqueSteps.map(function(u){
+    var rev=u*price;
+    var cost=fixed+u*varCost;
+    var profit=rev-cost;
+    return '<tr><td>'+u.toLocaleString()+'</td><td>'+fmt(rev)+'</td><td>'+fmt(cost)+'</td>'+
+      '<td class="'+(profit>=0?'profit-positive':'profit-negative')+'">'+(profit>=0?'+':'-')+fmt(profit)+'</td></tr>';
+  }).join('');
+}
+var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');
+if(_mb&&_dd){
+  _mb.addEventListener('click',function(e){e.stopPropagation();_dd.classList.toggle('open');});
+  document.addEventListener('click',function(){_dd.classList.remove('open');});
+}
+calc();
+</script>
+</body>
+</html>

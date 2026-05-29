@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tip Calculator - Split Bills & Calculate Tips | CalcHive</title>
+<meta name="description" content="Free tip calculator. Calculate tip amount, total bill, and split between any number of people. Instant results. No signup required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--text)}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none;transition:color .15s}.nav-links a:hover{color:var(--text)}
+.dropdown{position:relative}
+.more-btn{background:none;border:none;color:var(--muted);font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif}
+.more-btn:hover{color:var(--text)}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 0;min-width:210px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.dropdown-menu a{display:block;padding:9px 16px;color:var(--muted);text-decoration:none;font-size:.82rem;transition:all .15s}
+.dropdown-menu a:hover{color:var(--text);background:var(--surface2)}
+.dropdown.open .dropdown-menu{display:block}
+@media(max-width:800px){.nav-links{display:none}}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin-bottom:.75rem}
+.hero h1 span{color:var(--green)}.hero-sub{font-size:.95rem;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.6}
+.main{max-width:700px;margin:0 auto;padding:2.5rem 1.5rem}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.5rem}
+.panel-head{background:var(--surface2);border-bottom:1px solid var(--border);padding:1rem 1.5rem}
+.panel-title{font-weight:700;font-size:.95rem}
+.panel-body{padding:1.5rem}
+.field{margin-bottom:1.25rem}
+.field label{display:block;font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+.input-wrap{position:relative}
+.input-prefix{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+.input-suffix{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+input[type=number]{width:100%;padding:.65rem .75rem .65rem 1.75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.95rem;outline:none}
+input[type=number].no-prefix{padding-left:.75rem}
+input[type=number]:focus{border-color:var(--accent)}
+input[type=number]::-webkit-inner-spin-button{opacity:0}
+.tip-btns{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:.75rem}
+.tip-btn{padding:.5rem;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--muted);font-size:.82rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;text-align:center}
+.tip-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.tip-btn:hover:not(.active){border-color:var(--accent);color:var(--accent)}
+.results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem}
+.result-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1.25rem;text-align:center}
+.result-card.primary{border-color:var(--green);background:rgba(34,197,94,.08)}
+.result-val{font-family:'Playfair Display',serif;font-weight:700;font-size:1.6rem;color:var(--accent);line-height:1;margin-bottom:4px}
+.result-card.primary .result-val{color:var(--green);font-size:2rem}
+.result-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.split-section{border-top:1px solid var(--border);padding-top:1.25rem}
+.split-title{font-weight:700;font-size:.88rem;margin-bottom:.75rem}
+.split-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+.split-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.875rem;text-align:center}
+.split-num{font-size:.72rem;color:var(--muted);margin-bottom:3px;text-transform:uppercase;letter-spacing:.05em}
+.split-amount{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;color:var(--accent2)}
+.split-tip{font-size:.7rem;color:var(--muted);margin-top:2px}
+.quality-row{display:flex;gap:6px;margin-bottom:1rem}
+.quality-btn{flex:1;padding:.5rem;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--muted);font-size:.75rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;text-align:center;transition:all .15s}
+.quality-btn:hover{border-color:var(--accent2);color:var(--accent2)}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted)}
+.how-section{max-width:700px;margin:0 auto 3rem;padding:0 1.5rem}
+.how-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.how-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem}
+.how-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--accent);line-height:1;margin-bottom:.5rem}
+.how-card h3{font-size:.9rem;font-weight:600;margin-bottom:.4rem}
+.how-card p{font-size:.82rem;color:var(--muted);line-height:1.5}
+.faq-section{max-width:700px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:500px){.tip-btns{grid-template-columns:repeat(3,1fr)}.results-grid{grid-template-columns:1fr 1fr}.split-grid{grid-template-columns:1fr 1fr}.how-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Calc<span>Hive</span></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/mortgage-calculator.html">Mortgage</a></li>
+  <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
+  <li><a href="/loan-calculator.html">Loan</a></li>
+  <li><a href="/budget-planner.html">Budget</a></li>
+  <li class="dropdown">
+    <button class="more-btn">More &#9660;</button>
+    <div class="dropdown-menu">
+      <a href="/savings-goal-calculator.html">Savings Goal</a>
+      <a href="/credit-card-payoff-calculator.html">Credit Card Payoff</a>
+      <a href="/retirement-calculator.html">Retirement</a>
+      <a href="/net-worth-calculator.html">Net Worth</a>
+      <a href="/debt-snowball-calculator.html">Debt Snowball</a>
+      <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+      <a href="/investment-return-calculator.html">Investment Return</a>
+      <a href="/rent-vs-buy-calculator.html">Rent vs Buy</a>
+      <a href="/car-loan-calculator.html">Car Loan</a>
+      <a href="/student-loan-calculator.html">Student Loan</a>
+      <a href="/tax-bracket-calculator.html">Tax Bracket</a>
+      <a href="/tip-calculator.html">Tip Calculator</a>
+      <a href="/hourly-to-salary-calculator.html">Hourly to Salary</a>
+      <a href="/break-even-calculator.html">Break Even</a>
+      <a href="/invoice-generator.html">Invoice Generator</a>
+    </div>
+  </li>
+</ul>
+</header>
+<div class="hero">
+<div class="hero-eyebrow">Free · Instant · No Signup</div>
+<h1>Tip <span>Calculator</span></h1>
+<p class="hero-sub">Calculate tip amount, total bill, and split evenly between any number of people. Quick tip percentage buttons for every situation.</p>
+</div>
+<div class="main">
+<div class="panel">
+<div class="panel-head"><div class="panel-title">Bill Details</div></div>
+<div class="panel-body">
+<div class="field"><label>Bill Amount</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="bill" value="85.00" min="0" step="0.01" oninput="calc()"></div></div>
+<div class="field">
+<label>Tip Percentage</label>
+<div class="tip-btns">
+<button class="tip-btn" onclick="setTip(this,10)">10%</button>
+<button class="tip-btn" onclick="setTip(this,15)">15%</button>
+<button class="tip-btn active" onclick="setTip(this,18)">18%</button>
+<button class="tip-btn" onclick="setTip(this,20)">20%</button>
+<button class="tip-btn" onclick="setTip(this,25)">25%</button>
+<button class="tip-btn" onclick="setTip(this,30)">30%</button>
+</div>
+<div class="input-wrap"><input type="number" id="tipPct" value="18" min="0" max="100" step="1" class="no-prefix" oninput="calc()"><span class="input-suffix">%</span></div>
+</div>
+<div class="field"><label>Number of People</label>
+<div class="input-wrap"><input type="number" id="people" value="2" min="1" max="20" class="no-prefix" oninput="calc()"><span class="input-suffix">people</span></div></div>
+<div class="field">
+<label>Service Quality</label>
+<div class="quality-row">
+<button class="quality-btn" onclick="setTip(null,10)">Poor — 10%</button>
+<button class="quality-btn" onclick="setTip(null,15)">OK — 15%</button>
+<button class="quality-btn" onclick="setTip(null,18)">Good — 18%</button>
+<button class="quality-btn" onclick="setTip(null,20)">Great — 20%</button>
+<button class="quality-btn" onclick="setTip(null,25)">Excellent — 25%</button>
+</div>
+</div>
+</div></div>
+
+<div class="results-grid">
+<div class="result-card">
+<div class="result-val" id="tipAmount">$0</div>
+<div class="result-label">Tip Amount</div>
+</div>
+<div class="result-card primary">
+<div class="result-val" id="totalBill">$0</div>
+<div class="result-label">Total Bill</div>
+</div>
+<div class="result-card">
+<div class="result-val" id="perPerson">$0</div>
+<div class="result-label">Per Person</div>
+</div>
+</div>
+
+<div class="panel">
+<div class="panel-head"><div class="panel-title">Bill Split</div></div>
+<div class="panel-body">
+<div class="split-grid" id="splitGrid"></div>
+</div></div>
+
+<div class="ad-slot">Advertisement · Google AdSense</div>
+</div>
+
+<div class="how-section">
+<h2>How to use the tip calculator</h2>
+<div class="how-grid">
+<div class="how-card"><div class="how-num">1</div><h3>Enter your bill</h3><p>Type in the pre-tax bill amount from your receipt.</p></div>
+<div class="how-card"><div class="how-num">2</div><h3>Choose your tip</h3><p>Use the quick buttons or the service quality selector, or type a custom percentage.</p></div>
+<div class="how-card"><div class="how-num">3</div><h3>Split the bill</h3><p>Enter the number of people to see exactly how much each person owes including tip.</p></div>
+</div></div>
+<div class="faq-section">
+<h2>Frequently asked questions</h2>
+<div class="faq-item"><div class="faq-q">How much should I tip at a restaurant?</div><div class="faq-a">The standard tip in the US is 15-20% for sit-down restaurants. 18% is considered standard for good service, 20% for great service, and 25%+ for exceptional service. For poor service, 10% is acceptable.</div></div>
+<div class="faq-item"><div class="faq-q">Should I tip on the pre-tax or post-tax amount?</div><div class="faq-a">Either is acceptable. Tipping on the pre-tax amount is technically more correct, but many people tip on the total for simplicity. The difference is usually just a dollar or two.</div></div>
+<div class="faq-item"><div class="faq-q">Is this calculator free?</div><div class="faq-a">Yes — completely free with no account or signup required.</div></div>
+</div>
+<footer><p>&copy; 2025 CalcHive &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a><br>
+Also try: <a href="/budget-planner.html">Budget Planner</a> &middot; <a href="/loan-calculator.html">Loan Calculator</a></p></footer>
+<script>
+var currentTip = 18;
+function fmt(n){return '$'+(Math.round(n*100)/100).toFixed(2);}
+function setTip(btn, pct){
+  currentTip = pct;
+  document.getElementById('tipPct').value = pct;
+  document.querySelectorAll('.tip-btn').forEach(function(b){b.classList.remove('active');});
+  if(btn) btn.classList.add('active');
+  calc();
+}
+function calc(){
+  var bill = parseFloat(document.getElementById('bill').value)||0;
+  var pct = parseFloat(document.getElementById('tipPct').value)||0;
+  var people = parseInt(document.getElementById('people').value)||1;
+  var tip = bill * pct/100;
+  var total = bill + tip;
+  var perPerson = total / people;
+  document.getElementById('tipAmount').textContent = fmt(tip);
+  document.getElementById('totalBill').textContent = fmt(total);
+  document.getElementById('perPerson').textContent = fmt(perPerson);
+  var splits = [1,2,3,4,5,6];
+  document.getElementById('splitGrid').innerHTML = splits.map(function(n){
+    var pp = total/n;
+    var tp = tip/n;
+    return '<div class="split-card"><div class="split-num">'+n+' '+(n===1?'person':'people')+'</div>'+
+      '<div class="split-amount">'+fmt(pp)+'/ea</div>'+
+      '<div class="split-tip">incl. '+fmt(tp)+' tip</div></div>';
+  }).join('');
+}
+var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');
+if(_mb&&_dd){
+  _mb.addEventListener('click',function(e){e.stopPropagation();_dd.classList.toggle('open');});
+  document.addEventListener('click',function(){_dd.classList.remove('open');});
+}
+calc();
+</script>
+</body>
+</html>
