@@ -189,7 +189,7 @@ function getDate(months){var d=new Date();d.setMonth(d.getMonth()+months);var mn
 function calcPayment(bal,rate,months){var mr=rate/100/12;if(mr===0)return bal/months;return bal*(mr*Math.pow(1+mr,months))/(Math.pow(1+mr,months)-1);}
 function setDefaults(){
   var type=document.getElementById('loanType').value;
-  var rates={federal-undergrad:6.53,'federal-grad':8.08,'federal-plus':9.08,'private':7.5};
+  var rates={'federal-undergrad':6.53,'federal-grad':8.08,'federal-plus':9.08,'private':7.5};
   // just trigger calc
   calc();
 }
