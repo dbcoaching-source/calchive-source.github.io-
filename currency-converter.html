@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Currency Converter - Convert Any Currency | CalcHive</title>
+<meta name="description" content="Free currency converter. Convert between 30+ major world currencies with live-style rates. Instant results, no signup required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--text)}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none}.nav-links a:hover{color:var(--text)}
+.dropdown{position:relative}
+.more-btn{background:none;border:none;color:var(--muted);font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif}
+.more-btn:hover{color:var(--text)}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 0;min-width:210px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.dropdown-menu a{display:block;padding:9px 16px;color:var(--muted);text-decoration:none;font-size:.82rem}
+.dropdown-menu a:hover{color:var(--text);background:var(--surface2)}
+.dropdown.open .dropdown-menu{display:block}
+@media(max-width:800px){.nav-links{display:none}}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin-bottom:.75rem}
+.hero h1 span{color:var(--accent)}.hero-sub{font-size:.95rem;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.6}
+.main{max-width:800px;margin:0 auto;padding:2.5rem 1.5rem}
+.converter-box{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:1.5rem}
+.conv-row{padding:1.5rem;display:flex;align-items:center;gap:1rem}
+.conv-row+.conv-row{border-top:1px solid var(--border)}
+.currency-select-wrap{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
+.flag{font-size:1.5rem;width:36px;text-align:center}
+.currency-code{font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;min-width:45px}
+select.currency-select{background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.82rem;padding:.45rem .65rem;outline:none;cursor:pointer;max-width:180px}
+select.currency-select:focus{border-color:var(--accent)}
+.amount-input{flex:1;padding:.75rem 1rem;background:transparent;border:none;color:var(--text);font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;outline:none;text-align:right;min-width:0}
+.amount-input::-webkit-inner-spin-button{opacity:0}
+.swap-btn{width:40px;height:40px;background:var(--surface2);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;margin:0 auto;font-size:1.1rem;transition:all .2s;flex-shrink:0}
+.swap-btn:hover{background:var(--accent);border-color:var(--accent)}
+.rate-display{background:var(--surface2);padding:.875rem 1.5rem;text-align:center;font-size:.82rem;color:var(--muted);border-top:1px solid var(--border)}
+.rate-display strong{color:var(--text)}
+.quick-amounts{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.quick-btn{padding:6px 14px;background:var(--card);border:1px solid var(--border);border-radius:20px;color:var(--muted);font-size:.78rem;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
+.quick-btn:hover{border-color:var(--accent);color:var(--accent)}
+.rates-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.75rem;margin-bottom:1.5rem}
+.rate-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem;text-align:center;cursor:pointer;transition:all .15s}
+.rate-card:hover{border-color:var(--accent)}
+.rate-flag{font-size:1.3rem;margin-bottom:4px}
+.rate-code{font-size:.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.rate-val{font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:var(--text);margin-top:2px}
+.rate-name{font-size:.68rem;color:var(--muted);margin-top:2px}
+.disclaimer{font-size:.72rem;color:var(--muted);text-align:center;margin-bottom:1.5rem;line-height:1.6}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted)}
+.how-section{max-width:800px;margin:0 auto 3rem;padding:0 1.5rem}
+.how-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.how-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem}
+.how-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--accent);line-height:1;margin-bottom:.5rem}
+.how-card h3{font-size:.9rem;font-weight:600;margin-bottom:.4rem}
+.how-card p{font-size:.82rem;color:var(--muted);line-height:1.5}
+.faq-section{max-width:800px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:600px){.conv-row{flex-wrap:wrap}.how-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Calc<span>Hive</span></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/mortgage-calculator.html">Mortgage</a></li>
+  <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
+  <li><a href="/loan-calculator.html">Loan</a></li>
+  <li><a href="/budget-planner.html">Budget</a></li>
+  <li class="dropdown">
+    <button class="more-btn">More &#9660;</button>
+    <div class="dropdown-menu">
+      <a href="/savings-goal-calculator.html">Savings Goal</a>
+      <a href="/credit-card-payoff-calculator.html">Credit Card Payoff</a>
+      <a href="/retirement-calculator.html">Retirement</a>
+      <a href="/net-worth-calculator.html">Net Worth</a>
+      <a href="/debt-snowball-calculator.html">Debt Snowball</a>
+      <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+      <a href="/investment-return-calculator.html">Investment Return</a>
+      <a href="/rent-vs-buy-calculator.html">Rent vs Buy</a>
+      <a href="/car-loan-calculator.html">Car Loan</a>
+      <a href="/student-loan-calculator.html">Student Loan</a>
+      <a href="/tax-bracket-calculator.html">Tax Bracket</a>
+      <a href="/tip-calculator.html">Tip Calculator</a>
+      <a href="/hourly-to-salary-calculator.html">Hourly to Salary</a>
+      <a href="/break-even-calculator.html">Break Even</a>
+      <a href="/invoice-generator.html">Invoice Generator</a>
+      <a href="/currency-converter.html">Currency Converter</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/401k-calculator.html">401k Calculator</a>
+      <a href="/salary-comparison-calculator.html">Salary Comparison</a>
+      <a href="/inflation-calculator.html">Inflation Calculator</a>
+    </div>
+  </li>
+</ul>
+</header>
+<div class="hero">
+<div class="hero-eyebrow">Free · Instant · No Signup</div>
+<h1>Currency <span>Converter</span></h1>
+<p class="hero-sub">Convert between 30+ major world currencies instantly. See rates for all major currencies at once.</p>
+</div>
+<div class="main">
+<div class="converter-box">
+  <div class="conv-row">
+    <div class="currency-select-wrap">
+      <span class="flag" id="fromFlag">🇺🇸</span>
+      <span class="currency-code" id="fromCode">USD</span>
+      <select class="currency-select" id="fromCurrency" onchange="updateFromFlag();convert()"></select>
+    </div>
+    <input type="number" class="amount-input" id="fromAmount" value="1000" oninput="convert()">
+  </div>
+  <div style="padding:.5rem 1.5rem;text-align:center">
+    <button class="swap-btn" onclick="swapCurrencies()" title="Swap currencies">&#8645;</button>
+  </div>
+  <div class="conv-row">
+    <div class="currency-select-wrap">
+      <span class="flag" id="toFlag">🇪🇺</span>
+      <span class="currency-code" id="toCode">EUR</span>
+      <select class="currency-select" id="toCurrency" onchange="updateToFlag();convert()"></select>
+    </div>
+    <input type="number" class="amount-input" id="toAmount" value="0" oninput="convertReverse()" style="color:var(--accent2)">
+  </div>
+  <div class="rate-display" id="rateDisplay">1 USD = — EUR</div>
+</div>
+
+<div class="quick-amounts">
+  <span style="font-size:.78rem;color:var(--muted);align-self:center">Quick:</span>
+  <button class="quick-btn" onclick="setAmount(100)">100</button>
+  <button class="quick-btn" onclick="setAmount(500)">500</button>
+  <button class="quick-btn" onclick="setAmount(1000)">1,000</button>
+  <button class="quick-btn" onclick="setAmount(5000)">5,000</button>
+  <button class="quick-btn" onclick="setAmount(10000)">10,000</button>
+  <button class="quick-btn" onclick="setAmount(50000)">50,000</button>
+</div>
+
+<div style="font-weight:700;font-size:.88rem;margin-bottom:.75rem">All Rates vs <span id="baseLabel">USD</span></div>
+<div class="rates-grid" id="ratesGrid"></div>
+
+<div class="disclaimer">&#9432; Rates are approximate reference rates for informational purposes. For financial transactions, always use rates from your bank or broker.</div>
+
+<div class="ad-slot">Advertisement · Google AdSense</div>
+</div>
+
+<div class="how-section">
+<h2>How to use the currency converter</h2>
+<div class="how-grid">
+<div class="how-card"><div class="how-num">1</div><h3>Select currencies</h3><p>Choose your from and to currencies from the dropdowns. Over 30 major world currencies available.</p></div>
+<div class="how-card"><div class="how-num">2</div><h3>Enter amount</h3><p>Type any amount in either field. You can also convert in reverse by typing in the bottom field. Use quick buttons for common amounts.</p></div>
+<div class="how-card"><div class="how-num">3</div><h3>See all rates</h3><p>The grid below shows your base currency converted to all major currencies at once for easy comparison.</p></div>
+</div></div>
+<div class="faq-section">
+<h2>Frequently asked questions</h2>
+<div class="faq-item"><div class="faq-q">Are these live exchange rates?</div><div class="faq-a">These rates are reference rates updated periodically for informational use. For actual financial transactions such as wire transfers or currency exchange, always confirm the exact rate with your bank or exchange service as rates fluctuate constantly.</div></div>
+<div class="faq-item"><div class="faq-q">Which currencies are supported?</div><div class="faq-a">The converter supports 30+ major world currencies including USD, EUR, GBP, JPY, CAD, AUD, CHF, CNY, INR, MXN, BRL, and many more.</div></div>
+<div class="faq-item"><div class="faq-q">Is this calculator free?</div><div class="faq-a">Yes — completely free with no account or signup required.</div></div>
+</div>
+<footer><p>&copy; 2025 CalcHive &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a><br>
+Also try: <a href="/investment-return-calculator.html">Investment Return</a> &middot; <a href="/budget-planner.html">Budget Planner</a></p></footer>
+<script>
+var CURRENCIES = [
+  {code:'USD',name:'US Dollar',flag:'🇺🇸',rate:1},
+  {code:'EUR',name:'Euro',flag:'🇪🇺',rate:0.924},
+  {code:'GBP',name:'British Pound',flag:'🇬🇧',rate:0.793},
+  {code:'JPY',name:'Japanese Yen',flag:'🇯🇵',rate:149.5},
+  {code:'CAD',name:'Canadian Dollar',flag:'🇨🇦',rate:1.364},
+  {code:'AUD',name:'Australian Dollar',flag:'🇦🇺',rate:1.531},
+  {code:'CHF',name:'Swiss Franc',flag:'🇨🇭',rate:0.896},
+  {code:'CNY',name:'Chinese Yuan',flag:'🇨🇳',rate:7.243},
+  {code:'HKD',name:'Hong Kong Dollar',flag:'🇭🇰',rate:7.824},
+  {code:'SGD',name:'Singapore Dollar',flag:'🇸🇬',rate:1.341},
+  {code:'INR',name:'Indian Rupee',flag:'🇮🇳',rate:83.12},
+  {code:'MXN',name:'Mexican Peso',flag:'🇲🇽',rate:17.15},
+  {code:'BRL',name:'Brazilian Real',flag:'🇧🇷',rate:4.97},
+  {code:'KRW',name:'South Korean Won',flag:'🇰🇷',rate:1325},
+  {code:'SEK',name:'Swedish Krona',flag:'🇸🇪',rate:10.42},
+  {code:'NOK',name:'Norwegian Krone',flag:'🇳🇴',rate:10.55},
+  {code:'DKK',name:'Danish Krone',flag:'🇩🇰',rate:6.88},
+  {code:'NZD',name:'New Zealand Dollar',flag:'🇳🇿',rate:1.628},
+  {code:'ZAR',name:'South African Rand',flag:'🇿🇦',rate:18.63},
+  {code:'AED',name:'UAE Dirham',flag:'🇦🇪',rate:3.673},
+  {code:'SAR',name:'Saudi Riyal',flag:'🇸🇦',rate:3.751},
+  {code:'THB',name:'Thai Baht',flag:'🇹🇭',rate:35.12},
+  {code:'TRY',name:'Turkish Lira',flag:'🇹🇷',rate:32.15},
+  {code:'PLN',name:'Polish Zloty',flag:'🇵🇱',rate:3.98},
+  {code:'IDR',name:'Indonesian Rupiah',flag:'🇮🇩',rate:15650},
+  {code:'MYR',name:'Malaysian Ringgit',flag:'🇲🇾',rate:4.71},
+  {code:'PHP',name:'Philippine Peso',flag:'🇵🇭',rate:56.42},
+  {code:'CZK',name:'Czech Koruna',flag:'🇨🇿',rate:22.85},
+  {code:'HUF',name:'Hungarian Forint',flag:'🇭🇺',rate:355.2},
+  {code:'ILS',name:'Israeli Shekel',flag:'🇮🇱',rate:3.72},
+];
+
+function getRate(code){ return CURRENCIES.find(function(c){return c.code===code;}).rate; }
+function getFlag(code){ return CURRENCIES.find(function(c){return c.code===code;}).flag; }
+function getName(code){ return CURRENCIES.find(function(c){return c.code===code;}).name; }
+
+function populateSelects(){
+  var opts = CURRENCIES.map(function(c){ return '<option value="'+c.code+'">'+c.flag+' '+c.code+' — '+c.name+'</option>'; }).join('');
+  document.getElementById('fromCurrency').innerHTML = opts;
+  document.getElementById('toCurrency').innerHTML = opts;
+  document.getElementById('fromCurrency').value = 'USD';
+  document.getElementById('toCurrency').value = 'EUR';
+}
+
+function updateFromFlag(){
+  var code = document.getElementById('fromCurrency').value;
+  document.getElementById('fromFlag').textContent = getFlag(code);
+  document.getElementById('fromCode').textContent = code;
+  document.getElementById('baseLabel').textContent = code;
+}
+function updateToFlag(){
+  var code = document.getElementById('toCurrency').value;
+  document.getElementById('toFlag').textContent = getFlag(code);
+  document.getElementById('toCode').textContent = code;
+}
+
+function convert(){
+  var from = document.getElementById('fromCurrency').value;
+  var to = document.getElementById('toCurrency').value;
+  var amount = parseFloat(document.getElementById('fromAmount').value)||0;
+  var inUSD = amount / getRate(from);
+  var result = inUSD * getRate(to);
+  document.getElementById('toAmount').value = result.toFixed(4);
+  var rate = getRate(to)/getRate(from);
+  document.getElementById('rateDisplay').innerHTML = '1 '+from+' = <strong>'+rate.toFixed(4)+'</strong> '+to+' &nbsp;|&nbsp; 1 '+to+' = <strong>'+(1/rate).toFixed(4)+'</strong> '+from;
+  updateRatesGrid();
+}
+
+function convertReverse(){
+  var from = document.getElementById('fromCurrency').value;
+  var to = document.getElementById('toCurrency').value;
+  var amount = parseFloat(document.getElementById('toAmount').value)||0;
+  var inUSD = amount / getRate(to);
+  var result = inUSD * getRate(from);
+  document.getElementById('fromAmount').value = result.toFixed(4);
+  convert();
+}
+
+function setAmount(n){
+  document.getElementById('fromAmount').value = n;
+  convert();
+}
+
+function swapCurrencies(){
+  var f = document.getElementById('fromCurrency').value;
+  var t = document.getElementById('toCurrency').value;
+  document.getElementById('fromCurrency').value = t;
+  document.getElementById('toCurrency').value = f;
+  updateFromFlag(); updateToFlag(); convert();
+}
+
+function updateRatesGrid(){
+  var from = document.getElementById('fromCurrency').value;
+  var amount = parseFloat(document.getElementById('fromAmount').value)||1;
+  var inUSD = amount / getRate(from);
+  document.getElementById('ratesGrid').innerHTML = CURRENCIES
+    .filter(function(c){ return c.code !== from; })
+    .map(function(c){
+      var val = inUSD * c.rate;
+      var display = val >= 1000 ? val.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,',') : val.toFixed(2);
+      return '<div class="rate-card" onclick="document.getElementById(\'toCurrency\').value=\''+c.code+'\';updateToFlag();convert()">'+
+        '<div class="rate-flag">'+c.flag+'</div>'+
+        '<div class="rate-code">'+c.code+'</div>'+
+        '<div class="rate-val">'+display+'</div>'+
+        '<div class="rate-name">'+c.name+'</div>'+
+      '</div>';
+    }).join('');
+}
+
+var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');
+if(_mb&&_dd){
+  _mb.addEventListener('click',function(e){e.stopPropagation();_dd.classList.toggle('open');});
+  document.addEventListener('click',function(){_dd.classList.remove('open');});
+}
+populateSelects();
+updateFromFlag();
+updateToFlag();
+convert();
+</script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inflation Calculator - Calculate Purchasing Power | CalcHive</title>
+<meta name="description" content="Free inflation calculator. See how inflation affects purchasing power over time. Convert any amount between years using historical US inflation data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--text)}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none}.nav-links a:hover{color:var(--text)}
+.dropdown{position:relative}
+.more-btn{background:none;border:none;color:var(--muted);font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif}
+.more-btn:hover{color:var(--text)}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 0;min-width:210px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.dropdown-menu a{display:block;padding:9px 16px;color:var(--muted);text-decoration:none;font-size:.82rem}
+.dropdown-menu a:hover{color:var(--text);background:var(--surface2)}
+.dropdown.open .dropdown-menu{display:block}
+@media(max-width:800px){.nav-links{display:none}}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin-bottom:.75rem}
+.hero h1 span{color:var(--red)}.hero-sub{font-size:.95rem;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.6}
+.main{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:320px 1fr;gap:2rem;align-items:start}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.panel-head{background:var(--surface2);border-bottom:1px solid var(--border);padding:1rem 1.5rem}
+.panel-title{font-weight:700;font-size:.95rem}.panel-body{padding:1.5rem}
+.field{margin-bottom:1.25rem}
+.field label{display:block;font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+.input-wrap{position:relative}
+.input-prefix{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+input[type=number]{width:100%;padding:.65rem .75rem .65rem 1.75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.95rem;outline:none}
+input[type=number].no-prefix{padding-left:.75rem}
+input[type=number]:focus{border-color:var(--accent)}
+input[type=number]::-webkit-inner-spin-button{opacity:0}
+input[type=range]{-webkit-appearance:none;width:100%;height:4px;background:var(--border);border-radius:2px;margin-top:.5rem;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.range-labels{display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted);margin-top:4px}
+.result-hero{text-align:center;padding:1.5rem;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:12px;margin-bottom:1.5rem}
+.result-val{font-family:'Playfair Display',serif;font-weight:900;font-size:3rem;color:var(--red);line-height:1;margin-bottom:.25rem}
+.result-label{font-size:.82rem;color:var(--muted)}
+.result-sub{font-size:.78rem;color:var(--muted);margin-top:.4rem}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.stat-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1.25rem;text-align:center}
+.stat-val{font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:var(--accent);line-height:1;margin-bottom:4px}
+.stat-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.examples-section{margin-bottom:1.5rem}
+.examples-title{font-weight:700;font-size:.88rem;margin-bottom:.75rem}
+.example-row{display:flex;justify-content:space-between;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--border);font-size:.82rem}
+.example-row:last-child{border-bottom:none}
+.example-item{color:var(--muted)}
+.example-then{color:var(--accent2);font-weight:600}
+.example-now{color:var(--text);font-weight:600}
+.decade-chart{margin-bottom:1.5rem}
+.decade-title{font-weight:700;font-size:.88rem;margin-bottom:.75rem}
+.decade-row{display:flex;align-items:center;gap:.5rem;margin-bottom:5px}
+.decade-label{font-size:.72rem;color:var(--muted);width:45px;flex-shrink:0;text-align:right}
+.decade-bar-wrap{flex:1;background:var(--surface2);border-radius:3px;height:14px;overflow:hidden}
+.decade-bar{height:100%;background:var(--red);border-radius:3px}
+.decade-val{font-size:.7rem;color:var(--muted);min-width:35px;text-align:left}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted)}
+.how-section{max-width:900px;margin:0 auto 3rem;padding:0 1.5rem}
+.how-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.how-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem}
+.how-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--accent);line-height:1;margin-bottom:.5rem}
+.how-card h3{font-size:.9rem;font-weight:600;margin-bottom:.4rem}
+.how-card p{font-size:.82rem;color:var(--muted);line-height:1.5}
+.faq-section{max-width:900px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted)}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:700px){.main{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.how-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Calc<span>Hive</span></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/mortgage-calculator.html">Mortgage</a></li>
+  <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
+  <li><a href="/retirement-calculator.html">Retirement</a></li>
+  <li><a href="/budget-planner.html">Budget</a></li>
+  <li class="dropdown">
+    <button class="more-btn">More &#9660;</button>
+    <div class="dropdown-menu">
+      <a href="/savings-goal-calculator.html">Savings Goal</a>
+      <a href="/credit-card-payoff-calculator.html">Credit Card Payoff</a>
+      <a href="/net-worth-calculator.html">Net Worth</a>
+      <a href="/debt-snowball-calculator.html">Debt Snowball</a>
+      <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+      <a href="/investment-return-calculator.html">Investment Return</a>
+      <a href="/rent-vs-buy-calculator.html">Rent vs Buy</a>
+      <a href="/car-loan-calculator.html">Car Loan</a>
+      <a href="/student-loan-calculator.html">Student Loan</a>
+      <a href="/tax-bracket-calculator.html">Tax Bracket</a>
+      <a href="/tip-calculator.html">Tip Calculator</a>
+      <a href="/hourly-to-salary-calculator.html">Hourly to Salary</a>
+      <a href="/break-even-calculator.html">Break Even</a>
+      <a href="/invoice-generator.html">Invoice Generator</a>
+      <a href="/currency-converter.html">Currency Converter</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/401k-calculator.html">401k Calculator</a>
+      <a href="/salary-comparison-calculator.html">Salary Comparison</a>
+    </div>
+  </li>
+</ul>
+</header>
+<div class="hero">
+<div class="hero-eyebrow">Historical CPI Data · US Inflation · Free</div>
+<h1>Inflation <span>Calculator</span></h1>
+<p class="hero-sub">See how inflation erodes purchasing power over time. Convert any dollar amount between any two years using historical US CPI data going back to 1913.</p>
+</div>
+<div class="main">
+<div class="input-col">
+<div class="panel">
+<div class="panel-head"><div class="panel-title">Inflation Details</div></div>
+<div class="panel-body">
+<div class="field"><label>Amount</label>
+<div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="amount" value="1000" min="0" oninput="calc()"></div></div>
+<div class="field"><label>From Year</label>
+<div class="input-wrap"><input type="number" id="fromYear" value="2000" min="1913" max="2026" class="no-prefix" oninput="calc()"></div>
+<input type="range" min="1913" max="2026" value="2000" oninput="document.getElementById('fromYear').value=this.value;calc()">
+<div class="range-labels"><span>1913</span><span>2026</span></div></div>
+<div class="field"><label>To Year</label>
+<div class="input-wrap"><input type="number" id="toYear" value="2026" min="1913" max="2026" class="no-prefix" oninput="calc()"></div>
+<input type="range" min="1913" max="2026" value="2026" oninput="document.getElementById('toYear').value=this.value;calc()">
+<div class="range-labels"><span>1913</span><span>2026</span></div></div>
+<div class="field"><label>Or use custom inflation rate</label>
+<div class="input-wrap"><input type="number" id="customRate" value="" min="0" max="100" step="0.1" class="no-prefix" placeholder="Leave blank for historical" oninput="calc()"><span style="position:absolute;right:.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none">%</span></div></div>
+</div></div></div>
+<div class="output-col">
+<div class="panel">
+<div class="panel-head"><div class="panel-title">Purchasing Power Results</div></div>
+<div class="panel-body">
+<div class="result-hero">
+<div class="result-val" id="resultVal">$0</div>
+<div class="result-label" id="resultLabel">equivalent in 2026</div>
+<div class="result-sub" id="resultSub"></div>
+</div>
+<div class="stats-grid">
+<div class="stat-card"><div class="stat-val" id="totalInflation" style="color:var(--red)">0%</div><div class="stat-label">Total Inflation</div></div>
+<div class="stat-card"><div class="stat-val" id="annualRate" style="color:var(--yellow)">0%</div><div class="stat-label">Avg Annual Rate</div></div>
+<div class="stat-card"><div class="stat-val" id="purchasingPower" style="color:var(--red)">$0</div><div class="stat-label">Purchasing Power Lost</div></div>
+<div class="stat-card"><div class="stat-val" id="powerPct" style="color:var(--green)">0%</div><div class="stat-label">Power Retained</div></div>
+</div>
+<div class="examples-section">
+<div class="examples-title">What $100 could buy then vs now</div>
+<div id="examplesRows"></div>
+</div>
+<div class="decade-chart">
+<div class="decade-title">Cumulative Inflation by Decade</div>
+<div id="decadeChart"></div>
+</div>
+<div class="ad-slot">Advertisement · Google AdSense</div>
+</div></div></div></div>
+<div style="max-width:900px;margin:0 auto;padding:0 1.5rem"><div class="ad-slot">Advertisement · 728x90 · Google AdSense</div></div>
+<div class="how-section"><h2>How to use the inflation calculator</h2>
+<div class="how-grid">
+<div class="how-card"><div class="how-num">1</div><h3>Enter an amount</h3><p>Type any dollar amount you want to adjust for inflation.</p></div>
+<div class="how-card"><div class="how-num">2</div><h3>Select your years</h3><p>Choose a from year and to year. The calculator uses historical US CPI data going back to 1913.</p></div>
+<div class="how-card"><div class="how-num">3</div><h3>See the impact</h3><p>See the equivalent amount in the target year, total inflation, average annual rate, and how much purchasing power was lost.</p></div>
+</div></div>
+<div class="faq-section"><h2>Frequently asked questions</h2>
+<div class="faq-item"><div class="faq-q">What is inflation?</div><div class="faq-a">Inflation is the rate at which the general level of prices for goods and services rises over time, causing purchasing power to fall. The US Federal Reserve targets 2% annual inflation as a healthy level for the economy.</div></div>
+<div class="faq-item"><div class="faq-q">What data does this calculator use?</div><div class="faq-a">This calculator uses US Consumer Price Index (CPI) data, which measures the average change in prices paid by urban consumers for a basket of goods and services. CPI data is published by the Bureau of Labor Statistics.</div></div>
+<div class="faq-item"><div class="faq-q">Is this calculator free?</div><div class="faq-a">Yes — completely free with no account or signup required.</div></div>
+</div>
+<footer><p>&copy; 2025 CalcHive &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a><br>
+Also try: <a href="/compound-interest-calculator.html">Compound Interest</a> &middot; <a href="/retirement-calculator.html">Retirement Calculator</a></p></footer>
+<script>
+// Historical CPI values (approximate annual averages, base year = 1982-84 = 100)
+var CPI = {
+  1913:9.9,1914:10.0,1915:10.1,1916:10.9,1917:12.8,1918:15.1,1919:17.3,1920:20.0,
+  1921:17.9,1922:16.8,1923:17.1,1924:17.1,1925:17.5,1926:17.7,1927:17.4,1928:17.1,
+  1929:17.1,1930:16.7,1931:15.2,1932:13.7,1933:13.0,1934:13.4,1935:13.7,1936:13.9,
+  1937:14.4,1938:14.1,1939:13.9,1940:14.0,1941:14.7,1942:16.3,1943:17.3,1944:17.6,
+  1945:18.0,1946:19.5,1947:22.3,1948:24.1,1949:23.8,1950:24.1,1951:26.0,1952:26.5,
+  1953:26.7,1954:26.9,1955:26.8,1956:27.2,1957:28.1,1958:28.9,1959:29.1,1960:29.6,
+  1961:29.9,1962:30.2,1963:30.6,1964:31.0,1965:31.5,1966:32.4,1967:33.4,1968:34.8,
+  1969:36.7,1970:38.8,1971:40.5,1972:41.8,1973:44.4,1974:49.3,1975:53.8,1976:56.9,
+  1977:60.6,1978:65.2,1979:72.6,1980:82.4,1981:90.9,1982:96.5,1983:99.6,1984:103.9,
+  1985:107.6,1986:109.6,1987:113.6,1988:118.3,1989:124.0,1990:130.7,1991:136.2,1992:140.3,
+  1993:144.5,1994:148.2,1995:152.4,1996:156.9,1997:160.5,1998:163.0,1999:166.6,2000:172.2,
+  2001:177.1,2002:179.9,2003:184.0,2004:188.9,2005:195.3,2006:201.6,2007:207.3,2008:215.3,
+  2009:214.5,2010:218.1,2011:224.9,2012:229.6,2013:233.0,2014:236.7,2015:237.0,2016:240.0,
+  2017:245.1,2018:251.1,2019:255.7,2020:258.8,2021:270.9,2022:292.7,2023:304.7,2024:314.5,
+  2025:319.8,2026:325.0
+};
+
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+function fmtD(n){return '$'+(Math.round(n*100)/100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',');}
+
+function calc(){
+  var amount=parseFloat(document.getElementById('amount').value)||0;
+  var fromY=parseInt(document.getElementById('fromYear').value)||2000;
+  var toY=parseInt(document.getElementById('toYear').value)||2026;
+  var customRate=parseFloat(document.getElementById('customRate').value)||0;
+  fromY=Math.max(1913,Math.min(2026,fromY));
+  toY=Math.max(1913,Math.min(2026,toY));
+  var years=Math.abs(toY-fromY);
+  var equivalent,totalInfl,annualRate;
+  if(customRate>0){
+    var factor=Math.pow(1+customRate/100,years);
+    equivalent=fromY<toY?amount*factor:amount/factor;
+    totalInfl=(factor-1)*100*(fromY<toY?1:-1);
+    annualRate=customRate*(fromY<toY?1:-1);
+  } else {
+    var cpiFrom=CPI[fromY]||CPI[2000];
+    var cpiTo=CPI[toY]||CPI[2026];
+    equivalent=amount*(cpiTo/cpiFrom);
+    totalInfl=((cpiTo-cpiFrom)/cpiFrom*100);
+    annualRate=years>0?(Math.pow(cpiTo/cpiFrom,1/years)-1)*100:0;
+  }
+  var powerLost=Math.max(0,equivalent-amount);
+  var powerRetained=equivalent>0?(amount/equivalent*100):0;
+  document.getElementById('resultVal').textContent=fmtD(equivalent);
+  document.getElementById('resultLabel').textContent='$'+amount.toLocaleString()+' in '+fromY+' equals this in '+toY;
+  document.getElementById('resultSub').textContent='Prices '+(totalInfl>=0?'increased':'decreased')+' '+Math.abs(totalInfl).toFixed(1)+'% over '+years+' years';
+  document.getElementById('totalInflation').textContent=(totalInfl>=0?'+':'')+totalInfl.toFixed(1)+'%';
+  document.getElementById('annualRate').textContent=(annualRate>=0?'+':'')+annualRate.toFixed(2)+'%/yr';
+  document.getElementById('purchasingPower').textContent=fmt(powerLost);
+  document.getElementById('powerPct').textContent=Math.min(100,powerRetained).toFixed(0)+'%';
+
+  // Examples
+  var examples=[
+    {item:'Gallon of milk',then:3.5},
+    {item:'Loaf of bread',then:2.5},
+    {item:'Movie ticket',then:8},
+    {item:'Dozen eggs',then:2},
+    {item:'Gallon of gas',then:3},
+  ];
+  var cpiFrom2=CPI[fromY]||CPI[2000],cpiTo2=CPI[toY]||CPI[2026];
+  document.getElementById('examplesRows').innerHTML=examples.map(function(e){
+    var now=e.then*(cpiTo2/cpiFrom2);
+    return '<div class="example-row">'+
+      '<span class="example-item">'+e.item+'</span>'+
+      '<span class="example-then">$'+e.then.toFixed(2)+' ('+fromY+')</span>'+
+      '<span class="example-now">$'+now.toFixed(2)+' ('+toY+')</span>'+
+    '</div>';
+  }).join('');
+
+  // Decade chart
+  var decades=[1920,1930,1940,1950,1960,1970,1980,1990,2000,2010,2020];
+  var decadeInfls=decades.map(function(yr){
+    var c1=CPI[yr]||1,c2=CPI[Math.min(yr+10,2026)]||1;
+    return{yr:yr,infl:((c2-c1)/c1*100)};
+  });
+  var maxInfl=Math.max.apply(null,decadeInfls.map(function(d){return Math.abs(d.infl);}));
+  document.getElementById('decadeChart').innerHTML=decadeInfls.map(function(d){
+    return '<div class="decade-row">'+
+      '<span class="decade-label">'+d.yr+'s</span>'+
+      '<div class="decade-bar-wrap"><div class="decade-bar" style="width:'+(Math.abs(d.infl)/maxInfl*100)+'%"></div></div>'+
+      '<span class="decade-val">'+d.infl.toFixed(0)+'%</span>'+
+    '</div>';
+  }).join('');
+}
+var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');
+if(_mb&&_dd){
+  _mb.addEventListener('click',function(e){e.stopPropagation();_dd.classList.toggle('open');});
+  document.addEventListener('click',function(){_dd.classList.remove('open');});
+}
+calc();
+</script>
+</body>
+</html>
