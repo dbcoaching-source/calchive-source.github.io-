@@ -107,7 +107,7 @@ footer a{color:var(--accent2);text-decoration:none}
   <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
   <li><a href="/loan-calculator.html">Loan</a></li>
   <li><a href="/budget-planner.html">Budget</a></li>
-      <li class="dropdown">
+        <li class="dropdown">
     <button class="more-btn">More &#9660;</button>
     <div class="dropdown-menu">
       <a href="/savings-goal-calculator.html">Savings Goal</a>
@@ -130,6 +130,11 @@ footer a{color:var(--accent2);text-decoration:none}
       <a href="/401k-calculator.html">401k Calculator</a>
       <a href="/salary-comparison-calculator.html">Salary Comparison</a>
       <a href="/inflation-calculator.html">Inflation Calculator</a>
+      <a href="/mortgage-refinance-calculator.html">Refinance Calculator</a>
+      <a href="/dividend-calculator.html">Dividend Calculator</a>
+      <a href="/savings-rate-calculator.html">Savings Rate</a>
+      <a href="/debt-to-income-calculator.html">Debt-to-Income</a>
+      <a href="/paycheck-calculator.html">Paycheck Calculator</a>
     </div>
   </li>
 </ul>
@@ -205,8 +210,6 @@ function monthsToStr(m){var y=Math.floor(m/12),mo=m%12,p=[];if(y>0)p.push(y+' yr
 function getDate(m){var d=new Date();d.setMonth(d.getMonth()+Math.ceil(m));var mn=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return mn[d.getMonth()]+' '+d.getFullYear();}
 function setStrategy(s){
   strategy=s;
-  document.getElementById('tabSnowball').classList.toggle('active',s==='snowball');
-  document.getElementById('tabAvalanche').classList.toggle('active',s==='avalanche');
 }
 function renderTable(){
   var tbody=document.getElementById('debtTableBody');
@@ -300,6 +303,9 @@ calculate();
 
 
 
+
+if(_mb&&_dd){
+}
 
 var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');
 if(_mb&&_dd){

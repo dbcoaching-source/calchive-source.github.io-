@@ -92,7 +92,7 @@ footer a{color:var(--accent2);text-decoration:none}
   <li><a href="/loan-calculator.html">Loan</a></li>
   <li><a href="/car-loan-calculator.html">Car Loan</a></li>
   <li><a href="/student-loan-calculator.html">Student Loan</a></li>
-      <li class="dropdown">
+        <li class="dropdown">
     <button class="more-btn">More &#9660;</button>
     <div class="dropdown-menu">
       <a href="/savings-goal-calculator.html">Savings Goal</a>
@@ -115,6 +115,11 @@ footer a{color:var(--accent2);text-decoration:none}
       <a href="/401k-calculator.html">401k Calculator</a>
       <a href="/salary-comparison-calculator.html">Salary Comparison</a>
       <a href="/inflation-calculator.html">Inflation Calculator</a>
+      <a href="/mortgage-refinance-calculator.html">Refinance Calculator</a>
+      <a href="/dividend-calculator.html">Dividend Calculator</a>
+      <a href="/savings-rate-calculator.html">Savings Rate</a>
+      <a href="/debt-to-income-calculator.html">Debt-to-Income</a>
+      <a href="/paycheck-calculator.html">Paycheck Calculator</a>
     </div>
   </li>
 </ul>
@@ -240,7 +245,6 @@ function calc(){
     if(p.ibr){pmt=Math.max(0,discretionary*0.1/12);var b2=balance,m2=0,in2=0;while(b2>0.01&&m2<300){var ii=b2*mr;in2+=ii;b2=b2+ii-pmt;if(b2<0)b2=0;m2++;}ti=in2;}
     else if(p.factor){pmt=calcPayment(balance,rate,p.months)*p.factor;ti=pmt*p.months-balance;}
     else{pmt=calcPayment(balance,rate,p.months);ti=pmt*p.months-balance;}
-    return '<div class="repay-card'+(i===0?' active':'')+'" onclick="document.querySelectorAll(\'.repay-card\').forEach(function(c){c.classList.remove(\'active\')});this.classList.add(\'active\')">'+
       '<div class="repay-name">'+p.name+'</div>'+
       '<div class="repay-desc">'+p.desc+'</div>'+
       '<div class="repay-payment">'+fmt(pmt)+'/mo · '+fmt(Math.max(0,ti))+' interest</div>'+
@@ -249,6 +253,9 @@ function calc(){
 }
 calc();
 
+
+if(_mb&&_dd){
+}
 
 var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');
 if(_mb&&_dd){
