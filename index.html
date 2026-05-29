@@ -65,7 +65,7 @@ footer a{color:var(--accent2);text-decoration:none}
   <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
   <li><a href="/loan-calculator.html">Loan</a></li>
   <li><a href="/budget-planner.html">Budget</a></li>
-    <li class="dropdown">
+      <li class="dropdown">
     <button class="more-btn">More &#9660;</button>
     <div class="dropdown-menu">
       <a href="/savings-goal-calculator.html">Savings Goal</a>
@@ -83,6 +83,11 @@ footer a{color:var(--accent2);text-decoration:none}
       <a href="/hourly-to-salary-calculator.html">Hourly to Salary</a>
       <a href="/break-even-calculator.html">Break Even</a>
       <a href="/invoice-generator.html">Invoice Generator</a>
+      <a href="/currency-converter.html">Currency Converter</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/401k-calculator.html">401k Calculator</a>
+      <a href="/salary-comparison-calculator.html">Salary Comparison</a>
+      <a href="/inflation-calculator.html">Inflation Calculator</a>
     </div>
   </li>
 </ul>
@@ -102,7 +107,7 @@ footer a{color:var(--accent2);text-decoration:none}
 </div>
 
 <div class="main">
-  <div class="section-title">All 19 Calculators</div>
+  <div class="section-title">All 24 Calculators</div>
   <p class="section-sub">Every calculator is free, works instantly, and requires no account or signup.</p>
   <div class="calc-grid">
     <a href="/mortgage-calculator.html" class="calc-card"><div class="calc-icon">&#127968;</div><div class="calc-name">Mortgage Calculator</div><div class="calc-desc">Monthly payments, total interest, and full amortization schedule for any home loan.</div><div class="calc-arrow">Calculate →</div></a>
@@ -124,6 +129,11 @@ footer a{color:var(--accent2);text-decoration:none}
     <a href="/hourly-to-salary-calculator.html" class="calc-card"><div class="calc-icon">&#128181;</div><div class="calc-name">Hourly to Salary</div><div class="calc-desc">Convert any hourly wage to annual, monthly, weekly, and daily salary.</div><div class="calc-arrow">Calculate →</div></a>
     <a href="/break-even-calculator.html" class="calc-card"><div class="calc-icon">&#128200;</div><div class="calc-name">Break Even Calculator</div><div class="calc-desc">Find how many units you need to sell to cover your costs and turn a profit.</div><div class="calc-arrow">Calculate →</div></a>
     <a href="/invoice-generator.html" class="calc-card"><div class="calc-icon">&#128196;</div><div class="calc-name">Invoice Generator</div><div class="calc-desc">Create professional invoices instantly. Print or save as PDF for free.</div><div class="calc-arrow">Generate →</div></a>
+    <a href="/currency-converter.html" class="calc-card"><div class="calc-icon">&#127760;</div><div class="calc-name">Currency Converter</div><div class="calc-desc">Convert between 30+ world currencies instantly with live reference rates.</div><div class="calc-arrow">Convert →</div></a>
+    <a href="/roi-calculator.html" class="calc-card"><div class="calc-icon">&#128200;</div><div class="calc-name">ROI Calculator</div><div class="calc-desc">Calculate return on investment for any project, campaign, or business decision.</div><div class="calc-arrow">Calculate →</div></a>
+    <a href="/401k-calculator.html" class="calc-card"><div class="calc-icon">&#127381;</div><div class="calc-name">401k Calculator</div><div class="calc-desc">Project your 401k balance at retirement including employer match and compound growth.</div><div class="calc-arrow">Calculate →</div></a>
+    <a href="/salary-comparison-calculator.html" class="calc-card"><div class="calc-icon">&#128188;</div><div class="calc-name">Salary Comparison</div><div class="calc-desc">Compare two job offers side by side with true total compensation including benefits.</div><div class="calc-arrow">Compare →</div></a>
+    <a href="/inflation-calculator.html" class="calc-card"><div class="calc-icon">&#128185;</div><div class="calc-name">Inflation Calculator</div><div class="calc-desc">See how inflation erodes purchasing power using historical CPI data back to 1913.</div><div class="calc-arrow">Calculate →</div></a>
   </div>
   <div class="ad-slot">Advertisement · Google AdSense</div>
 </div>
@@ -151,8 +161,12 @@ footer a{color:var(--accent2);text-decoration:none}
   <p>&copy; 2025 CalcHive &middot; <a href="#">Privacy Policy</a> &middot; <a href="#">Terms of Use</a> &middot; <a href="#">Contact</a></p>
 </footer>
 <script>
+
 var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');
-if(_mb&&_dd){_mb.onclick=function(e){e.stopPropagation();_dd.classList.toggle('open');};document.onclick=function(){_dd.classList.remove('open');};}
+if(_mb&&_dd){
+  _mb.addEventListener('click',function(e){e.stopPropagation();_dd.classList.toggle('open');});
+  document.addEventListener('click',function(){_dd.classList.remove('open');});
+}
 </script>
 </body>
 </html>

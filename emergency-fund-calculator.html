@@ -106,7 +106,7 @@ footer a{color:var(--accent2);text-decoration:none}
   <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
   <li><a href="/loan-calculator.html">Loan</a></li>
   <li><a href="/budget-planner.html">Budget</a></li>
-    <li class="dropdown">
+      <li class="dropdown">
     <button class="more-btn">More &#9660;</button>
     <div class="dropdown-menu">
       <a href="/savings-goal-calculator.html">Savings Goal</a>
@@ -124,6 +124,11 @@ footer a{color:var(--accent2);text-decoration:none}
       <a href="/hourly-to-salary-calculator.html">Hourly to Salary</a>
       <a href="/break-even-calculator.html">Break Even</a>
       <a href="/invoice-generator.html">Invoice Generator</a>
+      <a href="/currency-converter.html">Currency Converter</a>
+      <a href="/roi-calculator.html">ROI Calculator</a>
+      <a href="/401k-calculator.html">401k Calculator</a>
+      <a href="/salary-comparison-calculator.html">Salary Comparison</a>
+      <a href="/inflation-calculator.html">Inflation Calculator</a>
     </div>
   </li>
 </ul>
@@ -270,7 +275,12 @@ calc();
 
 
 
-var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');if(_mb&&_dd){_mb.addEventListener('click',function(e){e.stopPropagation();_dd.classList.toggle('open');});document.addEventListener('click',function(){_dd.classList.remove('open');});}
+
+var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');
+if(_mb&&_dd){
+  _mb.addEventListener('click',function(e){e.stopPropagation();_dd.classList.toggle('open');});
+  document.addEventListener('click',function(){_dd.classList.remove('open');});
+}
 </script>
 </body>
 </html>
