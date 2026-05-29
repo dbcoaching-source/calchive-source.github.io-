@@ -8,13 +8,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous">
-  var dd = document.querySelector('.dropdown');
-  if (dd) {
-    dd.querySelector('.more-btn').addEventListener('click', function(e) {
-      e.stopPropagation();
-      dd.classList.toggle('open');
-    });
-    document.addEventListener('click', function() { dd.classList.remove('open'); });
   }
 </script>
 <style>
@@ -191,6 +184,7 @@ footer a{color:var(--accent2);text-decoration:none}
 </div>
 <p>&copy; 2025 CalcHive &middot; <a href="#">Privacy Policy</a> &middot; <a href="#">Terms of Use</a> &middot; <a href="#">Contact</a></p>
 </footer>
+
 
 <script>
 document.querySelector('.more-btn').addEventListener('click', function(e) {

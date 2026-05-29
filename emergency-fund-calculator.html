@@ -256,16 +256,9 @@ function calc(){
   document.getElementById('buildInterest').textContent=fmt(interest);
 }
 calc();
-
-  var dd = document.querySelector('.dropdown');
-  if (dd) {
-    dd.querySelector('.more-btn').addEventListener('click', function(e) {
-      e.stopPropagation();
-      dd.classList.toggle('open');
-    });
-    document.addEventListener('click', function() { dd.classList.remove('open'); });
   }
 </script>
+
 
 <script>
 document.querySelector('.more-btn').addEventListener('click', function(e) {
