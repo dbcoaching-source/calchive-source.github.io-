@@ -363,15 +363,8 @@ buildSections();
 
 
 
-var moreBtn=document.querySelector('.more-btn');
-var ddMenu=document.querySelector('.dropdown');
-if(moreBtn&&ddMenu){
-  moreBtn.addEventListener('click',function(e){e.stopPropagation();ddMenu.classList.toggle('open');});
-  document.addEventListener('click',function(){ddMenu.classList.remove('open');});
-}
-
-var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');
-if(_mb&&_dd){_mb.onclick=function(e){e.stopPropagation();_dd.classList.toggle('open');};document.onclick=function(){_dd.classList.remove('open');};}
+;document.onclick=function(){_dd.classList.remove('open');};}
+var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');if(_mb&&_dd){_mb.onclick=function(e){e.stopPropagation();_dd.classList.toggle('open');};document.onclick=function(){_dd.classList.remove('open');};}
 </script>
 </body>
 </html>

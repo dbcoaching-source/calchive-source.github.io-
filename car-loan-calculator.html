@@ -219,10 +219,8 @@ function calc(){
     '</div>';
   }).join('');
 }
-var moreBtn=document.querySelector('.more-btn');
-var dropdown=document.querySelector('.dropdown');
-if(moreBtn&&dropdown){moreBtn.addEventListener('click',function(e){e.stopPropagation();dropdown.classList.toggle('open');});document.addEventListener('click',function(){dropdown.classList.remove('open');});}
 calc();
+var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');if(_mb&&_dd){_mb.onclick=function(e){e.stopPropagation();_dd.classList.toggle('open');};document.onclick=function(){_dd.classList.remove('open');};}
 </script>
 </body>
 </html>
