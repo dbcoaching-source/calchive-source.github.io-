@@ -15,8 +15,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
 .logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem}
 .logo span{color:var(--accent)}
-.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500}
-.nav-links a{color:var(--muted);text-decoration:none}
 .nav-links a:hover{color:var(--text)}
 .hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
 .hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
@@ -88,18 +86,22 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 .faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
 footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted)}
 footer a{color:var(--accent2);text-decoration:none}
-@media(max-width:700px){.main{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.how-grid{grid-template-columns:1fr}.nav-links{display:none}.compare-grid{grid-template-columns:1fr 1fr}}
 
-  .nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
-  .nav-links a{color:var(--muted);text-decoration:none;transition:color .15s}
   .nav-links a:hover{color:var(--text)}
-  .dropdown{position:relative}
-  .more-btn{background:none;border:none;color:var(--muted);font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif;transition:color .15s}
   .more-btn:hover{color:var(--text)}
-  .dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 0;min-width:190px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.4)}
   .dropdown-menu a{display:block;padding:8px 16px;color:var(--muted);text-decoration:none;font-size:.82rem;transition:all .15s}
   .dropdown-menu a:hover{color:var(--text);background:var(--surface2)}
-  .dropdown.open .dropdown-menu{display:block}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--text)}
+.dropdown{position:relative}
+.more-btn{background:none;border:none;color:var(--muted);font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif;transition:color .15s}
+.more-btn:hover{color:var(--text)}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 0;min-width:210px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.dropdown-menu a{display:block;padding:9px 16px;color:var(--muted);text-decoration:none;font-size:.82rem;transition:all .15s}
+.dropdown-menu a:hover{color:var(--text);background:var(--surface2)}
+.dropdown.open .dropdown-menu{display:block}
+@media(max-width:700px){.nav-links{display:none}}
 </style>
 </head>
 <body>
@@ -111,7 +113,7 @@ footer a{color:var(--accent2);text-decoration:none}
   <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
   <li><a href="/loan-calculator.html">Loan</a></li>
   <li><a href="/budget-planner.html">Budget</a></li>
-    <li class="dropdown">
+  <li class="dropdown">
     <button class="more-btn">More &#9660;</button>
     <div class="dropdown-menu">
       <a href="/savings-goal-calculator.html">Savings Goal</a>
@@ -349,17 +351,13 @@ function toggleAmort(){ showAll=!showAll; renderAmort(); }
 
 calc();
 
-// Dropdown nav
-var moreBtn = document.querySelector('.more-btn');
-var dropdown = document.querySelector('.dropdown');
-if (moreBtn && dropdown) {
-  moreBtn.addEventListener('click', function(e) {
-    e.stopPropagation();
-    dropdown.classList.toggle('open');
-  });
-  document.addEventListener('click', function() {
-    dropdown.classList.remove('open');
-  });
+
+
+var moreBtn=document.querySelector('.more-btn');
+var ddMenu=document.querySelector('.dropdown');
+if(moreBtn&&ddMenu){
+  moreBtn.addEventListener('click',function(e){e.stopPropagation();ddMenu.classList.toggle('open');});
+  document.addEventListener('click',function(){ddMenu.classList.remove('open');});
 }
 </script>
 </body>
