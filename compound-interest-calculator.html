@@ -308,18 +308,19 @@ function calc(){
 
 calc();
   }
-</script>
 
-
-<script>
-document.querySelector('.more-btn').addEventListener('click', function(e) {
-  e.stopPropagation();
-  document.querySelector('.dropdown').classList.toggle('open');
-});
-document.addEventListener('click', function() {
-  var dd = document.querySelector('.dropdown');
-  if (dd) dd.classList.remove('open');
-});
+// Dropdown nav
+var moreBtn = document.querySelector('.more-btn');
+var dropdown = document.querySelector('.dropdown');
+if (moreBtn && dropdown) {
+  moreBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    dropdown.classList.toggle('open');
+  });
+  document.addEventListener('click', function() {
+    dropdown.classList.remove('open');
+  });
+}
 </script>
 </body>
 </html>
