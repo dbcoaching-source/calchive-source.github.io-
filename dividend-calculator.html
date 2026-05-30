@@ -79,6 +79,14 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem
 footer a{color:var(--accent2);text-decoration:none}
 @media(max-width:700px){.main{grid-template-columns:1fr}.income-breakdown{grid-template-columns:1fr 1fr}}
 </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3ZP51PBFPZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-3ZP51PBFPZ');
+</script>
 </head>
 <body>
 <header>
@@ -89,14 +97,16 @@ footer a{color:var(--accent2);text-decoration:none}
   <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
   <li><a href="/investment-return-calculator.html">Investment Return</a></li>
   <li><a href="/retirement-calculator.html">Retirement</a></li>
-  <li class="dropdown">
+    <li class="dropdown">
     <button class="more-btn">More &#9660;</button>
     <div class="dropdown-menu">
       <a href="/savings-goal-calculator.html">Savings Goal</a>
       <a href="/credit-card-payoff-calculator.html">Credit Card Payoff</a>
+      <a href="/retirement-calculator.html">Retirement</a>
       <a href="/net-worth-calculator.html">Net Worth</a>
       <a href="/debt-snowball-calculator.html">Debt Snowball</a>
       <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+      <a href="/investment-return-calculator.html">Investment Return</a>
       <a href="/rent-vs-buy-calculator.html">Rent vs Buy</a>
       <a href="/car-loan-calculator.html">Car Loan</a>
       <a href="/student-loan-calculator.html">Student Loan</a>
@@ -110,7 +120,8 @@ footer a{color:var(--accent2);text-decoration:none}
       <a href="/401k-calculator.html">401k Calculator</a>
       <a href="/salary-comparison-calculator.html">Salary Comparison</a>
       <a href="/inflation-calculator.html">Inflation Calculator</a>
-      <a href="/mortgage-refinance-calculator.html">Refinance</a>
+      <a href="/mortgage-refinance-calculator.html">Refinance Calculator</a>
+      <a href="/dividend-calculator.html">Dividend Calculator</a>
       <a href="/savings-rate-calculator.html">Savings Rate</a>
       <a href="/debt-to-income-calculator.html">Debt-to-Income</a>
       <a href="/paycheck-calculator.html">Paycheck Calculator</a>
@@ -254,12 +265,15 @@ function calc(){
       '<span class="drip-val">'+Math.round(d.shares).toLocaleString()+' sh</span></div>';
   }).join('');
 }
+if(_mb&&_dd){
+}
+calc();
+
 var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');
 if(_mb&&_dd){
   _mb.addEventListener('click',function(e){e.stopPropagation();_dd.classList.toggle('open');});
   document.addEventListener('click',function(){_dd.classList.remove('open');});
 }
-calc();
 </script>
 </body>
 </html>

@@ -69,6 +69,14 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem
 footer a{color:var(--accent2);text-decoration:none}
 @media(max-width:700px){.main{grid-template-columns:1fr}}
 </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3ZP51PBFPZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-3ZP51PBFPZ');
+</script>
 </head>
 <body>
 <header>
@@ -79,7 +87,7 @@ footer a{color:var(--accent2);text-decoration:none}
   <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
   <li><a href="/loan-calculator.html">Loan</a></li>
   <li><a href="/budget-planner.html">Budget</a></li>
-  <li class="dropdown">
+    <li class="dropdown">
     <button class="more-btn">More &#9660;</button>
     <div class="dropdown-menu">
       <a href="/savings-goal-calculator.html">Savings Goal</a>
@@ -228,12 +236,15 @@ function calc(){
     return '<tr><td>'+r.label+'</td><td class="old-val">'+fmt(r.old)+'</td><td class="new-val">'+fmt(r.nw)+'</td><td class="'+(diff<=0?'diff-pos':'diff-neg')+'">'+(diff<=0?'-':'+')+fmt(diff)+'</td></tr>';
   }).join('');
 }
+if(_mb&&_dd){
+}
+calc();
+
 var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');
 if(_mb&&_dd){
   _mb.addEventListener('click',function(e){e.stopPropagation();_dd.classList.toggle('open');});
   document.addEventListener('click',function(){_dd.classList.remove('open');});
 }
-calc();
 </script>
 </body>
 </html>
