@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Annuity vs Lump Sum Calculator | Buy an Annuity or Invest? | CalcHive</title>
+<meta name="description" content="Should you buy a lifetime annuity or invest the lump sum yourself? Free calculator compares payout rate, break-even age, and the return you'd need to match the annuity.">
+<link rel="canonical" href="https://calchive.co/annuity-vs-lump-sum-calculator.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3ZP51PBFPZ"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3ZP51PBFPZ');</script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--green-dim:#16a34a;--yellow:#eab308;--red:#ef4444;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:#f1f5f9}
+.logo a{text-decoration:none;color:inherit}
+.logo span{color:#3b82f6}
+header{background:#1a1d27;border-bottom:1px solid #2e3347;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:200}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
+.nav-links a{color:#94a3b8;text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:#f1f5f9}
+.nav-more-btn{background:none;border:none;color:#94a3b8;font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif}
+.nav-more-btn:hover{color:#f1f5f9}
+.mega-overlay{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:150}
+.mega-menu{display:none;position:fixed;top:64px;left:0;right:0;background:#1a1d27;border-bottom:2px solid #3b82f6;z-index:160;padding:1.5rem 2rem 2rem;box-shadow:0 8px 32px rgba(0,0,0,.6);max-height:calc(100vh - 64px);overflow-y:auto}
+.mega-menu.open{display:block}
+.mega-overlay.open{display:block}
+.mega-inner{max-width:1200px;margin:0 auto}
+.mega-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid #2e3347}
+.mega-title{font-family:'Playfair Display',serif;font-weight:900;font-size:1.1rem;color:#f1f5f9}
+.mega-all-link{color:#60a5fa;text-decoration:none;font-size:.82rem;font-weight:600}
+.mega-close{background:none;border:none;color:#94a3b8;font-size:1.2rem;cursor:pointer;padding:0;line-height:1}
+.mega-close:hover{color:#f1f5f9}
+.mega-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem}
+.mega-col h3{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#3b82f6;margin-bottom:.6rem}
+.mega-col a{display:block;color:#94a3b8;text-decoration:none;font-size:.8rem;padding:3px 0}
+.mega-col a:hover{color:#60a5fa}
+@media(max-width:800px){.nav-links{display:none}}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,2.75rem);margin-bottom:.75rem}
+.hero h1 span{color:var(--accent2)}
+.hero-sub{font-size:.95rem;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.6}
+.main{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:380px 1fr;gap:2rem;align-items:start}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.25rem}
+.panel:last-child{margin-bottom:0}
+.panel-head{background:var(--surface);border-bottom:1px solid var(--border);padding:1rem 1.5rem;font-weight:700;font-size:.95rem;font-family:'Playfair Display',serif;display:flex;align-items:center;gap:.5rem}
+.panel-head .icon{font-size:1.1rem}
+.panel-body{padding:1.5rem}
+.field{margin-bottom:1.1rem}
+.field label{display:block;font-size:.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+.field-hint{font-size:.7rem;color:var(--muted);margin-top:.25rem;opacity:.8}
+.input-prefix{position:relative;display:flex;align-items:center}
+.input-prefix span{position:absolute;left:.75rem;color:var(--muted);font-size:.9rem;font-weight:600;pointer-events:none}
+.input-prefix input{padding-left:1.75rem}
+.input-suffix{position:relative;display:flex;align-items:center}
+.input-suffix span{position:absolute;right:.75rem;color:var(--muted);font-size:.9rem;pointer-events:none}
+.input-suffix input{padding-right:2rem}
+input[type=number],input[type=text],select{width:100%;padding:.65rem .75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.9rem;outline:none;appearance:none}
+input:focus,select:focus{border-color:var(--accent)}
+.radio-group{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.radio-opt{display:flex;align-items:center;gap:.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.6rem .75rem;cursor:pointer;transition:all .15s}
+.radio-opt:hover{border-color:var(--accent)}
+.radio-opt input[type=radio]{width:14px;height:14px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
+.radio-opt span{font-size:.82rem}
+.radio-opt.selected{border-color:var(--accent);background:rgba(59,130,246,.1)}
+.section-divider{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent2);margin:.25rem 0 .75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.875rem 1.5rem;font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;width:100%;transition:background .2s}
+.btn:hover{background:#2563eb}
+.verdict{border-radius:12px;padding:1.5rem;margin-bottom:1.25rem;border:2px solid}
+.verdict.lump{border-color:var(--accent);background:rgba(59,130,246,.08)}
+.verdict.pension{border-color:var(--green);background:rgba(34,197,94,.08)}
+.verdict.neutral{border-color:var(--yellow);background:rgba(234,179,8,.08)}
+.verdict-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem}
+.verdict-title{font-family:'Playfair Display',serif;font-weight:900;font-size:1.5rem;margin-bottom:.4rem}
+.verdict-sub{font-size:.85rem;color:var(--muted);line-height:1.6}
+.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.25rem}
+.metric{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem}
+.metric-label{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.3rem}
+.metric-value{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--text)}
+.metric-sub{font-size:.72rem;color:var(--muted);margin-top:.2rem}
+.metric.highlight .metric-value{color:var(--accent2)}
+.comparison-table{width:100%;border-collapse:collapse;margin-bottom:1.25rem;font-size:.85rem}
+.comparison-table th{background:var(--surface2);padding:.75rem 1rem;text-align:left;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:1px solid var(--border)}
+.comparison-table td{padding:.75rem 1rem;border-bottom:1px solid var(--border);vertical-align:top}
+.comparison-table tr:last-child td{border-bottom:none}
+.comparison-table .lump-col{color:var(--accent2)}
+.comparison-table .pension-col{color:var(--green)}
+.tag{display:inline-block;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-left:.4rem;vertical-align:middle}
+.tag.pro{background:rgba(34,197,94,.15);color:var(--green)}
+.tag.con{background:rgba(239,68,68,.15);color:var(--red)}
+.tag.neutral{background:rgba(234,179,8,.15);color:var(--yellow)}
+.chart-wrap{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.25rem}
+.chart-title{font-size:.78rem;font-weight:600;color:var(--muted);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.06em}
+.factors{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.25rem}
+.factor-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem}
+.factor-title{font-size:.78rem;font-weight:700;margin-bottom:.35rem;display:flex;align-items:center;gap:.35rem}
+.factor-body{font-size:.75rem;color:var(--muted);line-height:1.5}
+.factor-icon{font-size:1rem}
+.disclaimer{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.875rem;font-size:.72rem;color:var(--muted);line-height:1.6;margin-bottom:1.25rem}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted)}
+.faq-section{max-width:1100px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted);margin-top:2rem}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:800px){.main{grid-template-columns:1fr}.metrics-grid{grid-template-columns:1fr 1fr}.factors{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo"><a href="/index.html">Calc<span>Hive</span></a></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/retirement-calculator.html">Retirement</a></li>
+  <li><a href="/pension-lump-sum-calculator.html">Pension</a></li>
+  <li><a href="/401k-calculator.html">401k</a></li>
+  <li><button class="nav-more-btn" id="megaToggle">All Calculators &#9660;</button></li>
+</ul>
+</header>
+<div class="mega-overlay" id="megaOverlay"></div>
+<div class="mega-menu" id="megaMenu">
+<div class="mega-inner">
+<div class="mega-top">
+  <span class="mega-title">All 35 Free Calculators</span>
+  <div style="display:flex;align-items:center;gap:1.5rem">
+    <a class="mega-all-link" href="/tools.html">Browse All Calculators &rarr;</a>
+    <button class="mega-close" id="megaClose">&#x2715;</button>
+  </div>
+</div>
+<div class="mega-grid">
+<div class="mega-col"><h3>Home &amp; Mortgage</h3>
+  <a href="/mortgage-calculator.html">Mortgage Calculator</a>
+  <a href="/mortgage-refinance-calculator.html">Refinance Calculator</a>
+  <a href="/mortgage-payoff-vs-invest-calculator.html">Payoff vs Invest</a>
+  <a href="/rent-vs-buy-calculator.html">Rent vs Buy</a>
+  <h3 style="margin-top:1rem">Loans</h3>
+  <a href="/loan-calculator.html">Loan Calculator</a>
+  <a href="/car-loan-calculator.html">Car Loan</a>
+  <a href="/student-loan-calculator.html">Student Loan</a>
+  <a href="/credit-card-payoff-calculator.html">Credit Card Payoff</a>
+  <a href="/debt-snowball-calculator.html">Debt Snowball</a>
+  <a href="/debt-to-income-calculator.html">Debt-to-Income</a>
+</div>
+<div class="mega-col"><h3>Savings &amp; Investing</h3>
+  <a href="/compound-interest-calculator.html">Compound Interest</a>
+  <a href="/savings-goal-calculator.html">Savings Goal</a>
+  <a href="/savings-rate-calculator.html">Savings Rate</a>
+  <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+  <a href="/investment-return-calculator.html">Investment Return</a>
+  <a href="/dividend-calculator.html">Dividend Calculator</a>
+  <a href="/roi-calculator.html">ROI Calculator</a>
+  <a href="/401k-calculator.html">401k Calculator</a>
+  <a href="/net-worth-calculator.html">Net Worth</a>
+</div>
+<div class="mega-col"><h3>Retirement</h3>
+  <a href="/retirement-calculator.html">Retirement Calculator</a>
+  <a href="/401k-calculator.html">401k Calculator</a>
+  <a href="/pension-lump-sum-calculator.html">Pension: Lump Sum vs Monthly</a>
+  <a href="/social-security-calculator.html">Social Security Age</a>
+  <a href="/annuity-vs-lump-sum-calculator.html">Annuity vs Lump Sum</a>
+  <a href="/roth-conversion-calculator.html">Roth Conversion</a>
+  <a href="/rmd-calculator.html">RMD Calculator</a>
+  <h3 style="margin-top:1rem">Tax &amp; Income</h3>
+  <a href="/tax-bracket-calculator.html">Tax Bracket</a>
+  <a href="/paycheck-calculator.html">Paycheck Calculator</a>
+  <a href="/hourly-to-salary-calculator.html">Hourly to Salary</a>
+  <a href="/salary-comparison-calculator.html">Salary Comparison</a>
+</div>
+<div class="mega-col"><h3>Budgeting</h3>
+  <a href="/budget-planner.html">Budget Planner</a>
+  <a href="/savings-goal-calculator.html">Savings Goal</a>
+  <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+  <h3 style="margin-top:1rem">Business</h3>
+  <a href="/break-even-calculator.html">Break Even</a>
+  <a href="/invoice-generator.html">Invoice Generator</a>
+  <a href="/roi-calculator.html">ROI Calculator</a>
+</div>
+<div class="mega-col"><h3>Other Tools</h3>
+  <a href="/currency-converter.html">Currency Converter</a>
+  <a href="/inflation-calculator.html">Inflation Calculator</a>
+  <a href="/tip-calculator.html">Tip Calculator</a>
+  <a href="/tools.html" style="color:#60a5fa;font-weight:600;margin-top:.5rem;display:block">View All 35 &rarr;</a>
+</div>
+</div>
+</div>
+</div>
+<div class="hero">
+  <div class="hero-eyebrow">Free &middot; No Signup &middot; Instant Results</div>
+  <h1>Annuity or <span>Invest It Yourself?</span></h1>
+  <p class="hero-sub">An immediate annuity guarantees income for life; investing the lump sum keeps control and flexibility. Compare the payout rate, break-even age, and the return you'd need to beat the annuity.</p>
+</div>
+<div class="main">
+<div class="input-col">
+
+<div class="panel"><div class="panel-head"><span class="icon">&#128176;</span> The Offer</div><div class="panel-body">
+  <div class="field"><label>Lump Sum You Could Invest Instead</label>
+    <div class="input-prefix"><span>$</span><input type="number" id="lump" value="500000" min="0" oninput="calc()"></div>
+    <div class="field-hint">The amount you would put into the annuity, or keep and invest</div></div>
+  <div class="field"><label>Annuity Monthly Payment Quoted</label>
+    <div class="input-prefix"><span>$</span><input type="number" id="payout" value="2950" min="0" oninput="calc()"></div>
+    <div class="field-hint">The guaranteed monthly income the annuity would pay you for life</div></div>
+  <div class="field"><label>Does the Annuity Increase Each Year?</label>
+    <div class="input-suffix"><span>%</span><input type="number" id="annCola" value="0" min="0" max="5" step="0.5" oninput="calc()"></div>
+    <div class="field-hint">Most fixed annuities are level (0%). An inflation rider lowers the starting payment.</div></div>
+</div></div>
+<div class="panel"><div class="panel-head"><span class="icon">&#128100;</span> About You</div><div class="panel-body">
+  <div class="field"><label>Your Current Age</label><input type="number" id="curAge" value="65" min="50" max="90" oninput="calc()"></div>
+  <div class="field"><label>Life Expectancy</label><input type="number" id="lifeExp" value="88" min="65" max="110" oninput="calc()">
+    <div class="field-hint">Annuities win the longer you live; investing wins if life is shorter</div></div>
+  <div class="field"><label>Spouse / Joint Payout?</label>
+    <div class="radio-group"><label class="radio-opt"><input type="radio" name="joint" value="yes" onchange="calc()"><span>Yes</span></label>
+    <label class="radio-opt selected"><input type="radio" name="joint" value="no" checked onchange="calc()"><span>No</span></label></div>
+    <div class="field-hint">If joint, your quoted payout should already reflect both lives</div></div>
+</div></div>
+<div class="panel"><div class="panel-head"><span class="icon">&#128200;</span> Assumptions</div><div class="panel-body">
+  <div class="field"><label>If You Invest Instead: Expected Return</label>
+    <div class="input-suffix"><span>%</span><input type="number" id="ret" value="6" min="0" max="12" step="0.5" oninput="calc()"></div>
+    <div class="field-hint">Conservative 4&ndash;5% &middot; Moderate 6&ndash;7% &middot; Aggressive 8%+</div></div>
+  <div class="field"><label>Inflation Rate</label>
+    <div class="input-suffix"><span>%</span><input type="number" id="infl" value="3" min="0" max="8" step="0.5" oninput="calc()"></div></div>
+  <div class="field"><label>Other Guaranteed Income</label>
+    <select id="other" onchange="calc()">
+      <option value="high">High &mdash; SS + pension cover my needs</option>
+      <option value="medium" selected>Medium &mdash; Social Security only</option>
+      <option value="low">Low &mdash; little guaranteed income</option>
+    </select></div>
+  <div class="field"><label>Health Status</label>
+    <select id="health" onchange="calc()">
+      <option value="excellent">Excellent &mdash; likely to live longer</option>
+      <option value="good" selected>Good &mdash; average</option>
+      <option value="fair">Fair &mdash; some concerns</option>
+      <option value="poor">Poor &mdash; serious concerns</option>
+    </select></div>
+</div></div>
+
+</div>
+<div class="output-col" id="outputCol">
+  <div style="text-align:center;padding:4rem 2rem;color:var(--muted)">
+    <div style="font-size:3rem;margin-bottom:1rem">&#9878;&#65039;</div>
+    <p>Fill in your details on the left to see your full analysis.</p>
+  </div>
+</div>
+</div>
+<div class="ad-slot" style="max-width:1100px;margin:0 auto 1.5rem">Advertisement &middot; Google AdSense</div>
+<div class="faq-section">
+<h2>Frequently asked questions</h2>
+<div class="faq-item"><div class="faq-q">What is the annuity payout rate?</div><div class="faq-a">It is the annual income the annuity pays divided by the lump sum it costs. A $500,000 annuity paying $2,950/month pays $35,400/year, a 7.1% payout rate. Note this is not an interest rate &mdash; it includes return of your own principal plus a 'mortality credit' that pools risk across everyone in the annuity.</div></div>
+<div class="faq-item"><div class="faq-q">How do I know if the payout is competitive?</div><div class="faq-a">Get quotes from several highly-rated insurers (look for A.M. Best ratings of A or better) on the same date, because annuity rates move with interest rates. The calculator's implied figures help, but the real test is comparing identical quotes from multiple carriers for the same age and payout structure.</div></div>
+<div class="faq-item"><div class="faq-q">What return would I need to match the annuity myself?</div><div class="faq-a">The calculator estimates the internal rate of return the annuity delivers if you live to your life expectancy. If you can confidently earn more than that after taxes and fees by investing, doing it yourself may leave you ahead &mdash; but you take on market and longevity risk that the annuity removes.</div></div>
+<div class="faq-item"><div class="faq-q">What's the biggest risk of investing it myself?</div><div class="faq-a">Outliving your money. An annuity guarantees income no matter how long you live or how markets perform. A self-managed portfolio can be depleted by a bad sequence of early returns combined with a long life. That certainty is exactly what you give up for higher expected (but not guaranteed) returns.</div></div>
+<div class="faq-item"><div class="faq-q">What's the biggest downside of an annuity?</div><div class="faq-a">You generally give up access to the principal &mdash; it is no longer a liquid asset you can tap for emergencies or leave to heirs (unless you buy riders that reduce the payout). You also take on the insurer's credit risk, and most fixed annuities have no inflation protection, so level payments lose purchasing power over time.</div></div>
+<div class="faq-item"><div class="faq-q">Should I annuitize everything?</div><div class="faq-a">Rarely. A common approach is to annuitize just enough to cover essential expenses (the 'income floor'), combined with Social Security, and invest the rest for growth and flexibility. This is sometimes called the 'floor and upside' strategy. A fee-only advisor can help size it.</div></div>
+</div>
+<footer>
+<p>&copy; 2026 CalcHive &middot; <a href="/about.html">About</a> &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a> &middot; <a href="/disclaimer.html">Disclaimer</a> &middot; <a href="/contact.html">Contact</a></p>
+<p style="margin-top:.5rem;font-size:.72rem">This calculator is for educational purposes only and does not constitute financial, tax, or investment advice. Consult a qualified professional before making decisions.</p>
+</footer>
+<script>
+
+function fmt(n){return '$'+Math.round(n).toLocaleString();}
+function fmtK(n){if(n<0)return '-'+fmtK(-n);return n>=1000000?'$'+(n/1000000).toFixed(2)+'M':'$'+Math.round(n/1000).toLocaleString()+'K';}
+function fmtPct(n){return n.toFixed(1)+'%';}
+function num(id,d){var v=parseFloat(document.getElementById(id).value);return isNaN(v)?d:v;}
+function val(id){return document.getElementById(id).value;}
+function splitBar(leftLabel,rightLabel,leftPct,leftColor,rightColor){
+  var rightPct=100-leftPct;
+  var h='<div style="margin-top:1rem;display:flex;gap:.5rem;align-items:center;font-size:.78rem">';
+  h+='<span style="color:'+leftColor+';font-weight:700">'+leftLabel+'</span>';
+  h+='<div style="flex:1;background:var(--surface2);border-radius:4px;height:8px;overflow:hidden">';
+  h+='<div style="width:'+leftPct+'%;height:100%;background:'+leftColor+';border-radius:4px"></div></div>';
+  h+='<span style="color:'+rightColor+';font-weight:700">'+rightLabel+'</span></div>';
+  h+='<div style="display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-top:.25rem"><span>'+leftPct+'%</span><span>'+rightPct+'%</span></div>';
+  return h;
+}
+function barChart(title,legend,rows,maxVal){
+  var h='<div class="chart-wrap"><div class="chart-title">'+title+'</div>';
+  h+='<div style="display:flex;gap:1rem;margin-bottom:.75rem;font-size:.75rem;flex-wrap:wrap">'+legend+'</div><div class="chart-bars">';
+  rows.forEach(function(r){
+    h+='<div style="margin-bottom:.5rem"><div style="font-size:.72rem;color:var(--muted);margin-bottom:.25rem">'+r.label+'</div>';
+    r.bars.forEach(function(b){
+      var pct=maxVal>0?Math.max(0,Math.round(b.v/maxVal*100)):0;
+      h+='<div style="display:flex;gap:.5rem;align-items:center;margin-bottom:.2rem">';
+      h+='<div style="width:64px;font-size:.7rem;color:'+b.color+'">'+b.name+'</div>';
+      h+='<div style="flex:1;background:var(--surface2);border-radius:3px;height:16px"><div style="width:'+pct+'%;height:100%;background:'+b.color+';border-radius:3px"></div></div>';
+      h+='<div style="width:72px;font-size:.7rem;text-align:right">'+fmtK(b.v)+'</div></div>';
+    });
+    h+='</div>';
+  });
+  h+='</div></div>';return h;
+}
+function factorCards(factors){
+  var h='<div class="factors">';
+  factors.forEach(function(f){
+    var color=f.favor==='a'?'var(--accent2)':f.favor==='b'?'var(--green)':'var(--yellow)';
+    h+='<div class="factor-card"><div class="factor-title"><span class="factor-icon">'+f.icon+'</span><span style="color:'+color+'">'+f.title+'</span></div>';
+    h+='<div class="factor-body">'+f.body+'</div></div>';
+  });
+  h+='</div>';return h;
+}
+function verdictBox(type,label,labelColor,title,sub,barHtml){
+  var h='<div class="verdict '+type+'">';
+  h+='<div class="verdict-label" style="color:'+labelColor+'">'+label+'</div>';
+  h+='<div class="verdict-title">'+title+'</div>';
+  h+='<div class="verdict-sub">'+sub+'</div>'+(barHtml||'')+'</div>';
+  return h;
+}
+function metricsGrid(items){
+  var h='<div class="metrics-grid">';
+  items.forEach(function(m){
+    h+='<div class="metric'+(m.hl?' highlight':'')+'"><div class="metric-label">'+m.label+'</div><div class="metric-value">'+m.value+'</div>'+(m.sub?'<div class="metric-sub">'+m.sub+'</div>':'')+'</div>';
+  });
+  h+='</div>';return h;
+}
+var DISC='<div class="disclaimer">&#9888; <strong>This is educational, not financial advice.</strong> This tool uses simplified models and assumptions that may not reflect your full situation, current tax law, or market conditions. Consult a fee-only fiduciary advisor (NAPFA.org) or CPA before acting.</div>';
+
+
+function calc(){
+  var lump=num('lump',500000),payout=num('payout',2950),annCola=num('annCola',0);
+  var curAge=num('curAge',65),lifeExp=num('lifeExp',88),ret=num('ret',6),infl=num('infl',3);
+  var joint=document.querySelector('input[name=joint]:checked').value==='yes';
+  var other=val('other'),health=val('health');
+  var years=Math.max(1,lifeExp-curAge),months=years*12;
+  var payoutRate=lump>0?(payout*12/lump*100):0;
+  // present value of annuity payments at a real discount rate
+  var disc=(ret-infl)/100/12; if(disc<=0)disc=0.0005;
+  var pvAnnuity=0,p=payout;
+  for(var m=1;m<=months;m++){ pvAnnuity+=p/Math.pow(1+disc,m); if(m%12===0)p*=(1+annCola/100); }
+  // invest-it-yourself: grow lump, withdraw matching annuity payment, track balance + break-even
+  var bal=lump,mret=ret/100/12,annTot=0,wTot=0,beAge=null,pmt=payout;
+  var invBalances=[lump],annTotals=[0],invTotals=[0];
+  for(var m2=1;m2<=Math.max(months,(110-curAge)*12);m2++){
+    var age=curAge+m2/12, alive=age<=lifeExp;
+    if(alive){ annTot+=pmt; if(m2%12===0)pmt*=(1+annCola/100); }
+    if(bal>0){ bal*=(1+mret); if(alive){var w=Math.min(bal,(alive?payout*Math.pow(1+annCola/100,Math.floor(m2/12)):0)); bal-=w; wTot+=w; } }
+    if(m2%12===0){ invBalances.push(bal); annTotals.push(annTot); invTotals.push(wTot+bal); }
+    if(beAge===null && annTot>(wTot+bal) && alive) beAge=Math.round(age);
+  }
+  var annLifetime=annTotals[Math.min(years,annTotals.length-1)]||annTot;
+  var invLifetime=invTotals[Math.min(years,invTotals.length-1)]||(wTot+bal);
+  var invLeftover=invBalances[Math.min(years,invBalances.length-1)]||bal;
+  // implied IRR of the annuity to life expectancy (bisection: find r where PV(payments)=lump)
+  function pvAt(r){var s=0,pp=payout;for(var m=1;m<=months;m++){s+=pp/Math.pow(1+r,m);if(m%12===0)pp*=(1+annCola/100);}return s;}
+  var lo=-0.02/12,hi=0.20/12,irr=lo;
+  if(pvAt(hi)>lump){irr=hi;} else if(pvAt(lo)<lump){irr=lo;} else {
+    for(var i=0;i<80;i++){var mid=(lo+hi)/2; if(pvAt(mid)>lump)lo=mid;else hi=mid; irr=mid;}
+  }
+  var irrAnnual=(Math.pow(1+irr,12)-1)*100;
+  // scoring: annuity (b) vs invest (a)
+  var inv=0,ann=0;
+  if(beAge===null)inv+=3; else if(beAge>lifeExp)inv+=2; else if(beAge<lifeExp-5)ann+=3; else ann+=1;
+  if(health==='poor'||health==='fair')inv+=2; else if(health==='excellent')ann+=2;
+  if(other==='low')ann+=3; else if(other==='high')inv+=2; else ann+=1;
+  if(payoutRate>=7)ann+=1; if(annCola===0)inv+=1;
+  if(ret-irrAnnual>1.5)inv+=2; else if(irrAnnual-ret>1)ann+=2;
+  var tot=inv+ann, invPct=tot>0?Math.round(inv/tot*100):50, annPct=100-invPct;
+  var vType,vTitle,vlc,vSub;
+  if(invPct>=60){vType='lump';vlc='var(--accent2)';vTitle='Lean Toward Investing It Yourself';
+    vSub='Given your health, other income, and return assumptions, keeping control of the lump sum likely leaves you ahead &mdash; with flexibility and an estate for heirs. The trade-off is taking on market and longevity risk.';}
+  else if(annPct>=60){vType='pension';vlc='var(--green)';vTitle='Lean Toward the Annuity';
+    vSub='Guaranteed lifetime income looks like the stronger choice for you &mdash; especially given your life expectancy, limited other guaranteed income, or the value of removing market risk. You give up liquidity and an inheritance.';}
+  else {vType='neutral';vlc='var(--yellow)';vTitle='It\'s a Close Call';
+    vSub='The numbers are closely matched. A common answer is to split the difference: annuitize enough to cover essential expenses and invest the rest. Consider a fee-only advisor.';}
+  var bar=splitBar('Invest','Annuity',invPct,'var(--accent2)','var(--green)');
+  var html=verdictBox(vType,'Our Analysis',vlc,vTitle,vSub,bar);
+  html+=metricsGrid([
+    {label:'Annuity Payout Rate',value:fmtPct(payoutRate),sub:'Annual income &divide; lump sum',hl:true},
+    {label:'Break-Even Age',value:beAge?('Age '+beAge):'Never',sub:'When annuity total overtakes investing',hl:true},
+    {label:'Annuity Implied Return',value:fmtPct(irrAnnual),sub:'Return it delivers to age '+lifeExp,hl:false},
+    {label:'Return You\'d Need to Beat It',value:fmtPct(irrAnnual),sub:'Net of taxes &amp; fees, to match',hl:false},
+    {label:'Annuity Lifetime Income',value:fmtK(annLifetime),sub:'Total payments to age '+lifeExp,hl:false},
+    {label:'Annuity Fair Value (PV)',value:fmtK(pvAnnuity),sub:'vs lump sum of '+fmtK(lump),hl:false},
+  ]);
+  var maxV=Math.max(annLifetime,invLifetime,lump);
+  html+=barChart('Annuity Income vs Investing the Lump Sum, by Age '+lifeExp,
+    '<span style="color:var(--green)">&#9632; Annuity total income</span><span style="color:var(--accent2)">&#9632; Invest (withdrawals + balance)</span>',
+    [{label:'By your life expectancy',bars:[
+      {name:'Annuity',v:annLifetime,color:'var(--green-dim)'},
+      {name:'Invest',v:invLifetime,color:'var(--accent)'}]}],maxV);
+  html+='<div class="panel"><div class="panel-head"><span class="icon">&#9878;&#65039;</span> Side-by-Side</div><div class="panel-body">';
+  html+='<table class="comparison-table"><thead><tr><th>Factor</th><th class="lump-col">Invest Yourself</th><th class="pension-col">Buy Annuity</th></tr></thead><tbody>';
+  var rows=[
+    ['Income guarantee','<span class="tag con">No</span> Depends on markets','<span class="tag pro">Yes</span> Paid for life'],
+    ['Outliving your money','<span class="tag neutral">Possible</span>','<span class="tag pro">Protected</span>'],
+    ['Access to principal','<span class="tag pro">Full</span> Liquid anytime','<span class="tag con">None</span> Locked in'],
+    ['Leave to heirs','<span class="tag pro">Yes</span> Remaining balance',(joint?'<span class="tag neutral">Joint life</span>':'<span class="tag con">No</span> Ends at death')],
+    ['Inflation protection','<span class="tag pro">Yes</span> Growth can outpace it',(annCola>0?'<span class="tag pro">Yes</span> '+annCola+'% rider':'<span class="tag con">No</span> Level payment')],
+    ['Upside potential','<span class="tag pro">Yes</span>','<span class="tag con">No</span> Fixed'],
+    ['Credit risk','<span class="tag pro">None</span>','<span class="tag neutral">Insurer</span> Check ratings'],
+  ];
+  rows.forEach(function(r){html+='<tr><td><strong>'+r[0]+'</strong></td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>';});
+  html+='</tbody></table></div></div>';
+  var factors=[];
+  if(payoutRate>=7)factors.push({icon:'&#128176;',title:'Strong Payout Rate',body:'A '+payoutRate.toFixed(1)+'% payout is competitive in a higher-rate environment. Still, confirm with multiple A-rated insurer quotes pulled the same day.',favor:'b'});
+  if(annCola===0)factors.push({icon:'&#128201;',title:'No Inflation Protection',body:'A level annuity loses purchasing power every year. At '+infl+'% inflation, today\'s '+fmt(payout)+'/mo is worth far less in 20 years.',favor:'a'});
+  if(health==='poor'||health==='fair')factors.push({icon:'&#127973;',title:'Health Concern',body:'A shorter life expectancy means you may not reach the break-even age, so the annuity\'s lifetime guarantee is worth less to you.',favor:'a'});
+  else if(health==='excellent')factors.push({icon:'&#128170;',title:'Excellent Health',body:'The longer you live, the more the annuity\'s mortality credits pay off. Longevity strongly favors guaranteed income.',favor:'b'});
+  if(other==='low')factors.push({icon:'&#128737;&#65039;',title:'Little Guaranteed Income',body:'With limited other guaranteed income, an annuity can provide a stable floor so a market crash never threatens your essentials.',favor:'b'});
+  else if(other==='high')factors.push({icon:'&#9989;',title:'Income Already Covered',body:'Social Security and other income cover your needs, so the flexibility and upside of investing become more attractive.',favor:'a'});
+  if(factors.length===0)factors.push({icon:'&#9878;&#65039;',title:'Balanced',body:'No single factor dominates. Consider partially annuitizing to cover essentials and investing the remainder.',favor:'neutral'});
+  html+='<div class="panel"><div class="panel-head"><span class="icon">&#127919;</span> Key Factors For You</div><div class="panel-body">'+factorCards(factors)+'</div></div>';
+  html+=DISC;
+  document.getElementById('outputCol').innerHTML=html;
+}
+
+
+document.querySelectorAll('.radio-opt input[type=radio]').forEach(function(r){
+  r.addEventListener('change', function(){
+    var group = this.closest('.radio-group');
+    group.querySelectorAll('.radio-opt').forEach(function(o){o.classList.remove('selected');});
+    this.closest('.radio-opt').classList.add('selected');
+    calc();
+  });
+});
+calc();
+var _mt=document.getElementById('megaToggle'),_mm=document.getElementById('megaMenu'),_mo=document.getElementById('megaOverlay'),_mc=document.getElementById('megaClose');
+function _openMega(){_mm.classList.add('open');_mo.classList.add('open');}
+function _closeMega(){_mm.classList.remove('open');_mo.classList.remove('open');}
+if(_mt)_mt.addEventListener('click',function(e){e.stopPropagation();_mm.classList.contains('open')?_closeMega():_openMega();});
+if(_mc)_mc.addEventListener('click',_closeMega);
+if(_mo)_mo.addEventListener('click',_closeMega);
+document.addEventListener('keydown',function(e){if(e.key==='Escape')_closeMega();});
+
+</script>
+</body>
+</html>
