@@ -12,18 +12,9 @@
 :root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
-.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--text)}.logo span{color:var(--accent)}
-.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
-.nav-links a{color:var(--muted);text-decoration:none}.nav-links a:hover{color:var(--text)}
-.dropdown{position:relative}
-.more-btn{background:none;border:none;color:var(--muted);font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif}
-.more-btn:hover{color:var(--text)}
-.dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 0;min-width:210px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.4)}
-.dropdown-menu a{display:block;padding:9px 16px;color:var(--muted);text-decoration:none;font-size:.82rem}
-.dropdown-menu a:hover{color:var(--text);background:var(--surface2)}
-.dropdown.open .dropdown-menu{display:block}
-@media(max-width:800px){.nav-links{display:none}}
+
+
+
 .hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
 .hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
 .hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin-bottom:.75rem}
@@ -77,6 +68,32 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted)}
 footer a{color:var(--accent2);text-decoration:none}
 @media(max-width:700px){.main{grid-template-columns:1fr}.how-grid{grid-template-columns:1fr}}
+
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:#f1f5f9}
+.logo a{text-decoration:none;color:inherit}
+.logo span{color:#3b82f6}
+header{background:#1a1d27;border-bottom:1px solid #2e3347;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:200}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
+.nav-links a{color:#94a3b8;text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:#f1f5f9}
+.nav-more-btn{background:none;border:none;color:#94a3b8;font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif}
+.nav-more-btn:hover{color:#f1f5f9}
+.mega-overlay{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:150}
+.mega-menu{display:none;position:fixed;top:64px;left:0;right:0;background:#1a1d27;border-bottom:2px solid #3b82f6;z-index:160;padding:1.5rem 2rem 2rem;box-shadow:0 8px 32px rgba(0,0,0,.6);max-height:calc(100vh - 64px);overflow-y:auto}
+.mega-menu.open{display:block}
+.mega-overlay.open{display:block}
+.mega-inner{max-width:1200px;margin:0 auto}
+.mega-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid #2e3347}
+.mega-title{font-family:'Playfair Display',serif;font-weight:900;font-size:1.1rem;color:#f1f5f9}
+.mega-all-link{color:#60a5fa;text-decoration:none;font-size:.82rem;font-weight:600}
+.mega-all-link:hover{text-decoration:underline}
+.mega-close{background:none;border:none;color:#94a3b8;font-size:1.2rem;cursor:pointer;padding:0;line-height:1}
+.mega-close:hover{color:#f1f5f9}
+.mega-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem}
+.mega-col h3{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#3b82f6;margin-bottom:.6rem}
+.mega-col a{display:block;color:#94a3b8;text-decoration:none;font-size:.8rem;padding:3px 0;transition:color .15s}
+.mega-col a:hover{color:#60a5fa}
+@media(max-width:800px){.nav-links{display:none}}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ZP51PBFPZ"></script>
@@ -89,45 +106,85 @@ footer a{color:var(--accent2);text-decoration:none}
 </head>
 <body>
 <header>
-<div class="logo">Calc<span>Hive</span></div>
+<div class="logo"><a href="/index.html">Calc<span>Hive</span></a></div>
 <ul class="nav-links">
   <li><a href="/index.html">Home</a></li>
   <li><a href="/mortgage-calculator.html">Mortgage</a></li>
   <li><a href="/compound-interest-calculator.html">Compound Interest</a></li>
-  <li><a href="/loan-calculator.html">Loan</a></li>
+  <li><a href="/retirement-calculator.html">Retirement</a></li>
   <li><a href="/budget-planner.html">Budget</a></li>
-      <li class="dropdown">
-    <button class="more-btn">More &#9660;</button>
-    <div class="dropdown-menu">
-      <a href="/savings-goal-calculator.html">Savings Goal</a>
-      <a href="/credit-card-payoff-calculator.html">Credit Card Payoff</a>
-      <a href="/retirement-calculator.html">Retirement</a>
-      <a href="/net-worth-calculator.html">Net Worth</a>
-      <a href="/debt-snowball-calculator.html">Debt Snowball</a>
-      <a href="/emergency-fund-calculator.html">Emergency Fund</a>
-      <a href="/investment-return-calculator.html">Investment Return</a>
-      <a href="/rent-vs-buy-calculator.html">Rent vs Buy</a>
-      <a href="/car-loan-calculator.html">Car Loan</a>
-      <a href="/student-loan-calculator.html">Student Loan</a>
-      <a href="/tax-bracket-calculator.html">Tax Bracket</a>
-      <a href="/tip-calculator.html">Tip Calculator</a>
-      <a href="/hourly-to-salary-calculator.html">Hourly to Salary</a>
-      <a href="/break-even-calculator.html">Break Even</a>
-      <a href="/invoice-generator.html">Invoice Generator</a>
-      <a href="/currency-converter.html">Currency Converter</a>
-      <a href="/roi-calculator.html">ROI Calculator</a>
-      <a href="/401k-calculator.html">401k Calculator</a>
-      <a href="/salary-comparison-calculator.html">Salary Comparison</a>
-      <a href="/inflation-calculator.html">Inflation Calculator</a>
-      <a href="/mortgage-refinance-calculator.html">Refinance Calculator</a>
-      <a href="/dividend-calculator.html">Dividend Calculator</a>
-      <a href="/savings-rate-calculator.html">Savings Rate</a>
-      <a href="/debt-to-income-calculator.html">Debt-to-Income</a>
-      <a href="/paycheck-calculator.html">Paycheck Calculator</a>
-    </div>
-  </li>
+  <li><button class="nav-more-btn" id="megaToggle">All Calculators &#9660;</button></li>
 </ul>
 </header>
+<div class="mega-overlay" id="megaOverlay"></div>
+<div class="mega-menu" id="megaMenu">
+<div class="mega-inner">
+<div class="mega-top">
+  <span class="mega-title">All 29 Free Calculators</span>
+  <div style="display:flex;align-items:center;gap:1.5rem">
+    <a class="mega-all-link" href="/tools.html">Browse All Calculators &rarr;</a>
+    <button class="mega-close" id="megaClose">&#x2715;</button>
+  </div>
+</div>
+<div class="mega-grid">
+<div class="mega-col">
+  <h3>Home &amp; Mortgage</h3>
+  <a href="/mortgage-calculator.html">Mortgage Calculator</a>
+  <a href="/mortgage-refinance-calculator.html">Refinance Calculator</a>
+  <a href="/rent-vs-buy-calculator.html">Rent vs Buy</a>
+  <h3 style="margin-top:1rem">Loans</h3>
+  <a href="/loan-calculator.html">Loan Calculator</a>
+  <a href="/car-loan-calculator.html">Car Loan</a>
+  <a href="/student-loan-calculator.html">Student Loan</a>
+  <a href="/credit-card-payoff-calculator.html">Credit Card Payoff</a>
+  <a href="/debt-snowball-calculator.html">Debt Snowball</a>
+  <a href="/debt-to-income-calculator.html">Debt-to-Income</a>
+</div>
+<div class="mega-col">
+  <h3>Savings &amp; Investing</h3>
+  <a href="/compound-interest-calculator.html">Compound Interest</a>
+  <a href="/savings-goal-calculator.html">Savings Goal</a>
+  <a href="/savings-rate-calculator.html">Savings Rate</a>
+  <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+  <a href="/investment-return-calculator.html">Investment Return</a>
+  <a href="/dividend-calculator.html">Dividend Calculator</a>
+  <a href="/roi-calculator.html">ROI Calculator</a>
+  <a href="/401k-calculator.html">401k Calculator</a>
+  <a href="/net-worth-calculator.html">Net Worth</a>
+</div>
+<div class="mega-col">
+  <h3>Retirement</h3>
+  <a href="/retirement-calculator.html">Retirement Calculator</a>
+  <a href="/401k-calculator.html">401k Calculator</a>
+  <a href="/compound-interest-calculator.html">Compound Interest</a>
+  <h3 style="margin-top:1rem">Tax &amp; Income</h3>
+  <a href="/tax-bracket-calculator.html">Tax Bracket</a>
+  <a href="/paycheck-calculator.html">Paycheck Calculator</a>
+  <a href="/hourly-to-salary-calculator.html">Hourly to Salary</a>
+  <a href="/salary-comparison-calculator.html">Salary Comparison</a>
+</div>
+<div class="mega-col">
+  <h3>Budgeting</h3>
+  <a href="/budget-planner.html">Budget Planner</a>
+  <a href="/savings-goal-calculator.html">Savings Goal</a>
+  <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+  <a href="/savings-rate-calculator.html">Savings Rate</a>
+  <h3 style="margin-top:1rem">Business</h3>
+  <a href="/break-even-calculator.html">Break Even</a>
+  <a href="/invoice-generator.html">Invoice Generator</a>
+  <a href="/roi-calculator.html">ROI Calculator</a>
+</div>
+<div class="mega-col">
+  <h3>Other Tools</h3>
+  <a href="/currency-converter.html">Currency Converter</a>
+  <a href="/inflation-calculator.html">Inflation Calculator</a>
+  <a href="/tip-calculator.html">Tip Calculator</a>
+  <a href="/tools.html" style="color:#60a5fa;font-weight:600;margin-top:.5rem;display:block">View All 29 &rarr;</a>
+</div>
+</div>
+</div>
+</div>
+
 <div class="hero">
 <div class="hero-eyebrow">Free · Instant · No Signup</div>
 <h1>Hourly to Salary <span>Calculator</span></h1>
@@ -235,18 +292,18 @@ function calc(){
     '</div>';
   }).join('');
 }
-if(_mb&&_dd){
-}
 calc();
 
-if(_mb&&_dd){
-}
 
-var _mb=document.querySelector('.more-btn'),_dd=document.querySelector('.dropdown');
-if(_mb&&_dd){
-  _mb.addEventListener('click',function(e){e.stopPropagation();_dd.classList.toggle('open');});
-  document.addEventListener('click',function(){_dd.classList.remove('open');});
-}
+</script>
+<script>
+var _mt=document.getElementById('megaToggle'),_mm=document.getElementById('megaMenu'),_mo=document.getElementById('megaOverlay'),_mc=document.getElementById('megaClose');
+function _openMega(){_mm.classList.add('open');_mo.classList.add('open');}
+function _closeMega(){_mm.classList.remove('open');_mo.classList.remove('open');}
+if(_mt)_mt.addEventListener('click',function(e){e.stopPropagation();_mm.classList.contains('open')?_closeMega():_openMega();});
+if(_mc)_mc.addEventListener('click',_closeMega);
+if(_mo)_mo.addEventListener('click',_closeMega);
+document.addEventListener('keydown',function(e){if(e.key==='Escape')_closeMega();});
 </script>
 </body>
 </html>
