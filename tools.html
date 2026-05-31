@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>All Calculators - Free Financial Calculators | CalcHive</title>
-<meta name="description" content="Browse all 29 free financial calculators on CalcHive — mortgage, retirement, budgeting, investing, taxes, and more. No signup required.">
+<meta name="description" content="Browse all 35 free financial calculators on CalcHive — mortgage, retirement, budgeting, investing, taxes, and more. No signup required.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
@@ -78,7 +78,7 @@ header{background:#1a1d27;border-bottom:1px solid #2e3347;padding:0 2rem;display
 <div class="mega-menu" id="megaMenu">
 <div class="mega-inner">
 <div class="mega-top">
-  <span class="mega-title">All 30 Free Calculators</span>
+  <span class="mega-title">All 35 Free Calculators</span>
   <div style="display:flex;align-items:center;gap:1.5rem">
     <a class="mega-all-link" href="/tools.html">Browse All Calculators &rarr;</a>
     <button class="mega-close" id="megaClose">&#x2715;</button>
@@ -88,6 +88,7 @@ header{background:#1a1d27;border-bottom:1px solid #2e3347;padding:0 2rem;display
 <div class="mega-col"><h3>Home &amp; Mortgage</h3>
   <a href="/mortgage-calculator.html">Mortgage Calculator</a>
   <a href="/mortgage-refinance-calculator.html">Refinance Calculator</a>
+  <a href="/mortgage-payoff-vs-invest-calculator.html">Payoff vs Invest</a>
   <a href="/rent-vs-buy-calculator.html">Rent vs Buy</a>
   <h3 style="margin-top:1rem">Loans</h3>
   <a href="/loan-calculator.html">Loan Calculator</a>
@@ -112,7 +113,10 @@ header{background:#1a1d27;border-bottom:1px solid #2e3347;padding:0 2rem;display
   <a href="/retirement-calculator.html">Retirement Calculator</a>
   <a href="/401k-calculator.html">401k Calculator</a>
   <a href="/pension-lump-sum-calculator.html">Pension: Lump Sum vs Monthly</a>
-  <a href="/compound-interest-calculator.html">Compound Interest</a>
+  <a href="/social-security-calculator.html">Social Security Age</a>
+  <a href="/annuity-vs-lump-sum-calculator.html">Annuity vs Lump Sum</a>
+  <a href="/roth-conversion-calculator.html">Roth Conversion</a>
+  <a href="/rmd-calculator.html">RMD Calculator</a>
   <h3 style="margin-top:1rem">Tax &amp; Income</h3>
   <a href="/tax-bracket-calculator.html">Tax Bracket</a>
   <a href="/paycheck-calculator.html">Paycheck Calculator</a>
@@ -123,7 +127,6 @@ header{background:#1a1d27;border-bottom:1px solid #2e3347;padding:0 2rem;display
   <a href="/budget-planner.html">Budget Planner</a>
   <a href="/savings-goal-calculator.html">Savings Goal</a>
   <a href="/emergency-fund-calculator.html">Emergency Fund</a>
-  <a href="/savings-rate-calculator.html">Savings Rate</a>
   <h3 style="margin-top:1rem">Business</h3>
   <a href="/break-even-calculator.html">Break Even</a>
   <a href="/invoice-generator.html">Invoice Generator</a>
@@ -133,15 +136,14 @@ header{background:#1a1d27;border-bottom:1px solid #2e3347;padding:0 2rem;display
   <a href="/currency-converter.html">Currency Converter</a>
   <a href="/inflation-calculator.html">Inflation Calculator</a>
   <a href="/tip-calculator.html">Tip Calculator</a>
-  <a href="/tools.html" style="color:#60a5fa;font-weight:600;margin-top:.5rem;display:block">View All 30 &rarr;</a>
+  <a href="/tools.html" style="color:#60a5fa;font-weight:600;margin-top:.5rem;display:block">View All 35 &rarr;</a>
 </div>
 </div>
 </div>
 </div>
-<script src="/nav.js"></script>
 <div class="hero">
 <h1>All Free <span>Calculators</span></h1>
-<p class="hero-sub">29 free financial calculators to help you make smarter money decisions. No signup required.</p>
+<p class="hero-sub">35 free financial calculators to help you make smarter money decisions. No signup required.</p>
 <div class="search-wrap"><input type="text" id="searchInput" placeholder="🔍 Search calculators..." oninput="filterTools()"></div>
 </div>
 <div class="main">
@@ -151,6 +153,7 @@ header{background:#1a1d27;border-bottom:1px solid #2e3347;padding:0 2rem;display
 <div class="tools-grid">
   <a href="/mortgage-calculator.html" class="tool-card"><div class="tool-icon">🏡</div><div class="tool-name">Mortgage Calculator</div><div class="tool-desc">Calculate monthly payments, total interest, and amortization for any home loan.</div><div class="tool-arrow">Calculate →</div></a>
   <a href="/mortgage-refinance-calculator.html" class="tool-card"><div class="tool-icon">🔄</div><div class="tool-name">Mortgage Refinance</div><div class="tool-desc">Should you refinance? Find your break-even point and lifetime savings.</div><div class="tool-arrow">Calculate →</div></a>
+  <a href="/mortgage-payoff-vs-invest-calculator.html" class="tool-card"><div class="tool-icon">⚖️</div><div class="tool-name">Pay Off Mortgage vs Invest</div><div class="tool-desc">Pay extra on the mortgage or invest the difference? Compare guaranteed savings vs expected returns.</div><div class="tool-arrow">Calculate →</div></a>
   <a href="/rent-vs-buy-calculator.html" class="tool-card"><div class="tool-icon">🏘️</div><div class="tool-name">Rent vs Buy</div><div class="tool-desc">Compare the true cost of renting vs buying a home over time.</div><div class="tool-arrow">Calculate →</div></a>
 </div></div>
 
@@ -186,6 +189,10 @@ header{background:#1a1d27;border-bottom:1px solid #2e3347;padding:0 2rem;display
   <a href="/pension-lump-sum-calculator.html" class="tool-card"><div class="tool-icon">⚖️</div><div class="tool-name">Pension: Lump Sum vs Monthly</div><div class="tool-desc">Should you take the lump sum or keep monthly payments? Get a full analysis with break-even age, projections, and a personalized recommendation.</div><div class="tool-arrow">Calculate →</div></a>
   <a href="/retirement-calculator.html" class="tool-card"><div class="tool-icon">🏖️</div><div class="tool-name">Retirement Calculator</div><div class="tool-desc">Project your retirement savings and see if you're on track.</div><div class="tool-arrow">Calculate →</div></a>
   <a href="/401k-calculator.html" class="tool-card"><div class="tool-icon">🏦</div><div class="tool-name">401k Calculator</div><div class="tool-desc">Project your 401k balance including employer match and compound growth.</div><div class="tool-arrow">Calculate →</div></a>
+  <a href="/social-security-calculator.html" class="tool-card"><div class="tool-icon">🏛️</div><div class="tool-name">Social Security Age</div><div class="tool-desc">Claim at 62, full retirement age, or 70? Compare lifetime benefits and find your break-even age.</div><div class="tool-arrow">Calculate →</div></a>
+  <a href="/annuity-vs-lump-sum-calculator.html" class="tool-card"><div class="tool-icon">💵</div><div class="tool-name">Annuity vs Lump Sum</div><div class="tool-desc">Buy a lifetime annuity or invest the lump sum yourself? Compare payout rate, break-even, and implied return.</div><div class="tool-arrow">Calculate →</div></a>
+  <a href="/roth-conversion-calculator.html" class="tool-card"><div class="tool-icon">🔁</div><div class="tool-name">Roth Conversion</div><div class="tool-desc">Should you convert a Traditional IRA to a Roth? Compare after-tax value and find your break-even tax rate.</div><div class="tool-arrow">Calculate →</div></a>
+  <a href="/rmd-calculator.html" class="tool-card"><div class="tool-icon">🕐</div><div class="tool-name">RMD Calculator</div><div class="tool-desc">Estimate your Required Minimum Distributions using the IRS Uniform Lifetime Table and SECURE 2.0 start ages.</div><div class="tool-arrow">Calculate →</div></a>
 </div></div>
 
 <div class="ad-slot">Advertisement · Google AdSense</div>
