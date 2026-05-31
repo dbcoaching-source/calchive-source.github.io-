@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pension Lump Sum vs Monthly Payments Calculator | CalcHive</title>
+<meta name="description" content="Free pension calculator. Compare taking a lump sum vs monthly pension payments. See break-even age, investment projections, and a personalized recommendation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3ZP51PBFPZ"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3ZP51PBFPZ');</script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--green-dim:#16a34a;--yellow:#eab308;--red:#ef4444;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:#f1f5f9}
+.logo a{text-decoration:none;color:inherit}
+.logo span{color:#3b82f6}
+header{background:#1a1d27;border-bottom:1px solid #2e3347;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:200}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
+.nav-links a{color:#94a3b8;text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:#f1f5f9}
+.nav-more-btn{background:none;border:none;color:#94a3b8;font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif}
+.nav-more-btn:hover{color:#f1f5f9}
+.mega-overlay{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:150}
+.mega-menu{display:none;position:fixed;top:64px;left:0;right:0;background:#1a1d27;border-bottom:2px solid #3b82f6;z-index:160;padding:1.5rem 2rem 2rem;box-shadow:0 8px 32px rgba(0,0,0,.6);max-height:calc(100vh - 64px);overflow-y:auto}
+.mega-menu.open{display:block}
+.mega-overlay.open{display:block}
+.mega-inner{max-width:1200px;margin:0 auto}
+.mega-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid #2e3347}
+.mega-title{font-family:'Playfair Display',serif;font-weight:900;font-size:1.1rem;color:#f1f5f9}
+.mega-all-link{color:#60a5fa;text-decoration:none;font-size:.82rem;font-weight:600}
+.mega-close{background:none;border:none;color:#94a3b8;font-size:1.2rem;cursor:pointer;padding:0;line-height:1}
+.mega-close:hover{color:#f1f5f9}
+.mega-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem}
+.mega-col h3{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#3b82f6;margin-bottom:.6rem}
+.mega-col a{display:block;color:#94a3b8;text-decoration:none;font-size:.8rem;padding:3px 0}
+.mega-col a:hover{color:#60a5fa}
+@media(max-width:800px){.nav-links{display:none}}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,2.75rem);margin-bottom:.75rem}
+.hero h1 span{color:var(--accent2)}
+.hero-sub{font-size:.95rem;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.6}
+.main{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:380px 1fr;gap:2rem;align-items:start}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.25rem}
+.panel:last-child{margin-bottom:0}
+.panel-head{background:var(--surface);border-bottom:1px solid var(--border);padding:1rem 1.5rem;font-weight:700;font-size:.95rem;font-family:'Playfair Display',serif;display:flex;align-items:center;gap:.5rem}
+.panel-head .icon{font-size:1.1rem}
+.panel-body{padding:1.5rem}
+.field{margin-bottom:1.1rem}
+.field label{display:block;font-size:.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+.field-hint{font-size:.7rem;color:var(--muted);margin-top:.25rem;opacity:.8}
+.input-prefix{position:relative;display:flex;align-items:center}
+.input-prefix span{position:absolute;left:.75rem;color:var(--muted);font-size:.9rem;font-weight:600;pointer-events:none}
+.input-prefix input{padding-left:1.75rem}
+.input-suffix{position:relative;display:flex;align-items:center}
+.input-suffix span{position:absolute;right:.75rem;color:var(--muted);font-size:.9rem;pointer-events:none}
+.input-suffix input{padding-right:2rem}
+input[type=number],input[type=text],select{width:100%;padding:.65rem .75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.9rem;outline:none;appearance:none}
+input:focus,select:focus{border-color:var(--accent)}
+.radio-group{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.radio-opt{display:flex;align-items:center;gap:.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.6rem .75rem;cursor:pointer;transition:all .15s}
+.radio-opt:hover{border-color:var(--accent)}
+.radio-opt input[type=radio]{width:14px;height:14px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
+.radio-opt span{font-size:.82rem}
+.radio-opt.selected{border-color:var(--accent);background:rgba(59,130,246,.1)}
+.section-divider{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent2);margin:.25rem 0 .75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.875rem 1.5rem;font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;width:100%;transition:background .2s}
+.btn:hover{background:#2563eb}
+/* Results */
+.verdict{border-radius:12px;padding:1.5rem;margin-bottom:1.25rem;border:2px solid}
+.verdict.lump{border-color:var(--accent);background:rgba(59,130,246,.08)}
+.verdict.pension{border-color:var(--green);background:rgba(34,197,94,.08)}
+.verdict.neutral{border-color:var(--yellow);background:rgba(234,179,8,.08)}
+.verdict-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem}
+.verdict-title{font-family:'Playfair Display',serif;font-weight:900;font-size:1.5rem;margin-bottom:.4rem}
+.verdict-sub{font-size:.85rem;color:var(--muted);line-height:1.6}
+.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.25rem}
+.metric{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem}
+.metric-label{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.3rem}
+.metric-value{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--text)}
+.metric-sub{font-size:.72rem;color:var(--muted);margin-top:.2rem}
+.metric.highlight .metric-value{color:var(--accent2)}
+.comparison-table{width:100%;border-collapse:collapse;margin-bottom:1.25rem;font-size:.85rem}
+.comparison-table th{background:var(--surface2);padding:.75rem 1rem;text-align:left;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:1px solid var(--border)}
+.comparison-table td{padding:.75rem 1rem;border-bottom:1px solid var(--border);vertical-align:top}
+.comparison-table tr:last-child td{border-bottom:none}
+.comparison-table .lump-col{color:var(--accent2)}
+.comparison-table .pension-col{color:var(--green)}
+.tag{display:inline-block;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-left:.4rem;vertical-align:middle}
+.tag.pro{background:rgba(34,197,94,.15);color:var(--green)}
+.tag.con{background:rgba(239,68,68,.15);color:var(--red)}
+.tag.neutral{background:rgba(234,179,8,.15);color:var(--yellow)}
+.chart-wrap{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.25rem}
+.chart-title{font-size:.78rem;font-weight:600;color:var(--muted);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.06em}
+.chart-bars{display:flex;flex-direction:column;gap:.6rem}
+.chart-row{display:grid;grid-template-columns:80px 1fr 80px;gap:.5rem;align-items:center;font-size:.78rem}
+.chart-label{color:var(--muted);text-align:right}
+.chart-bar-wrap{background:var(--surface2);border-radius:4px;overflow:hidden;height:20px}
+.chart-bar{height:100%;border-radius:4px;transition:width .5s ease;display:flex;align-items:center;padding-left:.5rem;font-size:.65rem;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden}
+.chart-val{text-align:left;font-weight:600}
+.factors{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.25rem}
+.factor-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem}
+.factor-title{font-size:.78rem;font-weight:700;margin-bottom:.35rem;display:flex;align-items:center;gap:.35rem}
+.factor-body{font-size:.75rem;color:var(--muted);line-height:1.5}
+.factor-icon{font-size:1rem}
+.disclaimer{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.875rem;font-size:.72rem;color:var(--muted);line-height:1.6;margin-bottom:1.25rem}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted)}
+.faq-section{max-width:1100px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted);margin-top:2rem}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:800px){.main{grid-template-columns:1fr}.metrics-grid{grid-template-columns:1fr 1fr}.factors{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo"><a href="/index.html">Calc<span>Hive</span></a></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/mortgage-calculator.html">Mortgage</a></li>
+  <li><a href="/retirement-calculator.html">Retirement</a></li>
+  <li><a href="/401k-calculator.html">401k</a></li>
+  <li><button class="nav-more-btn" id="megaToggle">All Calculators &#9660;</button></li>
+</ul>
+</header>
+<div class="mega-overlay" id="megaOverlay"></div>
+<div class="mega-menu" id="megaMenu">
+<div class="mega-inner">
+<div class="mega-top">
+  <span class="mega-title">All 30 Free Calculators</span>
+  <div style="display:flex;align-items:center;gap:1.5rem">
+    <a class="mega-all-link" href="/tools.html">Browse All Calculators &rarr;</a>
+    <button class="mega-close" id="megaClose">&#x2715;</button>
+  </div>
+</div>
+<div class="mega-grid">
+<div class="mega-col"><h3>Home &amp; Mortgage</h3>
+  <a href="/mortgage-calculator.html">Mortgage Calculator</a>
+  <a href="/mortgage-refinance-calculator.html">Refinance Calculator</a>
+  <a href="/rent-vs-buy-calculator.html">Rent vs Buy</a>
+  <h3 style="margin-top:1rem">Loans</h3>
+  <a href="/loan-calculator.html">Loan Calculator</a>
+  <a href="/car-loan-calculator.html">Car Loan</a>
+  <a href="/student-loan-calculator.html">Student Loan</a>
+  <a href="/credit-card-payoff-calculator.html">Credit Card Payoff</a>
+  <a href="/debt-snowball-calculator.html">Debt Snowball</a>
+  <a href="/debt-to-income-calculator.html">Debt-to-Income</a>
+</div>
+<div class="mega-col"><h3>Savings &amp; Investing</h3>
+  <a href="/compound-interest-calculator.html">Compound Interest</a>
+  <a href="/savings-goal-calculator.html">Savings Goal</a>
+  <a href="/savings-rate-calculator.html">Savings Rate</a>
+  <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+  <a href="/investment-return-calculator.html">Investment Return</a>
+  <a href="/dividend-calculator.html">Dividend Calculator</a>
+  <a href="/roi-calculator.html">ROI Calculator</a>
+  <a href="/401k-calculator.html">401k Calculator</a>
+  <a href="/net-worth-calculator.html">Net Worth</a>
+</div>
+<div class="mega-col"><h3>Retirement</h3>
+  <a href="/retirement-calculator.html">Retirement Calculator</a>
+  <a href="/401k-calculator.html">401k Calculator</a>
+  <a href="/pension-lump-sum-calculator.html">Pension: Lump Sum vs Monthly</a>
+  <h3 style="margin-top:1rem">Tax &amp; Income</h3>
+  <a href="/tax-bracket-calculator.html">Tax Bracket</a>
+  <a href="/paycheck-calculator.html">Paycheck Calculator</a>
+  <a href="/hourly-to-salary-calculator.html">Hourly to Salary</a>
+  <a href="/salary-comparison-calculator.html">Salary Comparison</a>
+</div>
+<div class="mega-col"><h3>Budgeting</h3>
+  <a href="/budget-planner.html">Budget Planner</a>
+  <a href="/savings-goal-calculator.html">Savings Goal</a>
+  <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+  <h3 style="margin-top:1rem">Business</h3>
+  <a href="/break-even-calculator.html">Break Even</a>
+  <a href="/invoice-generator.html">Invoice Generator</a>
+  <a href="/roi-calculator.html">ROI Calculator</a>
+</div>
+<div class="mega-col"><h3>Other Tools</h3>
+  <a href="/currency-converter.html">Currency Converter</a>
+  <a href="/inflation-calculator.html">Inflation Calculator</a>
+  <a href="/tip-calculator.html">Tip Calculator</a>
+  <a href="/tools.html" style="color:#60a5fa;font-weight:600;margin-top:.5rem;display:block">View All 30 &rarr;</a>
+</div>
+</div>
+</div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Free · No Signup · Instant Results</div>
+  <h1>Pension: Lump Sum vs <span>Monthly Payments</span></h1>
+  <p class="hero-sub">Should you take the lump sum or keep the monthly pension? Enter your numbers and get a full financial analysis including break-even age, investment projections, and a personalized recommendation.</p>
+</div>
+
+<div class="main">
+<div class="input-col">
+
+<div class="panel">
+<div class="panel-head"><span class="icon">💰</span> Your Pension Offer</div>
+<div class="panel-body">
+  <div class="field">
+    <label>Lump Sum Amount</label>
+    <div class="input-prefix"><span>$</span><input type="number" id="lumpSum" value="350000" min="0" oninput="calc()"></div>
+    <div class="field-hint">The one-time payment your employer is offering</div>
+  </div>
+  <div class="field">
+    <label>Monthly Pension Payment</label>
+    <div class="input-prefix"><span>$</span><input type="number" id="monthlyPension" value="2100" min="0" oninput="calc()"></div>
+    <div class="field-hint">Your guaranteed monthly payment if you keep the pension</div>
+  </div>
+  <div class="field">
+    <label>Survivor Benefit (if applicable)</label>
+    <div class="input-prefix"><span>$</span><input type="number" id="survivorBenefit" value="1050" min="0" oninput="calc()"></div>
+    <div class="field-hint">Monthly amount your spouse receives after you pass (0 if none)</div>
+  </div>
+  <div class="field">
+    <label>Cost-of-Living Adjustment (COLA)</label>
+    <div class="input-suffix"><span>%</span><input type="number" id="cola" value="0" min="0" max="5" step="0.1" oninput="calc()"></div>
+    <div class="field-hint">Annual % increase in pension payment (often 0–3%). Many pensions have no COLA.</div>
+  </div>
+</div>
+</div>
+
+<div class="panel">
+<div class="panel-head"><span class="icon">👤</span> About You</div>
+<div class="panel-body">
+  <div class="field">
+    <label>Your Current Age</label>
+    <input type="number" id="currentAge" value="62" min="40" max="80" oninput="calc()">
+  </div>
+  <div class="field">
+    <label>Your Life Expectancy</label>
+    <input type="number" id="lifeExpectancy" value="85" min="60" max="110" oninput="calc()">
+    <div class="field-hint">US average is 78 for men, 81 for women. Family history matters.</div>
+  </div>
+  <div class="field">
+    <label>Spouse / Partner?</label>
+    <div class="radio-group" id="spouseGroup">
+      <label class="radio-opt selected"><input type="radio" name="spouse" value="yes" checked onchange="calc()"><span>Yes</span></label>
+      <label class="radio-opt"><input type="radio" name="spouse" value="no" onchange="calc()"><span>No</span></label>
+    </div>
+  </div>
+  <div class="field" id="spouseAgeField">
+    <label>Spouse Age</label>
+    <input type="number" id="spouseAge" value="60" min="30" max="90" oninput="calc()">
+  </div>
+  <div class="field" id="spouseLifeField">
+    <label>Spouse Life Expectancy</label>
+    <input type="number" id="spouseLife" value="88" min="60" max="110" oninput="calc()">
+  </div>
+</div>
+</div>
+
+<div class="panel">
+<div class="panel-head"><span class="icon">📈</span> Financial Assumptions</div>
+<div class="panel-body">
+  <div class="field">
+    <label>If Lump Sum: Expected Investment Return</label>
+    <div class="input-suffix"><span>%</span><input type="number" id="investReturn" value="6" min="0" max="12" step="0.5" oninput="calc()"></div>
+    <div class="field-hint">Conservative: 4–5% · Moderate: 6–7% · Aggressive: 8–10%</div>
+  </div>
+  <div class="field">
+    <label>Your Tax Bracket</label>
+    <select id="taxRate" onchange="calc()">
+      <option value="0.10">10%</option>
+      <option value="0.12">12%</option>
+      <option value="0.22" selected>22%</option>
+      <option value="0.24">24%</option>
+      <option value="0.32">32%</option>
+      <option value="0.35">35%</option>
+      <option value="0.37">37%</option>
+    </select>
+    <div class="field-hint">Both pension payments and lump sum withdrawals are typically taxable</div>
+  </div>
+  <div class="field">
+    <label>Inflation Rate</label>
+    <div class="input-suffix"><span>%</span><input type="number" id="inflation" value="3" min="0" max="8" step="0.5" oninput="calc()"></div>
+  </div>
+  <div class="field">
+    <label>Other Sources of Guaranteed Income</label>
+    <select id="otherIncome" onchange="calc()">
+      <option value="high">High — Social Security + other pension</option>
+      <option value="medium" selected>Medium — Social Security only</option>
+      <option value="low">Low — Little to no other income</option>
+    </select>
+    <div class="field-hint">More guaranteed income elsewhere = lump sum is less risky</div>
+  </div>
+  <div class="field">
+    <label>Health Status</label>
+    <select id="health" onchange="calc()">
+      <option value="excellent">Excellent — likely to live longer</option>
+      <option value="good" selected>Good — average life expectancy</option>
+      <option value="fair">Fair — some health concerns</option>
+      <option value="poor">Poor — serious health concerns</option>
+    </select>
+  </div>
+  <div class="field">
+    <label>Debt Situation</label>
+    <select id="debt" onchange="calc()">
+      <option value="none" selected>Debt free</option>
+      <option value="some">Some debt (mortgage, car)</option>
+      <option value="high">High debt — would use lump sum to pay off</option>
+    </select>
+  </div>
+</div>
+</div>
+
+</div><!-- end input-col -->
+
+<div class="output-col" id="outputCol">
+  <div style="text-align:center;padding:4rem 2rem;color:var(--muted)">
+    <div style="font-size:3rem;margin-bottom:1rem">🧮</div>
+    <p>Fill in your details on the left to see your full analysis.</p>
+  </div>
+</div>
+</div>
+
+<div class="ad-slot" style="max-width:1100px;margin:0 auto 1.5rem">Advertisement · Google AdSense</div>
+
+<div class="faq-section">
+<h2>Frequently asked questions</h2>
+<div class="faq-item">
+  <div class="faq-q">What is the break-even age and why does it matter?</div>
+  <div class="faq-a">The break-even age is the point at which the total value of your monthly pension payments surpasses what you would have accumulated by investing the lump sum. If you live past the break-even age, the pension wins on pure numbers. If you die before it, the lump sum would have been worth more. It is one of the most important numbers in this decision.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q">What happens to my pension when I die?</div>
+  <div class="faq-a">This depends on your pension election. A single-life annuity pays the most per month but stops when you die, leaving nothing for your spouse. A joint-and-survivor annuity pays less per month but continues (often at 50–100%) for your spouse after you pass. If you take the lump sum, whatever remains can be passed to your heirs. This is a major factor in the decision if you have a spouse or dependents.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q">Is the lump sum or monthly pension taxed differently?</div>
+  <div class="faq-a">Both are generally taxable as ordinary income. With the lump sum, you can roll it directly into an IRA to defer taxes — you only pay taxes when you withdraw. Monthly pension payments are taxed as income each year. If you take the lump sum as cash rather than rolling it over, you will owe income tax on the full amount in that tax year, which can push you into a higher bracket.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q">What if my company goes bankrupt?</div>
+  <div class="faq-a">Private sector pension plans are insured by the Pension Benefit Guaranty Corporation (PBGC) up to certain limits (around $7,000/month in 2026). If your pension exceeds that or your employer is in financial trouble, taking the lump sum removes that risk entirely. Government pensions (federal, state, military) are generally much more secure.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q">Should I roll the lump sum into an IRA?</div>
+  <div class="faq-a">In almost all cases, yes — if you take the lump sum, roll it directly into a Traditional IRA within 60 days to avoid a large tax bill and potential 10% early withdrawal penalty. A direct trustee-to-trustee rollover is the cleanest method and avoids the mandatory 20% withholding on indirect rollovers.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q">Does this calculator account for Social Security?</div>
+  <div class="faq-a">The calculator factors in your other income sources as part of the risk assessment. Social Security provides inflation-adjusted guaranteed income for life, which reduces your reliance on the pension for basic expenses. If you have strong Social Security income, the flexibility of a lump sum becomes more attractive.</div>
+</div>
+</div>
+
+<footer>
+<p>&copy; 2026 CalcHive &middot; <a href="/about.html">About</a> &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a> &middot; <a href="/disclaimer.html">Disclaimer</a> &middot; <a href="/contact.html">Contact</a></p>
+<p style="margin-top:.5rem;font-size:.72rem">This calculator is for educational purposes only and does not constitute financial advice. Consult a qualified financial advisor before making pension decisions.</p>
+</footer>
+
+<script>
+function fmt(n){return '$'+Math.round(n).toLocaleString();}
+function fmtK(n){return n>=1000000?'$'+(n/1000000).toFixed(2)+'M':'$'+Math.round(n/1000).toLocaleString()+'K';}
+
+function calc(){
+  var lumpSum = parseFloat(document.getElementById('lumpSum').value)||0;
+  var monthlyPension = parseFloat(document.getElementById('monthlyPension').value)||0;
+  var survivorBenefit = parseFloat(document.getElementById('survivorBenefit').value)||0;
+  var cola = parseFloat(document.getElementById('cola').value)||0;
+  var currentAge = parseInt(document.getElementById('currentAge').value)||62;
+  var lifeExp = parseInt(document.getElementById('lifeExpectancy').value)||85;
+  var spouseAge = parseInt(document.getElementById('spouseAge').value)||60;
+  var spouseLife = parseInt(document.getElementById('spouseLife').value)||88;
+  var investReturn = parseFloat(document.getElementById('investReturn').value)||6;
+  var taxRate = parseFloat(document.getElementById('taxRate').value)||0.22;
+  var inflation = parseFloat(document.getElementById('inflation').value)||3;
+  var otherIncome = document.getElementById('otherIncome').value;
+  var health = document.getElementById('health').value;
+  var debt = document.getElementById('debt').value;
+  var hasSpouse = document.querySelector('input[name=spouse]:checked').value === 'yes';
+
+  // Show/hide spouse fields
+  document.getElementById('spouseAgeField').style.display = hasSpouse ? 'block' : 'none';
+  document.getElementById('spouseLifeField').style.display = hasSpouse ? 'block' : 'none';
+
+  var yearsYou = Math.max(1, lifeExp - currentAge);
+  var yearsSpouse = hasSpouse ? Math.max(1, spouseLife - spouseAge) : 0;
+  var yearsTotal = hasSpouse ? Math.max(yearsYou, yearsSpouse) : yearsYou;
+
+  var monthlyReturn = investReturn / 100 / 12;
+  var monthlyInflation = inflation / 100 / 12;
+
+  // ── Lump Sum Projection ───────────────────────────────────────
+  // Roll into IRA, grow at investReturn, withdraw monthly to match pension income
+  // Track balance over time
+  var lumpBalance = lumpSum;
+  var pensionAfterTax = monthlyPension * (1 - taxRate);
+  var lumpWithdrawal = pensionAfterTax; // withdraw same net amount as pension would pay
+  
+  var lumpBalances = [lumpSum];
+  var pensionTotals = [0];
+  var lumpTotals = [0];
+  var breakEvenAge = null;
+
+  var lumpCumulative = 0;
+  var pensionCumulative = 0;
+  var monthlyPay = monthlyPension;
+
+  for(var m = 1; m <= yearsTotal * 12; m++){
+    var age = currentAge + m/12;
+    var isAlive = age <= lifeExp;
+    var spouseAlive = hasSpouse && (spouseAge + m/12) <= spouseLife;
+
+    // Pension payment this month
+    if(isAlive){
+      var payment = monthlyPay * (1 - taxRate);
+      pensionCumulative += payment;
+      monthlyPay *= (1 + cola/100/12);
+    } else if(spouseAlive && survivorBenefit > 0){
+      var payment = survivorBenefit * (1 - taxRate);
+      pensionCumulative += payment;
+    }
+
+    // Lump sum: grow and optionally withdraw
+    if(lumpBalance > 0){
+      lumpBalance = lumpBalance * (1 + monthlyReturn);
+      if(isAlive || spouseAlive){
+        var withdrawal = Math.min(lumpBalance, pensionAfterTax);
+        lumpBalance -= withdrawal;
+        lumpCumulative += withdrawal;
+      }
+    } else {
+      // Lump sum depleted
+    }
+
+    if(m % 12 === 0){
+      var yr = m/12;
+      lumpBalances.push(lumpBalance);
+      pensionTotals.push(pensionCumulative);
+      lumpTotals.push(lumpCumulative + lumpBalance);
+    }
+
+    // Break-even: when pension cumulative > lump sum cumulative + remaining balance
+    if(!breakEvenAge && pensionCumulative > (lumpCumulative + lumpBalance) && isAlive){
+      breakEvenAge = Math.round(age);
+    }
+  }
+
+  // ── Total lifetime values ──────────────────────────────────────
+  var pensionLifetimeTotal = pensionTotals[pensionTotals.length-1];
+  var lumpLifetimeTotal = lumpTotals[lumpTotals.length-1];
+  var lumpFinalBalance = lumpBalances[lumpBalances.length-1];
+
+  // ── Lump sum needed to match pension (present value of annuity) ──
+  var pvPension = 0;
+  var discountRate = (investReturn - inflation) / 100 / 12;
+  if(discountRate <= 0) discountRate = 0.001;
+  var months = yearsYou * 12;
+  for(var m2=1; m2<=months; m2++){
+    var pmt = monthlyPension * Math.pow(1+cola/100/12, m2);
+    pvPension += pmt / Math.pow(1+discountRate, m2);
+  }
+  if(hasSpouse && survivorBenefit > 0){
+    var spouseMonths = Math.max(0, (spouseLife - spouseAge) - yearsYou) * 12;
+    for(var m3=1; m3<=spouseMonths; m3++){
+      pvPension += survivorBenefit / Math.pow(1+discountRate, yearsYou*12 + m3);
+    }
+  }
+
+  // ── Score system ────────────────────────────────────────────────
+  var lumpScore = 0;
+  var pensionScore = 0;
+
+  // Break-even
+  if(breakEvenAge !== null){
+    if(breakEvenAge > lifeExp) lumpScore += 3;
+    else if(breakEvenAge > lifeExp - 5) lumpScore += 1;
+    else pensionScore += 3;
+  } else {
+    lumpScore += 2; // lump never depleted
+  }
+
+  // Health
+  if(health==='poor'||health==='fair') lumpScore += 2;
+  else if(health==='excellent') pensionScore += 2;
+
+  // Other income
+  if(otherIncome==='high') lumpScore += 2;
+  else if(otherIncome==='low') pensionScore += 3;
+  else pensionScore += 1;
+
+  // Debt
+  if(debt==='high') lumpScore += 2;
+
+  // Spouse survivor
+  if(hasSpouse && survivorBenefit === 0) lumpScore += 1;
+  if(hasSpouse && survivorBenefit >= monthlyPension * 0.5) pensionScore += 1;
+
+  // COLA
+  if(cola >= 2) pensionScore += 2;
+  else if(cola === 0) lumpScore += 1;
+
+  // Lump sum vs PV
+  if(lumpSum > pvPension * 1.1) lumpScore += 2;
+  else if(lumpSum < pvPension * 0.9) pensionScore += 2;
+
+  var totalScore = lumpScore + pensionScore;
+  var lumpPct = totalScore > 0 ? Math.round(lumpScore/totalScore*100) : 50;
+  var pensionPct = 100 - lumpPct;
+
+  var verdictType, verdictTitle, verdictSub;
+  if(lumpPct >= 60){
+    verdictType = 'lump';
+    verdictTitle = 'Lean Toward the Lump Sum';
+    verdictSub = 'Based on your situation, the lump sum offers more financial flexibility and likely a better outcome given your health, other income sources, and investment potential.';
+  } else if(pensionPct >= 60){
+    verdictType = 'pension';
+    verdictTitle = 'Lean Toward Monthly Payments';
+    verdictSub = 'Based on your situation, the guaranteed monthly income is likely the stronger choice — especially given your life expectancy, limited other income, or the pension\'s cost-of-living adjustment.';
+  } else {
+    verdictType = 'neutral';
+    verdictTitle = 'It\'s a Close Call';
+    verdictSub = 'The numbers are closely matched for your situation. Your personal preferences — stability vs flexibility — should drive this decision. Consider consulting a fee-only financial advisor.';
+  }
+
+  // ── Build chart data ───────────────────────────────────────────
+  var chartYears = [10, 15, 20, 25, 30].filter(function(y){ return y <= yearsTotal + 2; });
+  var maxVal = 0;
+  var chartData = chartYears.map(function(y){
+    var pi = Math.min(y, pensionTotals.length-1);
+    var li = Math.min(y, lumpTotals.length-1);
+    var pv = pensionTotals[pi]||0;
+    var lv = lumpTotals[li]||0;
+    maxVal = Math.max(maxVal, pv, lv);
+    return {y:y, p:pv, l:lv};
+  });
+
+  // ── Render ─────────────────────────────────────────────────────
+  var breakEvenText = breakEvenAge ? 'Age ' + breakEvenAge : 'Never (lump sum lasts longer)';
+  var impliedReturn = (monthlyPension * 12 / lumpSum * 100).toFixed(2);
+
+  var html = '';
+
+  // Verdict
+  html += '<div class="verdict '+verdictType+'">';
+  html += '<div class="verdict-label" style="color:'+(verdictType==='lump'?'var(--accent2)':verdictType==='pension'?'var(--green)':'var(--yellow)')+'">Our Analysis</div>';
+  html += '<div class="verdict-title">'+verdictTitle+'</div>';
+  html += '<div class="verdict-sub">'+verdictSub+'</div>';
+  html += '<div style="margin-top:1rem;display:flex;gap:.5rem;align-items:center;font-size:.78rem">';
+  html += '<span style="color:var(--accent2);font-weight:700">Lump Sum</span>';
+  html += '<div style="flex:1;background:var(--surface2);border-radius:4px;height:8px;overflow:hidden">';
+  html += '<div style="width:'+lumpPct+'%;height:100%;background:var(--accent);border-radius:4px"></div></div>';
+  html += '<span style="color:var(--green);font-weight:700">Pension</span>';
+  html += '</div>';
+  html += '<div style="display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-top:.25rem"><span>'+lumpPct+'% lump sum factors</span><span>'+pensionPct+'% pension factors</span></div>';
+  html += '</div>';
+
+  // Key metrics
+  html += '<div class="metrics-grid">';
+  html += '<div class="metric highlight"><div class="metric-label">Break-Even Age</div><div class="metric-value">'+breakEvenText+'</div><div class="metric-sub">When pension total overtakes lump sum</div></div>';
+  html += '<div class="metric"><div class="metric-label">Implied Pension Rate</div><div class="metric-value">'+impliedReturn+'%</div><div class="metric-sub">Annual return your pension implies</div></div>';
+  html += '<div class="metric"><div class="metric-label">Pension Lifetime Total</div><div class="metric-value">'+fmtK(pensionLifetimeTotal)+'</div><div class="metric-sub">After-tax over your lifetime</div></div>';
+  html += '<div class="metric"><div class="metric-label">Lump Sum Lifetime Total</div><div class="metric-value">'+fmtK(lumpLifetimeTotal)+'</div><div class="metric-sub">Withdrawals + remaining balance</div></div>';
+  html += '<div class="metric"><div class="metric-label">Lump Sum at Life End</div><div class="metric-value">'+fmtK(lumpFinalBalance)+'</div><div class="metric-sub">Remaining estate / inheritance</div></div>';
+  html += '<div class="metric"><div class="metric-label">Pension Fair Value</div><div class="metric-value">'+fmtK(pvPension)+'</div><div class="metric-sub">Present value of all pension payments</div></div>';
+  html += '</div>';
+
+  // Chart
+  if(chartData.length > 0 && maxVal > 0){
+    html += '<div class="chart-wrap">';
+    html += '<div class="chart-title">Cumulative Value Over Time (After Tax)</div>';
+    html += '<div style="display:flex;gap:1rem;margin-bottom:.75rem;font-size:.75rem">';
+    html += '<span style="color:var(--accent2)">■ Lump Sum (withdrawals + balance)</span>';
+    html += '<span style="color:var(--green)">■ Pension (total payments)</span>';
+    html += '</div>';
+    html += '<div class="chart-bars">';
+    chartData.forEach(function(d){
+      var lPct = maxVal>0?Math.round(d.l/maxVal*100):0;
+      var pPct = maxVal>0?Math.round(d.p/maxVal*100):0;
+      html += '<div style="margin-bottom:.5rem"><div style="font-size:.72rem;color:var(--muted);margin-bottom:.25rem">Age '+(currentAge+d.y)+'</div>';
+      html += '<div style="display:flex;gap:.5rem;align-items:center;margin-bottom:.2rem">';
+      html += '<div style="width:60px;font-size:.7rem;color:var(--accent2)">Lump</div>';
+      html += '<div style="flex:1;background:var(--surface2);border-radius:3px;height:16px"><div style="width:'+lPct+'%;height:100%;background:var(--accent);border-radius:3px"></div></div>';
+      html += '<div style="width:70px;font-size:.7rem;text-align:right">'+fmtK(d.l)+'</div></div>';
+      html += '<div style="display:flex;gap:.5rem;align-items:center">';
+      html += '<div style="width:60px;font-size:.7rem;color:var(--green)">Pension</div>';
+      html += '<div style="flex:1;background:var(--surface2);border-radius:3px;height:16px"><div style="width:'+pPct+'%;height:100%;background:var(--green-dim);border-radius:3px"></div></div>';
+      html += '<div style="width:70px;font-size:.7rem;text-align:right">'+fmtK(d.p)+'</div></div>';
+      html += '</div>';
+    });
+    html += '</div></div>';
+  }
+
+  // Comparison table
+  html += '<div class="panel"><div class="panel-head"><span class="icon">⚖️</span> Side-by-Side Comparison</div><div class="panel-body">';
+  html += '<table class="comparison-table"><thead><tr><th>Factor</th><th class="lump-col">Lump Sum</th><th class="pension-col">Monthly Pension</th></tr></thead><tbody>';
+
+  var rows = [
+    ['Guaranteed income',
+      '<span class="tag con">No</span> Depends on investment returns',
+      '<span class="tag pro">Yes</span> Fixed monthly payment for life'],
+    ['Inflation protection',
+      '<span class="tag pro">Yes</span> Investments can grow with inflation',
+      cola>0?'<span class="tag pro">Yes</span> '+cola+'% annual COLA':'<span class="tag con">No</span> No COLA — purchasing power erodes'],
+    ['Spouse protection',
+      hasSpouse?'<span class="tag pro">Yes</span> Full balance passes to spouse':'N/A',
+      hasSpouse&&survivorBenefit>0?'<span class="tag neutral">Partial</span> '+fmt(survivorBenefit)+'/mo survivor benefit':'<span class="tag con">No</span> Payments stop at death'],
+    ['Investment control',
+      '<span class="tag pro">Full control</span> Choose your own investments',
+      '<span class="tag con">None</span> Fixed payment, no control'],
+    ['Early death scenario',
+      '<span class="tag pro">Better</span> Estate keeps remaining balance',
+      '<span class="tag con">Worse</span> Payments stop (unless survivor benefit)'],
+    ['Long life scenario',
+      '<span class="tag neutral">Risk</span> May outlive the money',
+      '<span class="tag pro">Better</span> Payments continue for life'],
+    ['Employer bankruptcy risk',
+      '<span class="tag pro">None</span> Your money, your control',
+      '<span class="tag neutral">Some risk</span> PBGC insures up to limits'],
+    ['Tax flexibility',
+      '<span class="tag pro">Yes</span> Roll to IRA, control withdrawals',
+      '<span class="tag con">Limited</span> Taxed as ordinary income each year'],
+    ['Immediate large expense',
+      '<span class="tag pro">Yes</span> Available for debt payoff, emergencies',
+      '<span class="tag con">No</span> Fixed monthly, no lump available'],
+  ];
+
+  rows.forEach(function(r){
+    html += '<tr><td><strong>'+r[0]+'</strong></td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>';
+  });
+  html += '</tbody></table></div></div>';
+
+  // Personal factors
+  html += '<div class="panel"><div class="panel-head"><span class="icon">🎯</span> Key Factors For Your Situation</div><div class="panel-body">';
+  html += '<div class="factors">';
+
+  var factors = [];
+
+  if(health==='poor'||health==='fair'){
+    factors.push({icon:'🏥',title:'Health Concern',body:'Your health status suggests a shorter-than-average life expectancy. The lump sum may provide more total value and leaves an inheritance.',favor:'lump'});
+  } else if(health==='excellent'){
+    factors.push({icon:'💪',title:'Excellent Health',body:'A longer life expectancy works strongly in favor of the monthly pension. The longer you live, the more the pension wins.',favor:'pension'});
+  }
+
+  if(otherIncome==='low'){
+    factors.push({icon:'🛡️',title:'Limited Other Income',body:'With little guaranteed income from other sources, the pension provides critical financial security you shouldn\'t give up lightly.',favor:'pension'});
+  } else if(otherIncome==='high'){
+    factors.push({icon:'✅',title:'Strong Other Income',body:'Your Social Security and other income cover basics. The lump sum\'s flexibility becomes more attractive when you aren\'t relying on the pension for essentials.',favor:'lump'});
+  }
+
+  if(debt==='high'){
+    factors.push({icon:'💳',title:'High Debt',body:'Using the lump sum to pay off high-interest debt can provide an immediate guaranteed return equal to that interest rate, which may exceed investment returns.',favor:'lump'});
+  }
+
+  if(cola===0){
+    factors.push({icon:'📉',title:'No Inflation Protection',body:'A pension with no COLA loses purchasing power every year. At 3% inflation, a $2,100 pension is worth only $1,163 in 20 years in today\'s dollars.',favor:'lump'});
+  } else if(cola>=2){
+    factors.push({icon:'📈',title:'COLA Benefit',body:'A '+cola+'% annual increase significantly improves the long-term value of the pension, making it more competitive against a lump sum investment.',favor:'pension'});
+  }
+
+  if(hasSpouse && survivorBenefit===0){
+    factors.push({icon:'👫',title:'No Survivor Benefit',body:'Your pension pays nothing to your spouse after you die. The lump sum would preserve wealth for them. This is a major consideration if your spouse depends on your income.',favor:'lump'});
+  }
+
+  if(lumpSum > pvPension * 1.15){
+    factors.push({icon:'💰',title:'Generous Lump Sum Offer',body:'Your lump sum offer of '+fmt(lumpSum)+' exceeds the calculated present value ('+fmtK(pvPension)+') of your pension payments. This is a financially attractive offer.',favor:'lump'});
+  } else if(lumpSum < pvPension * 0.9){
+    factors.push({icon:'⚠️',title:'Below-Value Lump Sum',body:'Your lump sum offer of '+fmt(lumpSum)+' is below the present value ('+fmtK(pvPension)+') of keeping the pension. The monthly payments are the stronger financial choice.',favor:'pension'});
+  }
+
+  if(factors.length === 0){
+    factors.push({icon:'⚖️',title:'Balanced Situation',body:'Your inputs suggest a fairly balanced decision. Neither option dominates strongly. Focus on what matters most to you: flexibility or security.',favor:'neutral'});
+  }
+
+  factors.forEach(function(f){
+    var color = f.favor==='lump'?'var(--accent2)':f.favor==='pension'?'var(--green)':'var(--yellow)';
+    html += '<div class="factor-card">';
+    html += '<div class="factor-title"><span class="factor-icon">'+f.icon+'</span><span style="color:'+color+'">'+f.title+'</span></div>';
+    html += '<div class="factor-body">'+f.body+'</div>';
+    html += '</div>';
+  });
+
+  html += '</div></div></div>';
+
+  html += '<div class="disclaimer">⚠️ <strong>This is educational, not financial advice.</strong> This calculator uses simplified models and estimates. Actual results depend on investment performance, tax law changes, inflation, longevity, and many personal factors. Please consult a fee-only financial advisor (NAPFA.org) or certified financial planner before making this decision.</div>';
+
+  document.getElementById('outputCol').innerHTML = html;
+}
+
+// Radio styling
+document.querySelectorAll('.radio-opt input[type=radio]').forEach(function(r){
+  r.addEventListener('change', function(){
+    var group = this.closest('.radio-group');
+    group.querySelectorAll('.radio-opt').forEach(function(o){o.classList.remove('selected');});
+    this.closest('.radio-opt').classList.add('selected');
+    calc();
+  });
+});
+
+// Init
+calc();
+
+var _mt=document.getElementById('megaToggle'),_mm=document.getElementById('megaMenu'),_mo=document.getElementById('megaOverlay'),_mc=document.getElementById('megaClose');
+function _openMega(){_mm.classList.add('open');_mo.classList.add('open');}
+function _closeMega(){_mm.classList.remove('open');_mo.classList.remove('open');}
+if(_mt)_mt.addEventListener('click',function(e){e.stopPropagation();_mm.classList.contains('open')?_closeMega():_openMega();});
+if(_mc)_mc.addEventListener('click',_closeMega);
+if(_mo)_mo.addEventListener('click',_closeMega);
+document.addEventListener('keydown',function(e){if(e.key==='Escape')_closeMega();});
+</script>
+</body>
+</html>
