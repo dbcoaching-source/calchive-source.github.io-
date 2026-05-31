@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roth Conversion Calculator | Should You Convert to a Roth IRA? | CalcHive</title>
+<meta name="description" content="Should you convert your Traditional IRA or 401k to a Roth? Free calculator compares after-tax future value, the tax cost now, and the break-even tax rate.">
+<link rel="canonical" href="https://calchive.co/roth-conversion-calculator.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3ZP51PBFPZ"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3ZP51PBFPZ');</script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--green-dim:#16a34a;--yellow:#eab308;--red:#ef4444;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:#f1f5f9}
+.logo a{text-decoration:none;color:inherit}
+.logo span{color:#3b82f6}
+header{background:#1a1d27;border-bottom:1px solid #2e3347;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:200}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
+.nav-links a{color:#94a3b8;text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:#f1f5f9}
+.nav-more-btn{background:none;border:none;color:#94a3b8;font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif}
+.nav-more-btn:hover{color:#f1f5f9}
+.mega-overlay{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:150}
+.mega-menu{display:none;position:fixed;top:64px;left:0;right:0;background:#1a1d27;border-bottom:2px solid #3b82f6;z-index:160;padding:1.5rem 2rem 2rem;box-shadow:0 8px 32px rgba(0,0,0,.6);max-height:calc(100vh - 64px);overflow-y:auto}
+.mega-menu.open{display:block}
+.mega-overlay.open{display:block}
+.mega-inner{max-width:1200px;margin:0 auto}
+.mega-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid #2e3347}
+.mega-title{font-family:'Playfair Display',serif;font-weight:900;font-size:1.1rem;color:#f1f5f9}
+.mega-all-link{color:#60a5fa;text-decoration:none;font-size:.82rem;font-weight:600}
+.mega-close{background:none;border:none;color:#94a3b8;font-size:1.2rem;cursor:pointer;padding:0;line-height:1}
+.mega-close:hover{color:#f1f5f9}
+.mega-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem}
+.mega-col h3{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#3b82f6;margin-bottom:.6rem}
+.mega-col a{display:block;color:#94a3b8;text-decoration:none;font-size:.8rem;padding:3px 0}
+.mega-col a:hover{color:#60a5fa}
+@media(max-width:800px){.nav-links{display:none}}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,2.75rem);margin-bottom:.75rem}
+.hero h1 span{color:var(--accent2)}
+.hero-sub{font-size:.95rem;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.6}
+.main{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:380px 1fr;gap:2rem;align-items:start}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.25rem}
+.panel:last-child{margin-bottom:0}
+.panel-head{background:var(--surface);border-bottom:1px solid var(--border);padding:1rem 1.5rem;font-weight:700;font-size:.95rem;font-family:'Playfair Display',serif;display:flex;align-items:center;gap:.5rem}
+.panel-head .icon{font-size:1.1rem}
+.panel-body{padding:1.5rem}
+.field{margin-bottom:1.1rem}
+.field label{display:block;font-size:.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+.field-hint{font-size:.7rem;color:var(--muted);margin-top:.25rem;opacity:.8}
+.input-prefix{position:relative;display:flex;align-items:center}
+.input-prefix span{position:absolute;left:.75rem;color:var(--muted);font-size:.9rem;font-weight:600;pointer-events:none}
+.input-prefix input{padding-left:1.75rem}
+.input-suffix{position:relative;display:flex;align-items:center}
+.input-suffix span{position:absolute;right:.75rem;color:var(--muted);font-size:.9rem;pointer-events:none}
+.input-suffix input{padding-right:2rem}
+input[type=number],input[type=text],select{width:100%;padding:.65rem .75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.9rem;outline:none;appearance:none}
+input:focus,select:focus{border-color:var(--accent)}
+.radio-group{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.radio-opt{display:flex;align-items:center;gap:.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.6rem .75rem;cursor:pointer;transition:all .15s}
+.radio-opt:hover{border-color:var(--accent)}
+.radio-opt input[type=radio]{width:14px;height:14px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
+.radio-opt span{font-size:.82rem}
+.radio-opt.selected{border-color:var(--accent);background:rgba(59,130,246,.1)}
+.section-divider{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent2);margin:.25rem 0 .75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.875rem 1.5rem;font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;width:100%;transition:background .2s}
+.btn:hover{background:#2563eb}
+.verdict{border-radius:12px;padding:1.5rem;margin-bottom:1.25rem;border:2px solid}
+.verdict.lump{border-color:var(--accent);background:rgba(59,130,246,.08)}
+.verdict.pension{border-color:var(--green);background:rgba(34,197,94,.08)}
+.verdict.neutral{border-color:var(--yellow);background:rgba(234,179,8,.08)}
+.verdict-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem}
+.verdict-title{font-family:'Playfair Display',serif;font-weight:900;font-size:1.5rem;margin-bottom:.4rem}
+.verdict-sub{font-size:.85rem;color:var(--muted);line-height:1.6}
+.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.25rem}
+.metric{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem}
+.metric-label{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.3rem}
+.metric-value{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--text)}
+.metric-sub{font-size:.72rem;color:var(--muted);margin-top:.2rem}
+.metric.highlight .metric-value{color:var(--accent2)}
+.comparison-table{width:100%;border-collapse:collapse;margin-bottom:1.25rem;font-size:.85rem}
+.comparison-table th{background:var(--surface2);padding:.75rem 1rem;text-align:left;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:1px solid var(--border)}
+.comparison-table td{padding:.75rem 1rem;border-bottom:1px solid var(--border);vertical-align:top}
+.comparison-table tr:last-child td{border-bottom:none}
+.comparison-table .lump-col{color:var(--accent2)}
+.comparison-table .pension-col{color:var(--green)}
+.tag{display:inline-block;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-left:.4rem;vertical-align:middle}
+.tag.pro{background:rgba(34,197,94,.15);color:var(--green)}
+.tag.con{background:rgba(239,68,68,.15);color:var(--red)}
+.tag.neutral{background:rgba(234,179,8,.15);color:var(--yellow)}
+.chart-wrap{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.25rem}
+.chart-title{font-size:.78rem;font-weight:600;color:var(--muted);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.06em}
+.factors{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.25rem}
+.factor-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem}
+.factor-title{font-size:.78rem;font-weight:700;margin-bottom:.35rem;display:flex;align-items:center;gap:.35rem}
+.factor-body{font-size:.75rem;color:var(--muted);line-height:1.5}
+.factor-icon{font-size:1rem}
+.disclaimer{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.875rem;font-size:.72rem;color:var(--muted);line-height:1.6;margin-bottom:1.25rem}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted)}
+.faq-section{max-width:1100px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted);margin-top:2rem}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:800px){.main{grid-template-columns:1fr}.metrics-grid{grid-template-columns:1fr 1fr}.factors{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo"><a href="/index.html">Calc<span>Hive</span></a></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/retirement-calculator.html">Retirement</a></li>
+  <li><a href="/pension-lump-sum-calculator.html">Pension</a></li>
+  <li><a href="/401k-calculator.html">401k</a></li>
+  <li><button class="nav-more-btn" id="megaToggle">All Calculators &#9660;</button></li>
+</ul>
+</header>
+<div class="mega-overlay" id="megaOverlay"></div>
+<div class="mega-menu" id="megaMenu">
+<div class="mega-inner">
+<div class="mega-top">
+  <span class="mega-title">All 35 Free Calculators</span>
+  <div style="display:flex;align-items:center;gap:1.5rem">
+    <a class="mega-all-link" href="/tools.html">Browse All Calculators &rarr;</a>
+    <button class="mega-close" id="megaClose">&#x2715;</button>
+  </div>
+</div>
+<div class="mega-grid">
+<div class="mega-col"><h3>Home &amp; Mortgage</h3>
+  <a href="/mortgage-calculator.html">Mortgage Calculator</a>
+  <a href="/mortgage-refinance-calculator.html">Refinance Calculator</a>
+  <a href="/mortgage-payoff-vs-invest-calculator.html">Payoff vs Invest</a>
+  <a href="/rent-vs-buy-calculator.html">Rent vs Buy</a>
+  <h3 style="margin-top:1rem">Loans</h3>
+  <a href="/loan-calculator.html">Loan Calculator</a>
+  <a href="/car-loan-calculator.html">Car Loan</a>
+  <a href="/student-loan-calculator.html">Student Loan</a>
+  <a href="/credit-card-payoff-calculator.html">Credit Card Payoff</a>
+  <a href="/debt-snowball-calculator.html">Debt Snowball</a>
+  <a href="/debt-to-income-calculator.html">Debt-to-Income</a>
+</div>
+<div class="mega-col"><h3>Savings &amp; Investing</h3>
+  <a href="/compound-interest-calculator.html">Compound Interest</a>
+  <a href="/savings-goal-calculator.html">Savings Goal</a>
+  <a href="/savings-rate-calculator.html">Savings Rate</a>
+  <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+  <a href="/investment-return-calculator.html">Investment Return</a>
+  <a href="/dividend-calculator.html">Dividend Calculator</a>
+  <a href="/roi-calculator.html">ROI Calculator</a>
+  <a href="/401k-calculator.html">401k Calculator</a>
+  <a href="/net-worth-calculator.html">Net Worth</a>
+</div>
+<div class="mega-col"><h3>Retirement</h3>
+  <a href="/retirement-calculator.html">Retirement Calculator</a>
+  <a href="/401k-calculator.html">401k Calculator</a>
+  <a href="/pension-lump-sum-calculator.html">Pension: Lump Sum vs Monthly</a>
+  <a href="/social-security-calculator.html">Social Security Age</a>
+  <a href="/annuity-vs-lump-sum-calculator.html">Annuity vs Lump Sum</a>
+  <a href="/roth-conversion-calculator.html">Roth Conversion</a>
+  <a href="/rmd-calculator.html">RMD Calculator</a>
+  <h3 style="margin-top:1rem">Tax &amp; Income</h3>
+  <a href="/tax-bracket-calculator.html">Tax Bracket</a>
+  <a href="/paycheck-calculator.html">Paycheck Calculator</a>
+  <a href="/hourly-to-salary-calculator.html">Hourly to Salary</a>
+  <a href="/salary-comparison-calculator.html">Salary Comparison</a>
+</div>
+<div class="mega-col"><h3>Budgeting</h3>
+  <a href="/budget-planner.html">Budget Planner</a>
+  <a href="/savings-goal-calculator.html">Savings Goal</a>
+  <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+  <h3 style="margin-top:1rem">Business</h3>
+  <a href="/break-even-calculator.html">Break Even</a>
+  <a href="/invoice-generator.html">Invoice Generator</a>
+  <a href="/roi-calculator.html">ROI Calculator</a>
+</div>
+<div class="mega-col"><h3>Other Tools</h3>
+  <a href="/currency-converter.html">Currency Converter</a>
+  <a href="/inflation-calculator.html">Inflation Calculator</a>
+  <a href="/tip-calculator.html">Tip Calculator</a>
+  <a href="/tools.html" style="color:#60a5fa;font-weight:600;margin-top:.5rem;display:block">View All 35 &rarr;</a>
+</div>
+</div>
+</div>
+</div>
+<div class="hero">
+  <div class="hero-eyebrow">Free &middot; No Signup &middot; Instant Results</div>
+  <h1>Should You Do a <span>Roth Conversion?</span></h1>
+  <p class="hero-sub">Converting means paying income tax now so the money grows and comes out tax-free later. It pays off if your tax rate later is higher than today &mdash; especially if you can pay the tax from outside savings.</p>
+</div>
+<div class="main">
+<div class="input-col">
+
+<div class="panel"><div class="panel-head"><span class="icon">&#128176;</span> The Conversion</div><div class="panel-body">
+  <div class="field"><label>Amount to Convert</label>
+    <div class="input-prefix"><span>$</span><input type="number" id="amount" value="100000" min="0" oninput="calc()"></div>
+    <div class="field-hint">How much of your Traditional IRA / 401k you'd move to a Roth</div></div>
+  <div class="field"><label>Pay the Conversion Tax From</label>
+    <div class="radio-group"><label class="radio-opt selected"><input type="radio" name="payfrom" value="outside" checked onchange="calc()"><span>Outside savings</span></label>
+    <label class="radio-opt"><input type="radio" name="payfrom" value="ira" onchange="calc()"><span>The IRA itself</span></label></div>
+    <div class="field-hint">Paying from outside savings is far more powerful &mdash; it shelters more money in the Roth</div></div>
+</div></div>
+<div class="panel"><div class="panel-head"><span class="icon">&#129534;</span> Tax Rates</div><div class="panel-body">
+  <div class="field"><label>Your Marginal Tax Rate Today</label>
+    <select id="tNow" onchange="calc()">
+      <option value="0.10">10%</option><option value="0.12">12%</option><option value="0.22" selected>22%</option>
+      <option value="0.24">24%</option><option value="0.32">32%</option><option value="0.35">35%</option><option value="0.37">37%</option>
+    </select>
+    <div class="field-hint">Include state income tax if applicable. A large conversion can push you into a higher bracket.</div></div>
+  <div class="field"><label>Expected Tax Rate in Retirement</label>
+    <select id="tFut" onchange="calc()">
+      <option value="0.10">10%</option><option value="0.12">12%</option><option value="0.22">22%</option>
+      <option value="0.24" selected>24%</option><option value="0.32">32%</option><option value="0.35">35%</option><option value="0.37">37%</option>
+    </select>
+    <div class="field-hint">The rate you expect when you'd otherwise withdraw the Traditional money</div></div>
+</div></div>
+<div class="panel"><div class="panel-head"><span class="icon">&#128200;</span> Growth</div><div class="panel-body">
+  <div class="field"><label>Years Until You'd Withdraw</label><input type="number" id="years" value="15" min="1" max="50" oninput="calc()"></div>
+  <div class="field"><label>Expected Annual Growth</label>
+    <div class="input-suffix"><span>%</span><input type="number" id="growth" value="6" min="0" max="12" step="0.5" oninput="calc()"></div></div>
+</div></div>
+
+</div>
+<div class="output-col" id="outputCol">
+  <div style="text-align:center;padding:4rem 2rem;color:var(--muted)">
+    <div style="font-size:3rem;margin-bottom:1rem">&#128260;</div>
+    <p>Fill in your details on the left to see your full analysis.</p>
+  </div>
+</div>
+</div>
+<div class="ad-slot" style="max-width:1100px;margin:0 auto 1.5rem">Advertisement &middot; Google AdSense</div>
+<div class="faq-section">
+<h2>Frequently asked questions</h2>
+<div class="faq-item"><div class="faq-q">How does a Roth conversion actually work?</div><div class="faq-a">You move money from a pre-tax account (Traditional IRA or 401k) into a Roth IRA and pay ordinary income tax on the converted amount in that year. After that, the money grows tax-free and qualified withdrawals are tax-free. There is no income limit on conversions, unlike direct Roth contributions.</div></div>
+<div class="faq-item"><div class="faq-q">When is converting worth it?</div><div class="faq-a">Mathematically, a conversion wins when your tax rate in retirement will be higher than your rate today. It is especially attractive in lower-income years &mdash; early retirement before Social Security and RMDs begin, a sabbatical, or a year with business losses &mdash; when you can convert at a low bracket.</div></div>
+<div class="faq-item"><div class="faq-q">Why does paying the tax from outside savings matter so much?</div><div class="faq-a">If you pay the conversion tax from the IRA itself, less money lands in the Roth. If you pay from a separate taxable account, the full amount keeps growing tax-free and you also remove money from a taxable account where future gains would be taxed. This 'pay from outside' advantage is often the single biggest driver of the result.</div></div>
+<div class="faq-item"><div class="faq-q">What about RMDs?</div><div class="faq-a">Traditional IRAs and 401ks force Required Minimum Distributions starting at age 73 or 75, which raise your taxable income whether you need the money or not. Roth IRAs have no RMDs during your lifetime, so converting can shrink future RMDs and the taxes they trigger &mdash; a benefit this simple calculator does not fully model.</div></div>
+<div class="faq-item"><div class="faq-q">Are there hidden downsides to a big conversion?</div><div class="faq-a">Yes. A large conversion can push you into a higher bracket, increase Medicare premiums via IRMAA two years later, reduce ACA health-insurance subsidies, and raise the taxable portion of Social Security. Many people convert smaller amounts over several years ("filling up a bracket") to manage these effects.</div></div>
+<div class="faq-item"><div class="faq-q">Is there a deadline or a way to undo it?</div><div class="faq-a">Conversions must be done by December 31 to count for that tax year. Since 2018, conversions can no longer be reversed ("recharacterized"), so the decision is permanent &mdash; another reason to model it carefully or work with a CPA before converting.</div></div>
+</div>
+<footer>
+<p>&copy; 2026 CalcHive &middot; <a href="/about.html">About</a> &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a> &middot; <a href="/disclaimer.html">Disclaimer</a> &middot; <a href="/contact.html">Contact</a></p>
+<p style="margin-top:.5rem;font-size:.72rem">This calculator is for educational purposes only and does not constitute financial, tax, or investment advice. Consult a qualified professional before making decisions.</p>
+</footer>
+<script>
+
+function fmt(n){return '$'+Math.round(n).toLocaleString();}
+function fmtK(n){if(n<0)return '-'+fmtK(-n);return n>=1000000?'$'+(n/1000000).toFixed(2)+'M':'$'+Math.round(n/1000).toLocaleString()+'K';}
+function fmtPct(n){return n.toFixed(1)+'%';}
+function num(id,d){var v=parseFloat(document.getElementById(id).value);return isNaN(v)?d:v;}
+function val(id){return document.getElementById(id).value;}
+function splitBar(leftLabel,rightLabel,leftPct,leftColor,rightColor){
+  var rightPct=100-leftPct;
+  var h='<div style="margin-top:1rem;display:flex;gap:.5rem;align-items:center;font-size:.78rem">';
+  h+='<span style="color:'+leftColor+';font-weight:700">'+leftLabel+'</span>';
+  h+='<div style="flex:1;background:var(--surface2);border-radius:4px;height:8px;overflow:hidden">';
+  h+='<div style="width:'+leftPct+'%;height:100%;background:'+leftColor+';border-radius:4px"></div></div>';
+  h+='<span style="color:'+rightColor+';font-weight:700">'+rightLabel+'</span></div>';
+  h+='<div style="display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-top:.25rem"><span>'+leftPct+'%</span><span>'+rightPct+'%</span></div>';
+  return h;
+}
+function barChart(title,legend,rows,maxVal){
+  var h='<div class="chart-wrap"><div class="chart-title">'+title+'</div>';
+  h+='<div style="display:flex;gap:1rem;margin-bottom:.75rem;font-size:.75rem;flex-wrap:wrap">'+legend+'</div><div class="chart-bars">';
+  rows.forEach(function(r){
+    h+='<div style="margin-bottom:.5rem"><div style="font-size:.72rem;color:var(--muted);margin-bottom:.25rem">'+r.label+'</div>';
+    r.bars.forEach(function(b){
+      var pct=maxVal>0?Math.max(0,Math.round(b.v/maxVal*100)):0;
+      h+='<div style="display:flex;gap:.5rem;align-items:center;margin-bottom:.2rem">';
+      h+='<div style="width:64px;font-size:.7rem;color:'+b.color+'">'+b.name+'</div>';
+      h+='<div style="flex:1;background:var(--surface2);border-radius:3px;height:16px"><div style="width:'+pct+'%;height:100%;background:'+b.color+';border-radius:3px"></div></div>';
+      h+='<div style="width:72px;font-size:.7rem;text-align:right">'+fmtK(b.v)+'</div></div>';
+    });
+    h+='</div>';
+  });
+  h+='</div></div>';return h;
+}
+function factorCards(factors){
+  var h='<div class="factors">';
+  factors.forEach(function(f){
+    var color=f.favor==='a'?'var(--accent2)':f.favor==='b'?'var(--green)':'var(--yellow)';
+    h+='<div class="factor-card"><div class="factor-title"><span class="factor-icon">'+f.icon+'</span><span style="color:'+color+'">'+f.title+'</span></div>';
+    h+='<div class="factor-body">'+f.body+'</div></div>';
+  });
+  h+='</div>';return h;
+}
+function verdictBox(type,label,labelColor,title,sub,barHtml){
+  var h='<div class="verdict '+type+'">';
+  h+='<div class="verdict-label" style="color:'+labelColor+'">'+label+'</div>';
+  h+='<div class="verdict-title">'+title+'</div>';
+  h+='<div class="verdict-sub">'+sub+'</div>'+(barHtml||'')+'</div>';
+  return h;
+}
+function metricsGrid(items){
+  var h='<div class="metrics-grid">';
+  items.forEach(function(m){
+    h+='<div class="metric'+(m.hl?' highlight':'')+'"><div class="metric-label">'+m.label+'</div><div class="metric-value">'+m.value+'</div>'+(m.sub?'<div class="metric-sub">'+m.sub+'</div>':'')+'</div>';
+  });
+  h+='</div>';return h;
+}
+var DISC='<div class="disclaimer">&#9888; <strong>This is educational, not financial advice.</strong> This tool uses simplified models and assumptions that may not reflect your full situation, current tax law, or market conditions. Consult a fee-only fiduciary advisor (NAPFA.org) or CPA before acting.</div>';
+
+
+function calc(){
+  var amount=num('amount',100000),tNow=parseFloat(val('tNow')),tFut=parseFloat(val('tFut'));
+  var years=num('years',15),growth=num('growth',6)/100;
+  var payOutside=document.querySelector('input[name=payfrom]:checked').value==='outside';
+  var g=Math.pow(1+growth,years);
+  var taxNow=amount*tNow;
+  var roth,trad,sideAccount=0,capGains=0.15;
+  if(payOutside){
+    roth=amount*g; // full amount converts, tax paid externally
+    // alternative: keep amount in Traditional + invest taxNow in a taxable account
+    var tradGross=amount*g; trad=tradGross*(1-tFut);
+    var sideGrowth=taxNow*g; sideAccount=taxNow+(sideGrowth-taxNow)*(1-capGains);
+    trad+=sideAccount;
+  } else {
+    roth=amount*(1-tNow)*g; // tax comes out of the conversion
+    trad=amount*g*(1-tFut);
+  }
+  var advantage=roth-trad;
+  var rothBetter=advantage>0;
+  // break-even future tax rate (rate at which Traditional path equals Roth)
+  var beRate;
+  if(payOutside){
+    // roth = amount*g*(1-be) + sideAccount  => solve be
+    beRate=1-((roth-sideAccount)/(amount*g));
+  } else {
+    // amount*(1-tNow)*g = amount*g*(1-be) => be = tNow
+    beRate=tNow;
+  }
+  beRate=Math.max(0,Math.min(0.6,beRate));
+  // scoring: roth (b=convert) vs traditional (a=don't)
+  var conv=0,no=0;
+  if(tFut>tNow)conv+=3; else if(tFut<tNow)no+=3; else conv+=0;
+  if(payOutside)conv+=2;
+  if(years>=15)conv+=1;
+  if(advantage>0)conv+=2; else no+=2;
+  if(tNow>=0.32)no+=1;
+  var tot=conv+no,convPct=tot>0?Math.round(conv/tot*100):50,noPct=100-convPct;
+  var vType,vlc,vTitle,vSub;
+  if(rothBetter && convPct>=55){vType='pension';vlc='var(--green)';vTitle='Converting Likely Pays Off';
+    vSub='Based on your tax rates, time horizon, and how you\'d pay the tax, the Roth is projected to leave you with more after-tax money &mdash; plus tax-free growth, no future RMDs, and a tax-free inheritance for heirs.';}
+  else if(!rothBetter && noPct>=55){vType='lump';vlc='var(--accent2)';vTitle='Probably Skip the Conversion';
+    vSub='Based on your inputs, you\'d likely come out behind after paying tax now &mdash; usually because your expected retirement tax rate is the same or lower than today\'s. Keeping the money tax-deferred looks better.';}
+  else {vType='neutral';vlc='var(--yellow)';vTitle='It\'s a Close Call';
+    vSub='The after-tax outcomes are close. Non-math factors &mdash; RMD reduction, IRMAA, ACA subsidies, estate planning, and bracket management &mdash; may decide it. A partial conversion over several years is often the answer.';}
+  var bar=splitBar('Don\'t Convert','Convert',noPct,'var(--accent2)','var(--green)');
+  var html=verdictBox(vType,'Our Analysis',vlc,vTitle,vSub,bar);
+  html+=metricsGrid([
+    {label:'Tax Cost Now',value:fmt(taxNow),sub:'Paid '+(payOutside?'from outside savings':'from the IRA'),hl:false},
+    {label:'Break-Even Future Rate',value:fmtPct(beRate*100),sub:'Convert wins if your future rate exceeds this',hl:true},
+    {label:'Roth After-Tax Value',value:fmtK(roth),sub:'In '+years+' years, tax-free',hl:true},
+    {label:'No-Convert After-Tax Value',value:fmtK(trad),sub:'Traditional'+(payOutside?' + side account':'')+', after tax',hl:false},
+    {label:'Net Advantage',value:(advantage>=0?'+':'')+fmtK(advantage),sub:rothBetter?'In favor of converting':'In favor of waiting',hl:false},
+    {label:'Effective Tax Rate',value:fmtPct(tNow*100),sub:'On the converted amount today',hl:false},
+  ]);
+  var maxV=Math.max(roth,trad);
+  html+=barChart('After-Tax Value in '+years+' Years',
+    '<span style="color:var(--green)">&#9632; Convert to Roth</span><span style="color:var(--accent2)">&#9632; Keep Traditional</span>',
+    [{label:'Projected after-tax balance',bars:[
+      {name:'Roth',v:roth,color:'var(--green-dim)'},
+      {name:'Traditional',v:trad,color:'var(--accent)'}]}],maxV);
+  var factors=[];
+  if(tFut>tNow)factors.push({icon:'&#128200;',title:'Higher Rate Later',body:'You expect to be in a higher bracket in retirement ('+(tFut*100).toFixed(0)+'% vs '+(tNow*100).toFixed(0)+'% now). Paying tax at today\'s lower rate is the core case for converting.',favor:'b'});
+  else if(tFut<tNow)factors.push({icon:'&#128201;',title:'Lower Rate Later',body:'You expect a lower bracket in retirement, which usually argues for keeping the deduction now and paying tax later at the lower rate.',favor:'a'});
+  if(payOutside)factors.push({icon:'&#128181;',title:'Paying Tax From Outside',body:'Covering the '+fmt(taxNow)+' tax bill from a taxable account lets the full '+fmt(amount)+' grow tax-free in the Roth. This is the biggest lever in your favor.',favor:'b'});
+  else factors.push({icon:'&#9888;&#65039;',title:'Paying Tax From the IRA',body:'Using IRA money for the tax means only '+fmt(amount*(1-tNow))+' actually reaches the Roth, sharply reducing the benefit. If possible, pay from outside savings instead.',favor:'a'});
+  factors.push({icon:'&#128338;',title:'No Future RMDs',body:'Roth IRAs have no Required Minimum Distributions during your life, so converting can lower future RMDs and the taxes they trigger &mdash; a benefit beyond this calculator\'s simple math.',favor:'b'});
+  factors.push({icon:'&#129657;',title:'Watch IRMAA &amp; ACA',body:'A large conversion can raise Medicare premiums (IRMAA) two years later and cut ACA subsidies. Converting smaller amounts across several low-income years often works best.',favor:'neutral'});
+  html+='<div class="panel"><div class="panel-head"><span class="icon">&#127919;</span> Key Factors For You</div><div class="panel-body">'+factorCards(factors)+'</div></div>';
+  html+=DISC;
+  document.getElementById('outputCol').innerHTML=html;
+}
+
+
+document.querySelectorAll('.radio-opt input[type=radio]').forEach(function(r){
+  r.addEventListener('change', function(){
+    var group = this.closest('.radio-group');
+    group.querySelectorAll('.radio-opt').forEach(function(o){o.classList.remove('selected');});
+    this.closest('.radio-opt').classList.add('selected');
+    calc();
+  });
+});
+calc();
+var _mt=document.getElementById('megaToggle'),_mm=document.getElementById('megaMenu'),_mo=document.getElementById('megaOverlay'),_mc=document.getElementById('megaClose');
+function _openMega(){_mm.classList.add('open');_mo.classList.add('open');}
+function _closeMega(){_mm.classList.remove('open');_mo.classList.remove('open');}
+if(_mt)_mt.addEventListener('click',function(e){e.stopPropagation();_mm.classList.contains('open')?_closeMega():_openMega();});
+if(_mc)_mc.addEventListener('click',_closeMega);
+if(_mo)_mo.addEventListener('click',_closeMega);
+document.addEventListener('keydown',function(e){if(e.key==='Escape')_closeMega();});
+
+</script>
+</body>
+</html>

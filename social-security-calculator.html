@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Security Claiming Age Calculator (62 vs 67 vs 70) | CalcHive</title>
+<meta name="description" content="Should you claim Social Security at 62, full retirement age, or 70? Free calculator shows monthly benefit, lifetime totals, and break-even ages for each strategy.">
+<link rel="canonical" href="https://calchive.co/social-security-calculator.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8115981364478047" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3ZP51PBFPZ"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3ZP51PBFPZ');</script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3347;--accent:#3b82f6;--accent2:#60a5fa;--green:#22c55e;--green-dim:#16a34a;--yellow:#eab308;--red:#ef4444;--text:#f1f5f9;--muted:#94a3b8;--card:#1e2235}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:#f1f5f9}
+.logo a{text-decoration:none;color:inherit}
+.logo span{color:#3b82f6}
+header{background:#1a1d27;border-bottom:1px solid #2e3347;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:200}
+.nav-links{display:flex;gap:1.5rem;list-style:none;font-size:.82rem;font-weight:500;align-items:center}
+.nav-links a{color:#94a3b8;text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:#f1f5f9}
+.nav-more-btn{background:none;border:none;color:#94a3b8;font-size:.82rem;font-weight:500;cursor:pointer;padding:0;font-family:'Inter',sans-serif}
+.nav-more-btn:hover{color:#f1f5f9}
+.mega-overlay{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:150}
+.mega-menu{display:none;position:fixed;top:64px;left:0;right:0;background:#1a1d27;border-bottom:2px solid #3b82f6;z-index:160;padding:1.5rem 2rem 2rem;box-shadow:0 8px 32px rgba(0,0,0,.6);max-height:calc(100vh - 64px);overflow-y:auto}
+.mega-menu.open{display:block}
+.mega-overlay.open{display:block}
+.mega-inner{max-width:1200px;margin:0 auto}
+.mega-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid #2e3347}
+.mega-title{font-family:'Playfair Display',serif;font-weight:900;font-size:1.1rem;color:#f1f5f9}
+.mega-all-link{color:#60a5fa;text-decoration:none;font-size:.82rem;font-weight:600}
+.mega-close{background:none;border:none;color:#94a3b8;font-size:1.2rem;cursor:pointer;padding:0;line-height:1}
+.mega-close:hover{color:#f1f5f9}
+.mega-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem}
+.mega-col h3{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#3b82f6;margin-bottom:.6rem}
+.mega-col a{display:block;color:#94a3b8;text-decoration:none;font-size:.8rem;padding:3px 0}
+.mega-col a:hover{color:#60a5fa}
+@media(max-width:800px){.nav-links{display:none}}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-bottom:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,5vw,2.75rem);margin-bottom:.75rem}
+.hero h1 span{color:var(--accent2)}
+.hero-sub{font-size:.95rem;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.6}
+.main{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:380px 1fr;gap:2rem;align-items:start}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.25rem}
+.panel:last-child{margin-bottom:0}
+.panel-head{background:var(--surface);border-bottom:1px solid var(--border);padding:1rem 1.5rem;font-weight:700;font-size:.95rem;font-family:'Playfair Display',serif;display:flex;align-items:center;gap:.5rem}
+.panel-head .icon{font-size:1.1rem}
+.panel-body{padding:1.5rem}
+.field{margin-bottom:1.1rem}
+.field label{display:block;font-size:.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+.field-hint{font-size:.7rem;color:var(--muted);margin-top:.25rem;opacity:.8}
+.input-prefix{position:relative;display:flex;align-items:center}
+.input-prefix span{position:absolute;left:.75rem;color:var(--muted);font-size:.9rem;font-weight:600;pointer-events:none}
+.input-prefix input{padding-left:1.75rem}
+.input-suffix{position:relative;display:flex;align-items:center}
+.input-suffix span{position:absolute;right:.75rem;color:var(--muted);font-size:.9rem;pointer-events:none}
+.input-suffix input{padding-right:2rem}
+input[type=number],input[type=text],select{width:100%;padding:.65rem .75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.9rem;outline:none;appearance:none}
+input:focus,select:focus{border-color:var(--accent)}
+.radio-group{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.radio-opt{display:flex;align-items:center;gap:.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.6rem .75rem;cursor:pointer;transition:all .15s}
+.radio-opt:hover{border-color:var(--accent)}
+.radio-opt input[type=radio]{width:14px;height:14px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
+.radio-opt span{font-size:.82rem}
+.radio-opt.selected{border-color:var(--accent);background:rgba(59,130,246,.1)}
+.section-divider{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent2);margin:.25rem 0 .75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.875rem 1.5rem;font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;width:100%;transition:background .2s}
+.btn:hover{background:#2563eb}
+.verdict{border-radius:12px;padding:1.5rem;margin-bottom:1.25rem;border:2px solid}
+.verdict.lump{border-color:var(--accent);background:rgba(59,130,246,.08)}
+.verdict.pension{border-color:var(--green);background:rgba(34,197,94,.08)}
+.verdict.neutral{border-color:var(--yellow);background:rgba(234,179,8,.08)}
+.verdict-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem}
+.verdict-title{font-family:'Playfair Display',serif;font-weight:900;font-size:1.5rem;margin-bottom:.4rem}
+.verdict-sub{font-size:.85rem;color:var(--muted);line-height:1.6}
+.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.25rem}
+.metric{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem}
+.metric-label{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.3rem}
+.metric-value{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--text)}
+.metric-sub{font-size:.72rem;color:var(--muted);margin-top:.2rem}
+.metric.highlight .metric-value{color:var(--accent2)}
+.comparison-table{width:100%;border-collapse:collapse;margin-bottom:1.25rem;font-size:.85rem}
+.comparison-table th{background:var(--surface2);padding:.75rem 1rem;text-align:left;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:1px solid var(--border)}
+.comparison-table td{padding:.75rem 1rem;border-bottom:1px solid var(--border);vertical-align:top}
+.comparison-table tr:last-child td{border-bottom:none}
+.comparison-table .lump-col{color:var(--accent2)}
+.comparison-table .pension-col{color:var(--green)}
+.tag{display:inline-block;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-left:.4rem;vertical-align:middle}
+.tag.pro{background:rgba(34,197,94,.15);color:var(--green)}
+.tag.con{background:rgba(239,68,68,.15);color:var(--red)}
+.tag.neutral{background:rgba(234,179,8,.15);color:var(--yellow)}
+.chart-wrap{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.25rem}
+.chart-title{font-size:.78rem;font-weight:600;color:var(--muted);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.06em}
+.factors{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.25rem}
+.factor-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem}
+.factor-title{font-size:.78rem;font-weight:700;margin-bottom:.35rem;display:flex;align-items:center;gap:.35rem}
+.factor-body{font-size:.75rem;color:var(--muted);line-height:1.5}
+.factor-icon{font-size:1rem}
+.disclaimer{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.875rem;font-size:.72rem;color:var(--muted);line-height:1.6;margin-bottom:1.25rem}
+.ad-slot{background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:1rem;text-align:center;margin:1.5rem 0;font-size:.7rem;color:var(--muted)}
+.faq-section{max-width:1100px;margin:0 auto 3rem;padding:0 1.5rem}
+.faq-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1.25rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.faq-a{font-size:.85rem;color:var(--muted);line-height:1.6}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:.8rem;color:var(--muted);margin-top:2rem}
+footer a{color:var(--accent2);text-decoration:none}
+@media(max-width:800px){.main{grid-template-columns:1fr}.metrics-grid{grid-template-columns:1fr 1fr}.factors{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo"><a href="/index.html">Calc<span>Hive</span></a></div>
+<ul class="nav-links">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/retirement-calculator.html">Retirement</a></li>
+  <li><a href="/pension-lump-sum-calculator.html">Pension</a></li>
+  <li><a href="/401k-calculator.html">401k</a></li>
+  <li><button class="nav-more-btn" id="megaToggle">All Calculators &#9660;</button></li>
+</ul>
+</header>
+<div class="mega-overlay" id="megaOverlay"></div>
+<div class="mega-menu" id="megaMenu">
+<div class="mega-inner">
+<div class="mega-top">
+  <span class="mega-title">All 35 Free Calculators</span>
+  <div style="display:flex;align-items:center;gap:1.5rem">
+    <a class="mega-all-link" href="/tools.html">Browse All Calculators &rarr;</a>
+    <button class="mega-close" id="megaClose">&#x2715;</button>
+  </div>
+</div>
+<div class="mega-grid">
+<div class="mega-col"><h3>Home &amp; Mortgage</h3>
+  <a href="/mortgage-calculator.html">Mortgage Calculator</a>
+  <a href="/mortgage-refinance-calculator.html">Refinance Calculator</a>
+  <a href="/mortgage-payoff-vs-invest-calculator.html">Payoff vs Invest</a>
+  <a href="/rent-vs-buy-calculator.html">Rent vs Buy</a>
+  <h3 style="margin-top:1rem">Loans</h3>
+  <a href="/loan-calculator.html">Loan Calculator</a>
+  <a href="/car-loan-calculator.html">Car Loan</a>
+  <a href="/student-loan-calculator.html">Student Loan</a>
+  <a href="/credit-card-payoff-calculator.html">Credit Card Payoff</a>
+  <a href="/debt-snowball-calculator.html">Debt Snowball</a>
+  <a href="/debt-to-income-calculator.html">Debt-to-Income</a>
+</div>
+<div class="mega-col"><h3>Savings &amp; Investing</h3>
+  <a href="/compound-interest-calculator.html">Compound Interest</a>
+  <a href="/savings-goal-calculator.html">Savings Goal</a>
+  <a href="/savings-rate-calculator.html">Savings Rate</a>
+  <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+  <a href="/investment-return-calculator.html">Investment Return</a>
+  <a href="/dividend-calculator.html">Dividend Calculator</a>
+  <a href="/roi-calculator.html">ROI Calculator</a>
+  <a href="/401k-calculator.html">401k Calculator</a>
+  <a href="/net-worth-calculator.html">Net Worth</a>
+</div>
+<div class="mega-col"><h3>Retirement</h3>
+  <a href="/retirement-calculator.html">Retirement Calculator</a>
+  <a href="/401k-calculator.html">401k Calculator</a>
+  <a href="/pension-lump-sum-calculator.html">Pension: Lump Sum vs Monthly</a>
+  <a href="/social-security-calculator.html">Social Security Age</a>
+  <a href="/annuity-vs-lump-sum-calculator.html">Annuity vs Lump Sum</a>
+  <a href="/roth-conversion-calculator.html">Roth Conversion</a>
+  <a href="/rmd-calculator.html">RMD Calculator</a>
+  <h3 style="margin-top:1rem">Tax &amp; Income</h3>
+  <a href="/tax-bracket-calculator.html">Tax Bracket</a>
+  <a href="/paycheck-calculator.html">Paycheck Calculator</a>
+  <a href="/hourly-to-salary-calculator.html">Hourly to Salary</a>
+  <a href="/salary-comparison-calculator.html">Salary Comparison</a>
+</div>
+<div class="mega-col"><h3>Budgeting</h3>
+  <a href="/budget-planner.html">Budget Planner</a>
+  <a href="/savings-goal-calculator.html">Savings Goal</a>
+  <a href="/emergency-fund-calculator.html">Emergency Fund</a>
+  <h3 style="margin-top:1rem">Business</h3>
+  <a href="/break-even-calculator.html">Break Even</a>
+  <a href="/invoice-generator.html">Invoice Generator</a>
+  <a href="/roi-calculator.html">ROI Calculator</a>
+</div>
+<div class="mega-col"><h3>Other Tools</h3>
+  <a href="/currency-converter.html">Currency Converter</a>
+  <a href="/inflation-calculator.html">Inflation Calculator</a>
+  <a href="/tip-calculator.html">Tip Calculator</a>
+  <a href="/tools.html" style="color:#60a5fa;font-weight:600;margin-top:.5rem;display:block">View All 35 &rarr;</a>
+</div>
+</div>
+</div>
+</div>
+<div class="hero">
+  <div class="hero-eyebrow">Free &middot; No Signup &middot; Instant Results</div>
+  <h1>When Should You Claim <span>Social Security?</span></h1>
+  <p class="hero-sub">Claiming at 62, your full retirement age, or 70 can change your lifetime benefits by tens of thousands of dollars. Enter your estimated benefit to compare all three.</p>
+</div>
+<div class="main">
+<div class="input-col">
+
+<div class="panel"><div class="panel-head"><span class="icon">&#128176;</span> Your Benefit</div><div class="panel-body">
+  <div class="field"><label>Estimated Monthly Benefit at Full Retirement Age</label>
+    <div class="input-prefix"><span>$</span><input type="number" id="pia" value="2400" min="0" oninput="calc()"></div>
+    <div class="field-hint">Your "primary insurance amount" &mdash; find it on your ssa.gov statement</div></div>
+  <div class="field"><label>Your Full Retirement Age (FRA)</label>
+    <select id="fra" onchange="calc()">
+      <option value="66">66 (born 1943&ndash;1954)</option>
+      <option value="66.5">66 and 6 mo (born 1957)</option>
+      <option value="67" selected>67 (born 1960 or later)</option>
+    </select>
+    <div class="field-hint">Most people retiring now have an FRA of 67</div></div>
+</div></div>
+<div class="panel"><div class="panel-head"><span class="icon">&#128100;</span> About You</div><div class="panel-body">
+  <div class="field"><label>Your Current Age</label><input type="number" id="curAge" value="61" min="50" max="70" oninput="calc()"></div>
+  <div class="field"><label>Life Expectancy</label><input type="number" id="lifeExp" value="86" min="65" max="110" oninput="calc()">
+    <div class="field-hint">US average is ~78 (men) / ~81 (women). Family history and health matter most.</div></div>
+  <div class="field"><label>Annual Cost-of-Living Adjustment (COLA)</label>
+    <div class="input-suffix"><span>%</span><input type="number" id="cola" value="2.5" min="0" max="5" step="0.1" oninput="calc()"></div>
+    <div class="field-hint">SS benefits rise with inflation. Long-run average is roughly 2&ndash;3%.</div></div>
+  <div class="field"><label>Still Working Before FRA?</label>
+    <div class="radio-group"><label class="radio-opt"><input type="radio" name="working" value="yes" onchange="calc()"><span>Yes</span></label>
+    <label class="radio-opt selected"><input type="radio" name="working" value="no" checked onchange="calc()"><span>No</span></label></div>
+    <div class="field-hint">If you work and claim before FRA, the earnings test may withhold benefits</div></div>
+  <div class="field"><label>Need the Income to Live On?</label>
+    <select id="need" onchange="calc()">
+      <option value="high">Yes &mdash; I need it as soon as possible</option>
+      <option value="medium" selected>Somewhat &mdash; I have some other savings</option>
+      <option value="low">No &mdash; I can comfortably wait</option>
+    </select></div>
+</div></div>
+
+</div>
+<div class="output-col" id="outputCol">
+  <div style="text-align:center;padding:4rem 2rem;color:var(--muted)">
+    <div style="font-size:3rem;margin-bottom:1rem">&#127991;&#65039;</div>
+    <p>Fill in your details on the left to see your full analysis.</p>
+  </div>
+</div>
+</div>
+<div class="ad-slot" style="max-width:1100px;margin:0 auto 1.5rem">Advertisement &middot; Google AdSense</div>
+<div class="faq-section">
+<h2>Frequently asked questions</h2>
+<div class="faq-item"><div class="faq-q">How much does claiming early or late change my benefit?</div><div class="faq-a">Claiming at 62 permanently reduces your benefit (about 30% lower than at an FRA of 67). Waiting past FRA earns delayed retirement credits of 8% per year until age 70, so claiming at 70 can be about 24% higher than at 67 &mdash; and roughly 77% higher than claiming at 62. These changes are permanent for the rest of your life.</div></div>
+<div class="faq-item"><div class="faq-q">What is the break-even age?</div><div class="faq-a">It is the age at which the higher monthly benefit from claiming later catches up to and overtakes the total benefits you would have collected by claiming earlier. Live past the break-even age and waiting wins; pass away before it and claiming early collected more in total. For 62 vs 70 the break-even is typically around age 80&ndash;82.</div></div>
+<div class="faq-item"><div class="faq-q">Does it ever make sense to claim at 62?</div><div class="faq-a">Yes. If you have serious health concerns or a shorter life expectancy, need the income to cover essential expenses, or have no other way to bridge the gap to a later claim, taking benefits at 62 can be the right call. It is also sometimes used by a lower-earning spouse while the higher earner delays.</div></div>
+<div class="faq-item"><div class="faq-q">Why might waiting until 70 be smart?</div><div class="faq-a">Delaying is essentially buying inflation-adjusted longevity insurance: a larger, guaranteed, COLA-protected check that you cannot outlive. It is most valuable for the higher earner in a couple (it also raises the survivor benefit), for people in good health, and for those with other assets to live on in the meantime.</div></div>
+<div class="faq-item"><div class="faq-q">What is the earnings test?</div><div class="faq-a">If you claim before your full retirement age and keep working, Social Security temporarily withholds $1 of benefits for every $2 you earn above an annual limit (a higher limit applies in the year you reach FRA). Those withheld benefits are not lost forever &mdash; your monthly amount is recalculated upward once you reach FRA.</div></div>
+<div class="faq-item"><div class="faq-q">Does this calculator include spousal or survivor benefits?</div><div class="faq-a">No &mdash; it models your own retirement benefit only. Spousal benefits, survivor benefits, and the interaction between two earners can significantly change the optimal strategy. Couples should run a dedicated analysis or consult an advisor before deciding.</div></div>
+</div>
+<footer>
+<p>&copy; 2026 CalcHive &middot; <a href="/about.html">About</a> &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a> &middot; <a href="/disclaimer.html">Disclaimer</a> &middot; <a href="/contact.html">Contact</a></p>
+<p style="margin-top:.5rem;font-size:.72rem">This calculator is for educational purposes only and does not constitute financial, tax, or investment advice. Consult a qualified professional before making decisions.</p>
+</footer>
+<script>
+
+function fmt(n){return '$'+Math.round(n).toLocaleString();}
+function fmtK(n){if(n<0)return '-'+fmtK(-n);return n>=1000000?'$'+(n/1000000).toFixed(2)+'M':'$'+Math.round(n/1000).toLocaleString()+'K';}
+function fmtPct(n){return n.toFixed(1)+'%';}
+function num(id,d){var v=parseFloat(document.getElementById(id).value);return isNaN(v)?d:v;}
+function val(id){return document.getElementById(id).value;}
+function splitBar(leftLabel,rightLabel,leftPct,leftColor,rightColor){
+  var rightPct=100-leftPct;
+  var h='<div style="margin-top:1rem;display:flex;gap:.5rem;align-items:center;font-size:.78rem">';
+  h+='<span style="color:'+leftColor+';font-weight:700">'+leftLabel+'</span>';
+  h+='<div style="flex:1;background:var(--surface2);border-radius:4px;height:8px;overflow:hidden">';
+  h+='<div style="width:'+leftPct+'%;height:100%;background:'+leftColor+';border-radius:4px"></div></div>';
+  h+='<span style="color:'+rightColor+';font-weight:700">'+rightLabel+'</span></div>';
+  h+='<div style="display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-top:.25rem"><span>'+leftPct+'%</span><span>'+rightPct+'%</span></div>';
+  return h;
+}
+function barChart(title,legend,rows,maxVal){
+  var h='<div class="chart-wrap"><div class="chart-title">'+title+'</div>';
+  h+='<div style="display:flex;gap:1rem;margin-bottom:.75rem;font-size:.75rem;flex-wrap:wrap">'+legend+'</div><div class="chart-bars">';
+  rows.forEach(function(r){
+    h+='<div style="margin-bottom:.5rem"><div style="font-size:.72rem;color:var(--muted);margin-bottom:.25rem">'+r.label+'</div>';
+    r.bars.forEach(function(b){
+      var pct=maxVal>0?Math.max(0,Math.round(b.v/maxVal*100)):0;
+      h+='<div style="display:flex;gap:.5rem;align-items:center;margin-bottom:.2rem">';
+      h+='<div style="width:64px;font-size:.7rem;color:'+b.color+'">'+b.name+'</div>';
+      h+='<div style="flex:1;background:var(--surface2);border-radius:3px;height:16px"><div style="width:'+pct+'%;height:100%;background:'+b.color+';border-radius:3px"></div></div>';
+      h+='<div style="width:72px;font-size:.7rem;text-align:right">'+fmtK(b.v)+'</div></div>';
+    });
+    h+='</div>';
+  });
+  h+='</div></div>';return h;
+}
+function factorCards(factors){
+  var h='<div class="factors">';
+  factors.forEach(function(f){
+    var color=f.favor==='a'?'var(--accent2)':f.favor==='b'?'var(--green)':'var(--yellow)';
+    h+='<div class="factor-card"><div class="factor-title"><span class="factor-icon">'+f.icon+'</span><span style="color:'+color+'">'+f.title+'</span></div>';
+    h+='<div class="factor-body">'+f.body+'</div></div>';
+  });
+  h+='</div>';return h;
+}
+function verdictBox(type,label,labelColor,title,sub,barHtml){
+  var h='<div class="verdict '+type+'">';
+  h+='<div class="verdict-label" style="color:'+labelColor+'">'+label+'</div>';
+  h+='<div class="verdict-title">'+title+'</div>';
+  h+='<div class="verdict-sub">'+sub+'</div>'+(barHtml||'')+'</div>';
+  return h;
+}
+function metricsGrid(items){
+  var h='<div class="metrics-grid">';
+  items.forEach(function(m){
+    h+='<div class="metric'+(m.hl?' highlight':'')+'"><div class="metric-label">'+m.label+'</div><div class="metric-value">'+m.value+'</div>'+(m.sub?'<div class="metric-sub">'+m.sub+'</div>':'')+'</div>';
+  });
+  h+='</div>';return h;
+}
+var DISC='<div class="disclaimer">&#9888; <strong>This is educational, not financial advice.</strong> This tool uses simplified models and assumptions that may not reflect your full situation, current tax law, or market conditions. Consult a fee-only fiduciary advisor (NAPFA.org) or CPA before acting.</div>';
+
+
+function ssBenefit(pia,fra,claim){
+  if(claim<fra){var me=Math.round((fra-claim)*12);var f36=Math.min(me,36),bey=Math.max(0,me-36);
+    return pia*(1-(f36*(5/9/100)+bey*(5/12/100)));}
+  if(claim>fra){var ml=Math.round((Math.min(claim,70)-fra)*12);return pia*(1+ml*(2/3/100));}
+  return pia;
+}
+function calc(){
+  var pia=num('pia',2400),fra=parseFloat(val('fra')),curAge=num('curAge',61),lifeExp=num('lifeExp',86),cola=num('cola',2.5);
+  var working=document.querySelector('input[name=working]:checked').value==='yes';
+  var need=val('need');
+  var opts=[{age:62,name:'Claim at 62'},{age:fra,name:'Claim at FRA ('+fra+')'},{age:70,name:'Claim at 70'}];
+  opts.forEach(function(o){o.monthly=ssBenefit(pia,fra,o.age);});
+  // cumulative nominal benefits by age (apply COLA annually from claim)
+  function cumAt(o,targetAge){
+    if(targetAge<o.age)return 0;
+    var total=0,m=o.monthly;
+    for(var a=Math.floor(o.age);a<targetAge;a++){
+      var months=12;
+      if(a===Math.floor(o.age)) months=12-Math.round((o.age-Math.floor(o.age))*12);
+      total+=m*months; m*=(1+cola/100);
+    }
+    return total;
+  }
+  opts.forEach(function(o){o.lifetime=cumAt(o,lifeExp);});
+  // break-even ages between pairs (later vs earlier)
+  function breakEven(earlier,later){
+    for(var a=Math.ceil(later.age);a<=110;a++){ if(cumAt(later,a)>=cumAt(earlier,a)) return a; }
+    return null;
+  }
+  var be62v70=breakEven(opts[0],opts[2]);
+  var be62vFRA=breakEven(opts[0],opts[1]);
+  var beFRAv70=breakEven(opts[1],opts[2]);
+  // best by lifetime
+  var best=opts.slice().sort(function(a,b){return b.lifetime-a.lifetime;})[0];
+  // scoring early vs late
+  var early=0,late=0;
+  if(lifeExp>=85)late+=3; else if(lifeExp>=80)late+=1; else if(lifeExp<78)early+=3; else early+=1;
+  if(need==='high')early+=3; else if(need==='low')late+=2; else early+=0;
+  if(working)early+=1;
+  if(cola>=2.5)late+=1;
+  var tot=early+late, earlyPct=tot>0?Math.round(early/tot*100):50, latePct=100-earlyPct;
+  var vType,vLabel,vlc,vTitle,vSub;
+  if(best.age>=70 && latePct>=55){vType='pension';vLabel='Our Analysis';vlc='var(--green)';vTitle='Delaying Pays Off';
+    vSub='Given your life expectancy and situation, waiting toward age 70 maximizes your expected lifetime benefits and gives you a larger, inflation-protected check you cannot outlive. The trade-off is bridging the income gap until then.';}
+  else if(best.age<=62 && earlyPct>=55){vType='lump';vLabel='Our Analysis';vlc='var(--accent2)';vTitle='Claiming Earlier Makes Sense';
+    vSub='Given your life expectancy, income needs, or health, claiming earlier collects more total benefit in your case. Waiting would risk leaving money on the table.';}
+  else {vType='neutral';vLabel='Our Analysis';vlc='var(--yellow)';vTitle='Your FRA Is a Reasonable Middle';
+    vSub='The strategies are closely matched for your inputs. Claiming around your full retirement age balances a meaningful benefit with not waiting too long. Personal factors should break the tie.';}
+  var bar=splitBar('Claim Early','Wait Longer',earlyPct,'var(--accent2)','var(--green)');
+  var html=verdictBox(vType,vLabel,vlc,vTitle,vSub,bar);
+  html+=metricsGrid([
+    {label:'Monthly at 62',value:fmt(opts[0].monthly),sub:'Reduced, starts soonest',hl:false},
+    {label:'Monthly at FRA',value:fmt(opts[1].monthly),sub:'Full benefit',hl:false},
+    {label:'Monthly at 70',value:fmt(opts[2].monthly),sub:'Maximum, +8%/yr delayed credits',hl:true},
+    {label:'62-vs-70 Break-Even',value:be62v70?('Age '+be62v70):'&mdash;',sub:'Live past this and waiting wins',hl:true},
+    {label:'Highest Lifetime Total',value:best.name.replace('Claim ',''),sub:'By your life expectancy of '+lifeExp,hl:false},
+    {label:'Lifetime Total (best)',value:fmtK(best.lifetime),sub:'Nominal, COLA-adjusted',hl:false},
+  ]);
+  // chart: lifetime totals at life expectancy
+  var maxV=Math.max(opts[0].lifetime,opts[1].lifetime,opts[2].lifetime);
+  html+=barChart('Total Benefits Collected by Age '+lifeExp+' (with COLA)',
+    '<span style="color:var(--accent2)">&#9632; Claim 62</span><span style="color:var(--muted)">&#9632; Claim FRA</span><span style="color:var(--green)">&#9632; Claim 70</span>',
+    [{label:'Lifetime totals',bars:[
+      {name:'Age 62',v:opts[0].lifetime,color:'var(--accent)'},
+      {name:'FRA',v:opts[1].lifetime,color:'#64748b'},
+      {name:'Age 70',v:opts[2].lifetime,color:'var(--green-dim)'}]}],maxV);
+  var factors=[];
+  if(lifeExp>=85)factors.push({icon:'&#129505;',title:'Longevity Favors Waiting',body:'A life expectancy of '+lifeExp+' means many years to collect the larger delayed benefit. The longer you live, the more delaying wins.',favor:'b'});
+  else if(lifeExp<78)factors.push({icon:'&#9203;',title:'Shorter Horizon',body:'With a life expectancy of '+lifeExp+', you may not reach the break-even age, so claiming earlier likely collects more in total.',favor:'a'});
+  if(need==='high')factors.push({icon:'&#128184;',title:'You Need the Income',body:'If benefits cover essential living costs now, claiming earlier may be necessary regardless of the math. Don\'t go into hardship to chase a break-even.',favor:'a'});
+  if(need==='low')factors.push({icon:'&#128737;&#65039;',title:'You Can Afford to Wait',body:'With other assets to live on, delaying buys a bigger, guaranteed, inflation-protected income stream &mdash; valuable longevity insurance.',favor:'b'});
+  if(working)factors.push({icon:'&#128188;',title:'Earnings Test Applies',body:'Claiming before FRA while working can temporarily withhold benefits if you earn above the annual limit. Waiting until FRA avoids this entirely.',favor:'b'});
+  factors.push({icon:'&#128106;',title:'Think About Survivors',body:'If you are the higher earner in a couple, delaying also raises the survivor benefit your spouse keeps for life. This calculator covers your own benefit only.',favor:'b'});
+  html+='<div class="panel"><div class="panel-head"><span class="icon">&#127919;</span> Key Factors For You</div><div class="panel-body">'+factorCards(factors)+'</div></div>';
+  html+=DISC;
+  document.getElementById('outputCol').innerHTML=html;
+}
+
+
+document.querySelectorAll('.radio-opt input[type=radio]').forEach(function(r){
+  r.addEventListener('change', function(){
+    var group = this.closest('.radio-group');
+    group.querySelectorAll('.radio-opt').forEach(function(o){o.classList.remove('selected');});
+    this.closest('.radio-opt').classList.add('selected');
+    calc();
+  });
+});
+calc();
+var _mt=document.getElementById('megaToggle'),_mm=document.getElementById('megaMenu'),_mo=document.getElementById('megaOverlay'),_mc=document.getElementById('megaClose');
+function _openMega(){_mm.classList.add('open');_mo.classList.add('open');}
+function _closeMega(){_mm.classList.remove('open');_mo.classList.remove('open');}
+if(_mt)_mt.addEventListener('click',function(e){e.stopPropagation();_mm.classList.contains('open')?_closeMega():_openMega();});
+if(_mc)_mc.addEventListener('click',_closeMega);
+if(_mo)_mo.addEventListener('click',_closeMega);
+document.addEventListener('keydown',function(e){if(e.key==='Escape')_closeMega();});
+
+</script>
+</body>
+</html>
